@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Database</title>
+<link rel="StyleSheet" href="res/mc.css" type="text/css" title="cse4413" media="screen, print"/>
+<script type="text/javascript" src="res/myJS.js">;</script>
+</head>
+<body>
+	<header> Student Information System</header>
+	<nav>
+		<ul>
+			<li><a href="#"> Home </a></li>
+			<li><a href="#"> About</a></li>
+		</ul>
+	</nav>
+	<section>
+	<article>
+	 <div class="info">
+	  <fieldset>
+			  <legend>SIS-v1</legend>
+		<form action="" method="POST" class="osapForm">
+			<label for="namePrefix"> Name Prefix: </label>
+			<input type="text" id="namePrefix" name="namePrefix" value=""/>
+			<label for="credit_taken"> Minimum Credit Taken: </label>
+			<input type="text" id="credit_taken" name="credit_taken" value=""/>
+		</form>
+		<button type="submit" value="ReportAjax" id="report" name="reportAjax" onclick="reportAjax('/StuffGo/Sis?reportAjax=true')">ReportAjax</button>
+		 </fieldset>
+	<p id="result">
+							
+	</p>
+	</div>
+	</article>
+			<aside>
+			<figure>
+				<img
+					src="http://lassonde.yorku.ca/profiles/lassonde/themes/custom/lassonde/logo-lassonde.png"
+					height="100px" width="100px" />
+				<figcaption>York University</figcaption>
+			</figure>
+		</aside>
+	</section>
+	<footer> Copyright EECS 4413Z- All rights reserved</footer>
+</body>
+</html>
