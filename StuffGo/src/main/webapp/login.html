@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Log in</title>
+		<!-- Below line imports the keccak_256 function -->
+		<script src="https://cdn.jsdelivr.net/gh/emn178/js-sha3/build/sha3.min.js"></script>
+		<!--  Below line imports our own js file -->
+		<script src="res/login.js"></script>
+	</head>
+	<body>
+		<form action="" method="post" onsubmit="return false">
+			<div class="container">
+				<label for="usernameInput"><b>Username</b></label>
+				<input type="text" placeholder="Enter Username" id="usernameInput" required />
+
+				<label for="passwordInput"><b>Password</b></label>
+				<input type="password" placeholder="Enter Password" id="passwordInput" required />
+
+				<button type="submit" onclick="return login()">Login</button>
+			</div>
+		</form>
+	</body>
+</html>
