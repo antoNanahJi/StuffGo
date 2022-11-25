@@ -3,14 +3,17 @@ const login = () => {
 	const passwordValue = document.getElementById('passwordInput').value;
 	const passwordToSend = keccak_256(passwordValue);
 
-	// fetch('/StuffGo/Sis')
-	// 	.then((response) => {
-	// 		console.log('fetched...');
-	// 		console.log(response.text());
-	// 		return response.json();
-	// 	})
-	// 	.then((responseJson) => {
-	// 		console.log(responseJson);
-	// 	})
-	// 	.catch('cannot fetch...');
+	fetch(`/StuffGo/User?login=true&username=${usernameValue}&passwordHash=${passwordToSend}`)
+		.then((response) => {
+			console.log('fetched...');
+			return response.json();
+		})
+		.then((responseJSON) => {
+			if (responseJSON.isLoggedIn) {
+				window.location.href = '/StuffGo/homepage.html';
+			} else {
+				alert('Wrong username or password');
+			}
+		})
+		.catch('cannot fetch...');
 };
