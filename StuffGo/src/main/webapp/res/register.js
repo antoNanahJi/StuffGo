@@ -6,7 +6,7 @@ const register = () => {
 	const defaultShippingValue = document.getElementById('defaultShippingInput').value;
 
 	fetch(
-		`/StuffGo/User?login=false&username=${usernameValue}&passwordHash=${passwordToSend}&billing=${defaultBillingValue}&shipping=${defaultShippingValue}`
+		`/StuffGo/User?type=register&username=${usernameValue}&passwordHash=${passwordToSend}&billing=${defaultBillingValue}&shipping=${defaultShippingValue}`
 	)
 		.then((response) => {
 			console.log('fetched...');

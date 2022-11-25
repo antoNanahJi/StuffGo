@@ -59,15 +59,14 @@ public class User extends HttpServlet {
 		
 		String username = request.getParameter("username");
 		String passwordHash = request.getParameter("passwordHash");
-		String login = request.getParameter("login");
-		boolean receivedLogin = Boolean.parseBoolean(login);
+		String type = request.getParameter("type");
 		System.out.println("username: " + username);
 		System.out.println("passwordHash: " + passwordHash);
 		
 		Writer resOut = response.getWriter();
 		response.setContentType("application/json");
 		try {
-			if (receivedLogin) {
+			if (type.equals("login")) {
 				 boolean isLoggedIn = userModel.loginUser(username, passwordHash);
 				 if (isLoggedIn) {
 					session.setAttribute("isLoggedIn", true);
@@ -77,11 +76,8 @@ public class User extends HttpServlet {
 					resOut.append("{\"isLoggedIn\": false}");
 					resOut.flush();
 				 }
-				// TODO: Create UserDAO and use it to check if the user exists
-				// TODO: make sure to update session so that user is signed in
-
-			} else {
-				// Means it is a register
+			} else if (type.equals("register")) {
+				// TODO: Handle showing error for duplicate username
 				String billing = request.getParameter("billing");
 				String shipping = request.getParameter("shipping");
 				UserBean newUser = new UserBean(username, passwordHash, shipping, billing);
@@ -95,6 +91,11 @@ public class User extends HttpServlet {
 					resOut.append("{\"isRegistered\": false}");
 					resOut.flush();
 				}
+			} else {
+				// would mean logout
+				session.setAttribute("isLoggedIn", false);
+				resOut.append("{\"isLoggedOut\": true}");
+				resOut.flush();
 			}
 			// TODO: save that user is logged in to the session
 		} catch (Exception e) {

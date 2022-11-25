@@ -3,7 +3,7 @@ const login = () => {
 	const passwordValue = document.getElementById('passwordInput').value;
 	const passwordToSend = keccak_256(passwordValue);
 
-	fetch(`/StuffGo/User?login=true&username=${usernameValue}&passwordHash=${passwordToSend}`)
+	fetch(`/StuffGo/User?type=login&username=${usernameValue}&passwordHash=${passwordToSend}`)
 		.then((response) => {
 			console.log('fetched...');
 			return response.json();
