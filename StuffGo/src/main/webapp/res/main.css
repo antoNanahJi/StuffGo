@@ -1,0 +1,92 @@
+
+h3 {
+    font-size: 28px;
+    font-weight: 700;
+    padding-bottom: 24px;
+}
+h5 {
+    font-size: 18px;
+    font-weight: 700;
+}
+h6 {
+    padding: 12px;
+    font-size: 18px;
+    color: white;
+
+}
+a {
+    text-decoration: none;
+}
+
+.navigation {
+    padding: 24px;
+    background-color: grey;
+}
+.navbar-brand {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    transition: color 1s ease;
+}
+.navbar-brand:hover {
+   color: black;
+}
+.nav-link {
+    color: white;
+    font-weight: 600;
+    transition: color 1s ease;
+}
+.nav-link:hover {
+    color: black;
+}
+/* CATALOG SECTION */
+.filter {
+    margin-top: 32px;
+    background-color: lightgrey;
+    padding: 24px;
+    border-radius: 35px;
+}
+.items {
+    margin-top: 24px;
+    padding-left: 24px;
+}
+.item-box{
+    width: 220px;
+    height: 220px;
+    background-color: lightgrey;
+    border-radius: 35px;
+    margin: 12px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+/* ITEM SECTION */
+.productImage {
+min-height: 500px;
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+border-radius: 35px;
+margin-top: 32px;
+}
+.productDetails {
+    margin-top: 32px;
+    background-color: lightgrey;
+    padding: 24px;
+    border-radius: 35px;
+    margin-left: 12px;
+}
+button {
+    background-color: grey;
+    padding: 16px;
+    border: 0;
+    padding-left: 24px;
+    border-radius: 35px;
+    width: 100%;
+    font-weight: 700;
+    color: white;
+    margin-top: 24px !important;
+}
+
