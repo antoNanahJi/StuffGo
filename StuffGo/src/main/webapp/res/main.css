@@ -51,11 +51,10 @@ a {
     padding-left: 24px;
 }
 .item-box{
-    width: 220px;
     height: 220px;
     background-color: lightgrey;
     border-radius: 35px;
-    margin: 12px;
+    border: 12px white solid;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
