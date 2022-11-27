@@ -19,8 +19,23 @@ public class ItemDAO {
 		}
 	}
 	
-	public Map<String, ItemBean> retrieve() throws SQLException, NamingException{
+	public Map<String, ItemBean> retrieve(String brand, String type, String category,String ID) throws SQLException, NamingException{
 		String query = "select * from ITEMS";
+		if(brand != null || type != null || category != null || ID != null) {
+			query+= "where";
+		}
+		if(brand != null ) {
+			query+= "brand=" +brand;
+		}
+		if(type != null ) {
+			query+= "type=" +type;
+		}
+		if(category != null ) {
+			query+= "category=" +category;
+		}
+		if( ID != null) {
+			query+= "ID=" + ID;
+		}
 		return getTable(query);
 	}
 
