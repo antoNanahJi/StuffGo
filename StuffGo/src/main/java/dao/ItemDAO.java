@@ -20,7 +20,7 @@ public class ItemDAO {
 	}
 	
 	public Map<String, ItemBean> retrieve() throws SQLException, NamingException{
-		String query = "select * from Items";
+		String query = "select * from ITEMS";
 		return getTable(query);
 	}
 
@@ -44,5 +44,4 @@ public class ItemDAO {
 		con.close();
 		return rv;
 	}
-	
 }
