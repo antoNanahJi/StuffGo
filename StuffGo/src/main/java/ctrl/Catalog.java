@@ -16,13 +16,13 @@ import model.StoreModel;
  * Servlet implementation class SIS
  */
 @WebServlet("/home")
-public class Items extends HttpServlet {
+public class Catalog extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Items() {
+	public Catalog() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
