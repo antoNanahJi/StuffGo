@@ -5,6 +5,6 @@
 	<Resource name="jdbc/EECS" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
 type="javax.sql.DataSource"
 driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
-url="jdbc:derby:/Users/ziyaicoz/eclipse-workspace/SIS-1"/>
+url="jdbc:derby:\Users\zyckf\enterprise_workplace\My_DB"/>
 <ResourceLink global="jdbc/EECS" name="jdbc/EECS" type="javax.sql.DataSource" />
 </Context>
