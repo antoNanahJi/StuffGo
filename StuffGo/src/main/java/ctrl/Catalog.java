@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.ItemBean;
+import bean.StudentBean;
 import model.StoreModel;
 
 /**
@@ -53,10 +54,28 @@ public class Catalog extends HttpServlet {
 			String category = request.getParameter("category");
 			String ID = request.getParameter("ID");
 			Map<String, ItemBean> results = model.retreiveItem(brand,type,category,ID);
-			resOut.write("hello1");
-			
+			response.setContentType("application/json");
+			int counter = 0;
+			resOut.append("{");
+			resOut.append("\"items\" : [");
+			for (String key : results.keySet()) {
+				resOut.append("{");
+				resOut.append("\"name\" : \"" + results.get(key).getName() + "\",");
+				resOut.append("\"price\" : \"" + results.get(key).getPrice() + "\",");
+				resOut.append("\"image\" : \"" + results.get(key).getImage() + "\"}");
+				if (results.size() != counter + 1) {
+					resOut.append(",");
+				}
+				counter++;
+			}
+			resOut.append("]}");
+			resOut.flush();
 			System.out.println(results);
 			// resOut.append(results.get("001").getID());
+		
+		
+		
+		
 		} catch (Exception e) {
 			System.out.println("error");
 			e.printStackTrace();

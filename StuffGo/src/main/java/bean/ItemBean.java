@@ -7,21 +7,36 @@ package bean;
 //sid: CSE ID
 //name: full name
 public class ItemBean {
-	private String category;
-	private String name;
 	private String ID;
+	private String category;
+	private String brand;
+	private String type1;
+	private String name;
+	private String price;
 	private String description;
 	private String reviews;
 	private String image;
 	
-	public ItemBean(String category, String name, String ID, String description, String reviews, String image) {
+	public ItemBean(String iD, String category, String brand, String type1, String name, String price,
+			String description, String reviews, String image) {
 		super();
+		ID = iD;
 		this.category = category;
+		this.brand = brand;
+		this.type1 = type1;
 		this.name = name;
-		this.ID = ID;
+		this.price = price;
 		this.description = description;
 		this.reviews = reviews;
 		this.image = image;
+	}
+
+	public String getID() {
+		return ID;
+	}
+
+	public void setID(String iD) {
+		ID = iD;
 	}
 
 	public String getCategory() {
@@ -32,6 +47,22 @@ public class ItemBean {
 		this.category = category;
 	}
 
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getType1() {
+		return type1;
+	}
+
+	public void setType1(String type1) {
+		this.type1 = type1;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -40,12 +71,12 @@ public class ItemBean {
 		this.name = name;
 	}
 
-	public String getID() {
-		return ID;
+	public String getPrice() {
+		return price;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
+	public void setPrice(String price) {
+		this.price = price;
 	}
 
 	public String getDescription() {
@@ -73,5 +104,7 @@ public class ItemBean {
 	}
 	
 	
-	
+
+
+
 }

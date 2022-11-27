@@ -46,13 +46,18 @@ public class ItemDAO {
 				.prepareStatement(query);
 		ResultSet r = p.executeQuery();
 		while (r.next()){
-			String category = r.getString("category");
-			String name = r.getString("name");
 			String ID = r.getString("ID");
+			String category = r.getString("category");
+			String brand = r.getString("brand");
+			String type  = r.getString("type1");
+			String name = r.getString("name");
+			String price = r.getString("price");
 			String description = r.getString("description");
 			String reviews = r.getString("reviews");
 			String imageURL = r.getString("image");
-			rv.put(ID, new ItemBean(category, name ,ID ,description, reviews, imageURL));
+
+			rv.put(ID, new ItemBean(ID, category, brand, type,name, price,
+					description, reviews, imageURL));
 		}
 		r.close();
 		p.close();
