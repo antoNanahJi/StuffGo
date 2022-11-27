@@ -48,7 +48,11 @@ public class Catalog extends HttpServlet {
 		Writer resOut = response.getWriter();
 		try {
 			StoreModel model = (StoreModel) this.getServletContext().getAttribute("SModel");
-			Map<String, ItemBean> results = model.retreiveItem();
+			String brand = request.getParameter("brand");
+			String type = request.getParameter("type");
+			String category = request.getParameter("category");
+			String ID = request.getParameter("ID");
+			Map<String, ItemBean> results = model.retreiveItem(brand,type,category,ID);
 			resOut.write("hello1");
 			
 			System.out.println(results);
