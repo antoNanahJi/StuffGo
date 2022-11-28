@@ -14,6 +14,7 @@
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
   <link rel="StyleSheet" href="res/main.css" type="text/css" title="cse4413" media="screen, print"/>
+  <script type="text/javascript" src="res/item.js">;</script>
 </head>
 
 <body>
@@ -44,7 +45,7 @@
       <div class="row">
         <div class="col-lg-3 filter">
           <h3>Filters</h3>
-          <form action="/action_page.php">
+          <form method="POST" id="filters"> 
             <h5>Brands</h5>
             <input type="radio" id="html" name="fav_language" value="HTML">
             <label for="html">HTML</label><br>
@@ -72,10 +73,10 @@
           </form>
 
           <button type="button" name="ajax" value="true"
-            onclick="doSimpleAjax('/Michalowski_SIS-v2/Sis?reportAjax=true');return false;">ReportAjax</button>
+            onclick="doSimpleAjax('/StuffGo/home;">ReportAjax</button>
         </div>
         <div class="col-lg-9 items">
-          <div class="row">
+          <div class="row" id="result">
           
             <a class="col-4 item-box d-flex justify-content-center align-items-end"
               style="background-image:linear-gradient(to bottom, rgba(128, 128, 128, 0),rgba(128, 128, 128, 0.2), rgb(128, 128, 128 ,1)), url(https://images.unsplash.com/photo-1669036727109-8adda0d99cd0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80);"
@@ -97,7 +98,6 @@
               href="">
               <h6>Item Name</h6>
             </a>
-
           </div>
 
 

@@ -48,11 +48,12 @@ public class Catalog extends HttpServlet {
 			throws ServletException, IOException{
 		Writer resOut = response.getWriter();
 		try {
-			StoreModel model = (StoreModel) this.getServletContext().getAttribute("SModel");
 			String brand = request.getParameter("brand");
 			String type = request.getParameter("type");
 			String category = request.getParameter("category");
 			String ID = request.getParameter("ID");
+			
+			StoreModel model = (StoreModel) this.getServletContext().getAttribute("SModel");
 			Map<String, ItemBean> results = model.retreiveItem(brand,type,category,ID);
 			response.setContentType("application/json");
 			int counter = 0;
@@ -63,6 +64,8 @@ public class Catalog extends HttpServlet {
 				resOut.append("\"name\" : \"" + results.get(key).getName() + "\",");
 				resOut.append("\"price\" : \"" + results.get(key).getPrice() + "\",");
 				resOut.append("\"image\" : \"" + results.get(key).getImage() + "\"}");
+				resOut.append("\"ID\" : \"" + results.get(key).getID() + "\"}");
+				
 				if (results.size() != counter + 1) {
 					resOut.append(",");
 				}
@@ -71,15 +74,10 @@ public class Catalog extends HttpServlet {
 			resOut.append("]}");
 			resOut.flush();
 			System.out.println(results);
-			// resOut.append(results.get("001").getID());
-		
-		
-		
-		
+			
 		} catch (Exception e) {
 			System.out.println("error");
 			e.printStackTrace();
-			
 		}
 	}
 
