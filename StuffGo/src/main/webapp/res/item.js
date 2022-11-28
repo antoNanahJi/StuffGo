@@ -7,7 +7,7 @@ const sqlValues = [ "SELECT", "UPDATE", "DELETE", "INSERT INTO", "CREATE DATABAS
 
 window.onload = () => {
 	var request = new XMLHttpRequest();
-	request.open("GET", /StuffGo/home, true);
+	request.open("GET", "/StuffGo/home", true);
 	request.onreadystatechange = function() {
 	handlerLoad(request);
 	console.log(request);
