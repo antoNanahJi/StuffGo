@@ -5,6 +5,7 @@
 	<Resource name="jdbc/EECS" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
 type="javax.sql.DataSource"
 driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
-url="jdbc:derby:C:\Users\zyckf\enterprise-workspace\MyDB"/>
+url="jdbc:sqlserver://stuffgo.database.windows.net:1433;database=stuffgo"
+/>
 <ResourceLink global="jdbc/EECS" name="jdbc/EECS" type="javax.sql.DataSource" />
 </Context>
