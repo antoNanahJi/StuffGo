@@ -4,8 +4,8 @@
 	<Manager pathname="" />
 	<Resource name="jdbc/EECS" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
 type="javax.sql.DataSource"
-driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
-url="jdbc:sqlserver://stuffgo.database.windows.net:1433;database=stuffgo"
+driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+url="jdbc:sqlserver://stuffgo.database.windows.net:1433;database=stuffgo;user=StuffGo;password=@stuff123;"
 />
 <ResourceLink global="jdbc/EECS" name="jdbc/EECS" type="javax.sql.DataSource" />
 </Context>

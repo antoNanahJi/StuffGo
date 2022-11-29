@@ -63,7 +63,7 @@ public class Catalog extends HttpServlet {
 				resOut.append("{");
 				resOut.append("\"name\" : \"" + results.get(key).getName() + "\",");
 				resOut.append("\"price\" : \"" + results.get(key).getPrice() + "\",");
-				resOut.append("\"image\" : \"" + results.get(key).getImage() + "\"}");
+				resOut.append("\"image\" : \"" + results.get(key).getImage() + "\",");
 				resOut.append("\"ID\" : \"" + results.get(key).getID() + "\"}");
 				
 				if (results.size() != counter + 1) {
