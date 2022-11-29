@@ -64,4 +64,39 @@ public class ItemDAO {
 		con.close();
 		return rv;
 	}
+	
+	public ItemBean retrieveItem(String ID) throws SQLException, NamingException{
+		String query = "select * from ITEMS ";
+
+		if( ID != null) {
+			query+= "where ID=" + ID;
+		}
+		return getRow(query);
+	}
+	
+	public ItemBean getRow(String query) throws SQLException{
+		ItemBean item = null;
+		Connection con = this.ds.getConnection();
+		PreparedStatement p = con
+				.prepareStatement(query);
+		ResultSet r = p.executeQuery();
+		while (r.next()){
+			String ID = r.getString("ID");
+			String category = r.getString("category");
+			String brand = r.getString("brand");
+			String type  = r.getString("type1");
+			String name = r.getString("name");
+			String price = r.getString("price");
+			String description = r.getString("description");
+			String reviews = r.getString("reviews");
+			String imageURL = r.getString("image");
+
+			item = new ItemBean(ID, category, brand, type,name, price,
+					description, reviews, imageURL);
+		}
+		r.close();
+		p.close();
+		con.close();
+		return item;
+	}
 }

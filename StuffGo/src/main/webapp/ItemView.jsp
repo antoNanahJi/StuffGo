@@ -1,10 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>StuffGo Item view</title>
     <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <!-- JavaScript Bundle with Popper -->
@@ -14,7 +16,7 @@
 <body>
     <nav class="navbar navbar-expand-md justify-content-between navigation">
         <div class="container">
-            <a class="navbar-brand" href="#">StuffGo</a>
+            <a class="navbar-brand" href="http://localhost:8080/StuffGo/homepage.html">StuffGo</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -36,13 +38,13 @@
       <section>
     <div class="container">
         <div class="row">
-            <div class="col-lg-7 productImage" style="background-image: url(https://images.unsplash.com/photo-1669036727109-8adda0d99cd0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80);">        
+            <div class="col-lg-7 productImage" style="background-image: url(${image});">        
             </div>
             <div class="col-lg-5 productContainer">
               <div class="row productDetails">
-                <h3>Item</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam distinctio aliquid, quaerat saepe exercitationem perferendis inventore eius doloremque fuga! Repudiandae accusantium natus earum esse ut eum enim, iste autem tempore animi hic perferendis porro incidunt debitis sapiente, inventore consequuntur nostrum ipsum rerum corporis numquam. Reiciendis alias facilis repellendus aliquid eum?</p>
-                <h3>$120</h3>
+                <h3>${name}</h3>
+                <p>${description}</p>
+                <h3>${price}</h3>
                 <button type="button">Add To Cart</button>
               </div>
                         

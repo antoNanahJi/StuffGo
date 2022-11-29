@@ -2,12 +2,16 @@ package ctrl;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import bean.ItemBean;
+import model.StoreModel;
 
 /**
  * Servlet implementation class ItemInfo
@@ -31,14 +35,30 @@ public class ItemInfo extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		Writer resOut = response.getWriter();
 		String itemID = "";
 		
 		if(request.getParameter("ID") != null) {
 			itemID = request.getParameter("ID");
 		}
 		
-		resOut.write("itemID: " + itemID);
+		try {
+			
+			StoreModel model = (StoreModel) this.getServletContext().getAttribute("SModel");
+			ItemBean itemInfo = model.retreiveItem(itemID);
+			
+			request.setAttribute("image", itemInfo.getImage());
+			request.setAttribute("name", itemInfo.getName());
+			request.setAttribute("description", itemInfo.getDescription());
+			request.setAttribute("price", itemInfo.getPrice());
+			
+			
+			String target = "/ItemView.jsp";
+			request.getRequestDispatcher(target).forward(request, response);
+			
+		} catch (Exception e) {
+			System.out.println("error");
+			e.printStackTrace();
+		}
 	}
 
 	/**
