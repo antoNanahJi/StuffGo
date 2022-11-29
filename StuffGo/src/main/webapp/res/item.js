@@ -58,7 +58,7 @@ function addParagraphs(parent, rs) {
 	rs.items.map((datum) => {
     resu+= "<a";
 	+ "class=\"col-4 item-box d-flex justify-content-center align-items-end\"";
-	+  "style=\"background-image:linear-gradient(to bottom, rgba(128, 128, 128, 0),rgba(128, 128, 128, 0.2), rgb(128, 128, 128 ,1)), url(" + datum.image + ");\"";
+	+  "style=\"background-image:linear-gradient(to bottom, rgba(128, 128, 128, 0),rgba(128, 128, 128, 0.2), rgb(128, 128, 128 ,1)), url(" + datum.image + ");\""
 	+  "href=\"http://localhost:8080/StuffGo/item?" + datum.iD + "\">";
 	+ "<h6>" + datum.name+"</h6>";
 	+ "</a>";
@@ -72,7 +72,15 @@ function addFilters(parent, rs) {
 	 "<input type=\"radio\" id=\""+ item.brand +"\" name=\"brand\" value=\"" + item.brand +  ">" + 
             "<label for=\"html\">" + item.brand + "</label><br>"
 	))];
-	resu+= "<h5>Types</h5>";
-	resu+= "<h5>Categories</h5>";
+		resu+= "<h5>Types</h5>";
+	[...new Set(rs.items.map(item => resu+= 
+	 "<input type=\"radio\" id=\""+ item.brand +"\" name=\"brand\" value=\"" + item.types +  ">" + 
+            "<label for=\"html\">" + item.brand + "</label><br>"
+	))];
+			resu+= "<h5>Categories</h5>";
+	[...new Set(rs.items.map(item => resu+= 
+	 "<input type=\"radio\" id=\""+ item.brand +"\" name=\"brand\" value=\"" + item.category +  ">" + 
+            "<label for=\"html\">" + item.brand + "</label><br>"
+	))];
 	parent.innerHTML = resu;
 }
