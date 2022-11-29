@@ -1,5 +1,4 @@
 // SQL ARRAY VALUES
-
 const sqlValues = [ "SELECT", "UPDATE", "DELETE", "INSERT INTO", "CREATE DATABASE", "ALTER DATABASE", "CREATE TABLE",
 	"ALTER TABLE", "DROP TABLE", "CREATE INDEX", "DROP INDEX", "=", ";" ];
 
@@ -7,7 +6,7 @@ const sqlValues = [ "SELECT", "UPDATE", "DELETE", "INSERT INTO", "CREATE DATABAS
 
 window.onload = () => {
 	var request = new XMLHttpRequest();
-	request.open("GET", "/StuffGo/home", true);
+	request.open("GET", "http://localhost:8080/StuffGo/home", true);
 	request.onreadystatechange = function() {
 	handlerLoad(request);
 	console.log(request);
@@ -34,11 +33,14 @@ function doSimpleAjax(address) {
 //HANDLE AJAX REQUEST
 function handlerLoad(request) {
 	if ((request.readyState == 4) && (request.status == 200)) {
-		var target = document.getElementById("filters");
+		var mainTarget = document.getElementById("result");
+		var filterTarget = document.getElementById("filters");
 		//here you want to add parse the json and display individual key,
 		//values pairs as html elements ( tables, paragraphs, etc..)
-		var rs = JSON.parse(request.responseText);
-		addFilters(target, rs);
+		var rsFilters = JSON.parse(request.responseText);
+		var rsParagrahps = JSON.parse(request.responseText);
+		addParagraphs(mainTarget, rsParagrahps);
+		addFilters(filterTarget,rsFilters)
 	}
 }
 
@@ -56,15 +58,18 @@ function handlerClick(request) {
 function addParagraphs(parent, rs) {
 	let resu = "";
 	rs.items.map((datum) => {
-    resu+= "<a";
-	+ "class=\"col-4 item-box d-flex justify-content-center align-items-end\"";
-	+  "style=\"background-image:linear-gradient(to bottom, rgba(128, 128, 128, 0),rgba(128, 128, 128, 0.2), rgb(128, 128, 128 ,1)), url(" + datum.image + ");\""
-	+  "href=\"http://localhost:8080/StuffGo/item?" + datum.iD + "\">";
-	+ "<h6>" + datum.name+"</h6>";
-	+ "</a>";
+    resu+= "<a "
+	+ "class=\"col-4 item-box d-flex justify-content-center align-items-end\" "
+	+  "style=\"background-image:linear-gradient(to bottom, rgba(128, 128, 128, 0),rgba(128, 128, 128, 0.2), rgb(128, 128, 128 ,1)), url(" + datum.image + ");\" "
+	+  "href=\"http://localhost:8080/StuffGo/ItemInfo?ID=" + datum.ID + "\">"
+	+ "<h6>" + datum.name+"</h6>"
+	+ "</a>"
 	parent.innerHTML = resu;
 });
+console.log(rs);
+console.log(resu);
 }
+
 function addFilters(parent, rs) {
 	let resu = "";
 	resu+= "<h5>Brands</h5>";
@@ -83,4 +88,5 @@ function addFilters(parent, rs) {
             "<label for=\"html\">" + item.brand + "</label><br>"
 	))];
 	parent.innerHTML = resu;
+	console.log(rs);
 }
