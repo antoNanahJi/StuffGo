@@ -16,19 +16,13 @@ window.onload = () => {
 
 // SEND AJAX REQUEST
 function doSimpleAjax(address) {
-	if (validate()) {
-		var request = new XMLHttpRequest();
-		var data = "";
-		data += "&prefix=" + document.getElementById("prefix").value
-			+ "&";
-		data += "credit_taken=" + document.getElementById("credit_taken").value;
-		request.open("GET", (address + data), true);
-		request.onreadystatechange = function() {
-			handler(request);
-			console.log(request);
-		};
-		request.send(null);
-	}
+		 var brand = document.getElementsByName('brand');
+			console.log(brand);
+		   for(i = 0; i < brand.length; i++) {
+                if(brand[i].checked){
+                        console.log("checked")
+                        console.log(brand[i].value)
+            }}
 }
 //HANDLE AJAX REQUEST
 function handlerLoad(request) {
@@ -74,18 +68,18 @@ function addFilters(parent, rs) {
 	let resu = "";
 	resu+= "<h5>Brands</h5>";
 	[...new Set(rs.items.map(item => resu+= 
-	 "<input type=\"radio\" id=\""+ item.brand +"\" name=\"brand\" value=\"" + item.brand +  ">" + 
+	 "<input type=\"radio\" id=\""+ item.brand +"\" name=\"brand\" value=\"" + item.brand +  "\">" + 
             "<label for=\"html\">" + item.brand + "</label><br>"
 	))];
 		resu+= "<h5>Types</h5>";
 	[...new Set(rs.items.map(item => resu+= 
-	 "<input type=\"radio\" id=\""+ item.brand +"\" name=\"brand\" value=\"" + item.types +  ">" + 
-            "<label for=\"html\">" + item.brand + "</label><br>"
+	 "<input type=\"radio\" id=\""+ item.type +"\" name=\"type\" value=\"" + item.type +  ">" + 
+            "<label for=\"html\">" + item.type + "</label><br>"
 	))];
 			resu+= "<h5>Categories</h5>";
 	[...new Set(rs.items.map(item => resu+= 
-	 "<input type=\"radio\" id=\""+ item.brand +"\" name=\"brand\" value=\"" + item.category +  ">" + 
-            "<label for=\"html\">" + item.brand + "</label><br>"
+	 "<input type=\"radio\" id=\""+ item.category +"\" name=\"category\" value=\"" + item.category +  ">" + 
+            "<label for=\"html\">" + item.category + "</label><br>"
 	))];
 	parent.innerHTML = resu;
 	console.log(rs);
