@@ -16,13 +16,43 @@ window.onload = () => {
 
 // SEND AJAX REQUEST
 function doSimpleAjax(address) {
+		 var request = new XMLHttpRequest();
+		 var data = "";
 		 var brand = document.getElementsByName('brand');
-			console.log(brand);
+		 var type = document.getElementsByName('type');
+		 var category = document.getElementsByName('category');
+		 console.log(brand);
+		 
 		   for(i = 0; i < brand.length; i++) {
                 if(brand[i].checked){
                         console.log("checked")
                         console.log(brand[i].value)
+                        data+= "brand="+ brand[i].value;
             }}
+           
+            for(i = 0; i < type.length; i++) {
+                if(type[i].checked){
+                        console.log("checked")
+                        console.log(type[i].value);
+                        data+= "&type="+ type[i].value;
+            }}
+
+            for(i = 0; i < category.length; i++) {
+                if(category[i].checked){
+                        console.log("checked");
+                        console.log(category[i].value);
+                        data+= "&category="+ category[i].value;
+            }}
+            
+            console.log(address+data);
+          
+        request.open("GET", (address + data), true);
+		request.onreadystatechange = function() {
+		handlerClick(request);
+		console.log(request);
+		};
+		request.send(null);
+
 }
 //HANDLE AJAX REQUEST
 function handlerLoad(request) {
@@ -51,6 +81,10 @@ function handlerClick(request) {
 //FOR A TABLE IN THE FUNCTION
 function addParagraphs(parent, rs) {
 	let resu = "";
+	if(rs.items.length===0){
+		parent.innerHTML = "No items found";
+	}
+	else {
 	rs.items.map((datum) => {
     resu+= "<a "
 	+ "class=\"col-4 item-box d-flex justify-content-center align-items-end\" "
@@ -59,7 +93,7 @@ function addParagraphs(parent, rs) {
 	+ "<h6>" + datum.name+"</h6>"
 	+ "</a>"
 	parent.innerHTML = resu;
-});
+});}
 console.log(rs);
 console.log(resu);
 }
@@ -73,12 +107,12 @@ function addFilters(parent, rs) {
 	))];
 		resu+= "<h5>Types</h5>";
 	[...new Set(rs.items.map(item => resu+= 
-	 "<input type=\"radio\" id=\""+ item.type +"\" name=\"type\" value=\"" + item.type +  ">" + 
+	 "<input type=\"radio\" id=\""+ item.type +"\" name=\"type\" value=\"" + item.type +  "\">" + 
             "<label for=\"html\">" + item.type + "</label><br>"
 	))];
 			resu+= "<h5>Categories</h5>";
 	[...new Set(rs.items.map(item => resu+= 
-	 "<input type=\"radio\" id=\""+ item.category +"\" name=\"category\" value=\"" + item.category +  ">" + 
+	 "<input type=\"radio\" id=\""+ item.category +"\" name=\"category\" value=\"" + item.category +  "\">" + 
             "<label for=\"html\">" + item.category + "</label><br>"
 	))];
 	parent.innerHTML = resu;

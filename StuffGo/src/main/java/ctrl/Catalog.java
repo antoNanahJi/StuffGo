@@ -54,7 +54,7 @@ public class Catalog extends HttpServlet {
 			String ID = request.getParameter("ID");
 			
 			StoreModel model = (StoreModel) this.getServletContext().getAttribute("SModel");
-			Map<String, ItemBean> results = model.retreiveItems(brand,type,category,ID);
+			Map<String, ItemBean> results = model.retrieve(brand,type,category,ID);
 			response.setContentType("application/json");
 			int counter = 0;
 			resOut.append("{");

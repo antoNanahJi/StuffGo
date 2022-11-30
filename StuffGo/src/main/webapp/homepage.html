@@ -15,6 +15,7 @@
     crossorigin="anonymous"></script>
   <link rel="StyleSheet" href="res/main.css" type="text/css" title="cse4413" media="screen, print"/>
   <script type="text/javascript" src="res/item.js">;</script>
+  <script src="test.js"> </script>
 </head>
 
 <body>
@@ -73,7 +74,7 @@
           </form>
 
           <button type="button" name="ajax" value="true"
-            onclick="doSimpleAjax('http://localhost:8080/StuffGo/home')">Filter Results</button>
+            onclick="doSimpleAjax('/StuffGo/home?');">Filter Results</button>
         </div>
         <div class="col-lg-9 items">
           <div class="row" id="result">
@@ -82,7 +83,7 @@
       </div>
     </div>
   </section>
-  <script src="test.js"> </script>
+  
 </body>
 
 </html>

@@ -16,7 +16,7 @@ public class StoreModel {
 	
 	}
 	//return the Map of CSE ID and the student information
-	public Map<String, ItemBean> retreiveItems(String brand, String type, String category,String ID) throws SQLException, NamingException {
+	public Map<String, ItemBean> retrieve(String brand, String type, String category,String ID) throws SQLException, NamingException {
 		return this.itemData.retrieve(brand,type,category,ID);
 	}
 	

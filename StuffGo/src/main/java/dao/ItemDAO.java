@@ -22,21 +22,28 @@ public class ItemDAO {
 	public Map<String, ItemBean> retrieve(String brand, String type, String category,String ID) throws SQLException, NamingException{
 		String query = "select * from ITEMS";
 		if(brand != null || type != null || category != null || ID != null) {
-			query+= "where";
+			query+= " where ";
 		}
 		if(brand != null ) {
-			query+= "brand=" +brand;
+			query+= "brand=" +"'" + brand + "' AND ";
 		}
-		if(type != null ) {
-			query+= "type=" +type;
+		if(type != null) {
+			query+= "type1=" +"'" + type + "' AND ";
 		}
 		if(category != null ) {
-			query+= "category=" +category;
+			query+= "category=" +"'" + category + "' AND ";
 		}
 		if( ID != null) {
-			query+= "ID=" + ID;
+			query+= "ID="  +"'" + ID + "' AND ";
 		}
+		
+		if(brand != null || type != null || category != null || ID != null) {
+			
+			query = query.substring(0,query.length()-4);
+		}
+		System.out.println(query);
 		return getTable(query);
+		
 	}
 
 	public Map<String, ItemBean> getTable(String query) throws SQLException{
