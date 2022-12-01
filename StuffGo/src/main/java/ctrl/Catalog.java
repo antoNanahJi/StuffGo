@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.ItemBean;
-
-import model.StoreModel;
+import model.MainModel;
 
 /**
  * Servlet implementation class SIS
@@ -33,10 +32,13 @@ public class Catalog extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		try {
-			StoreModel model = new StoreModel();
-			this.getServletContext().setAttribute("SModel", model);
+
+	    	// SisModel instance save in context attribute
+    		MainModel model = MainModel.getInstance();
+	    	this.getServletContext().setAttribute("MainModel", model);
+
 		} catch (ClassNotFoundException e) {
-			throw new ServletException("Class Not Found" + e);
+			throw new ServletException("Class Not Found!" + e);
 		}
 	}
 
@@ -46,6 +48,7 @@ public class Catalog extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
+		request.getSession().setAttribute("isLoggedIn", false);
 		Writer resOut = response.getWriter();
 		try {
 			String brand = request.getParameter("brand");
@@ -53,8 +56,8 @@ public class Catalog extends HttpServlet {
 			String category = request.getParameter("category");
 			String ID = request.getParameter("ID");
 			
-			StoreModel model = (StoreModel) this.getServletContext().getAttribute("SModel");
-			Map<String, ItemBean> results = model.retrieve(brand,type,category,ID);
+			MainModel model = (MainModel) this.getServletContext().getAttribute("MainModel");
+			Map<String, ItemBean> results = model.getStoreModel().retrieve(brand,type,category,ID);
 			response.setContentType("application/json");
 			int counter = 0;
 			resOut.append("{");

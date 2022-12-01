@@ -56,11 +56,15 @@
             				onclick="addReview('http://localhost:8080/StuffGo/ItemInfo?out=addReview&ID=${itemID}')">Write a customer review</button>
 					</div>        
 		       </div>
-		       <div class="row productDetails">
-		        	<div id="reviews">
-		            </div>        
-		       </div>
-		    </div>
+
+ 
+			  <div class="row productDetails">
+			    <div style="overflow-y: scroll; height:200px;" id="reviews" >
+
+			    </div>
+			  </div>
+			</div>
+			</div>
 		</section>
 	</body>
 </html>

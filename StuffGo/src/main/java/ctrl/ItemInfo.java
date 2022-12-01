@@ -19,7 +19,6 @@ import bean.ItemReviewBean;
 import bean.StudentBean;
 import model.MainModel;
 import model.SisModel;
-import model.StoreModel;
 
 /**
  * Servlet implementation class ItemInfo
@@ -43,16 +42,6 @@ public class ItemInfo extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
     	super.init(config);
-    	
-    	try {
-
-	    	// SisModel instance save in context attribute
-    		MainModel model = MainModel.getInstance();
-	    	this.getServletContext().setAttribute("MainModel", model);
-
-		} catch (ClassNotFoundException e) {
-			throw new ServletException("Class Not Found!" + e);
-		}
     }
     
 	/**
@@ -69,33 +58,43 @@ public class ItemInfo extends HttpServlet {
 		
 		try {
 			
-			StoreModel storeModel = (StoreModel) context.getAttribute("SModel");
 			MainModel model = (MainModel) context.getAttribute("MainModel");
 				
 				if(request.getParameter("out") != null && request.getParameter("out").equals("addReview")) {
-					String userID = "123"; // get from the session
-					String review = "";
-					String reviewDate = "";
-					String ID = "";
 					
-					if(request.getParameter("ID") != null) {
-						ID = request.getParameter("ID");
-					}
-							
-					// Get credit taken value
-					if(request.getParameter("REVIEW") != null) {
-						review =  request.getParameter("REVIEW");
-					}
-					
-					// Get credit taken value
-					if(request.getParameter("REVIEWDATE") != null) {
-						reviewDate =  request.getParameter("REVIEWDATE");
-					}
-					try {
-						model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, review, reviewDate);
-					} catch(Exception e) {			
-						resOut.append(e.getMessage());
-					}
+					//if (request.getSession().getAttribute("isLoggedIn") != null && !((boolean) request.getSession().getAttribute("isLoggedIn"))) {
+					//	String target = "/login.html";
+					//	request.getRequestDispatcher(target).forward(request, response);
+						
+					//} else {
+						String userID = "123"; // get from the session
+						String review = "";
+						String reviewDate = "";
+						String ID = "";
+						
+						if(request.getParameter("ID") != null) {
+							ID = request.getParameter("ID");
+						}
+								
+						// Get credit taken value
+						if(request.getParameter("REVIEW") != null) {
+							review =  request.getParameter("REVIEW");
+						}
+						
+						// Get credit taken value
+						if(request.getParameter("REVIEWDATE") != null) {
+							reviewDate =  request.getParameter("REVIEWDATE");
+						} 
+						try {
+							int k = model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, review, reviewDate);
+							System.out.print("K: " + k);
+						} catch(Exception e) {			
+							resOut.append(e.getMessage());
+						}
+						
+						resOut.write("{\"user\":\"" + userID + "\"}");
+						resOut.flush();
+					//}
 				}
 				if(request.getParameter("out") != null && request.getParameter("out").equals("getReviews")) {
 					StringBuilder jsonData = new StringBuilder();
@@ -113,7 +112,7 @@ public class ItemInfo extends HttpServlet {
 								jsonData.append("\"" + iBean.getUserID() + "\"");
 								jsonData.append(",\"review\":");
 								jsonData.append("\"" + iBean.getReview() + "\"");
-								jsonData.append(",\"data\":");
+								jsonData.append(",\"date\":");
 								jsonData.append("\"" + iBean.getReviewDate() + "\"");
 								jsonData.append("}, ");
 							}
@@ -135,7 +134,7 @@ public class ItemInfo extends HttpServlet {
 					this.itemID = request.getParameter("ID");
 					
 				}
-				ItemBean itemInfo = storeModel.retreiveItem(this.itemID);
+				ItemBean itemInfo = model.getStoreModel().retreiveItem(this.itemID);
 				
 				request.setAttribute("image", itemInfo.getImage());
 				request.setAttribute("name", itemInfo.getName());

@@ -7,8 +7,8 @@ import java.util.Map;
 
 import dao.StudentDAO;
 import model.SisModel;
-import model.UserModel;
 import utilities.View;
+import model.MainModel;
 
 
 import javax.servlet.ServletException;
@@ -41,10 +41,13 @@ public class User extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		try {
-			UserModel userModel = new UserModel();
-			this.getServletContext().setAttribute("USER_MODEL", userModel);
+
+	    	// SisModel instance save in context attribute
+    		MainModel model = MainModel.getInstance();
+	    	this.getServletContext().setAttribute("MainModel", model);
+
 		} catch (ClassNotFoundException e) {
-			throw new ServletException("Class Not Found" + e);
+			throw new ServletException("Class Not Found!" + e);
 		}
 	}
 
@@ -54,7 +57,7 @@ public class User extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		UserModel userModel = (UserModel) this.getServletContext().getAttribute("USER_MODEL");
+		MainModel model = (MainModel) this.getServletContext().getAttribute("MainModel");
 		HttpSession session = request.getSession();
 		
 		String username = request.getParameter("username");
@@ -67,7 +70,7 @@ public class User extends HttpServlet {
 		response.setContentType("application/json");
 		try {
 			if (type.equals("login")) {
-				 boolean isLoggedIn = userModel.loginUser(username, passwordHash);
+				 boolean isLoggedIn = model.getUserModel().loginUser(username, passwordHash);
 				 if (isLoggedIn) {
 					session.setAttribute("isLoggedIn", true);
 					resOut.append("{\"isLoggedIn\": true}");
@@ -81,7 +84,7 @@ public class User extends HttpServlet {
 				String billing = request.getParameter("billing");
 				String shipping = request.getParameter("shipping");
 				UserBean newUser = new UserBean(username, passwordHash, shipping, billing);
-				boolean isRegistered = userModel.registerUser(newUser);
+				boolean isRegistered = model.getUserModel().registerUser(newUser);
 				System.out.println("isRegistered: " + isRegistered);
 				if (isRegistered) {
 					session.setAttribute("isLoggedIn", true);

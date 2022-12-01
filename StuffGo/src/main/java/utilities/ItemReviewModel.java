@@ -1,4 +1,4 @@
-package model;
+package utilities;
 
 import java.io.IOException;
 import java.sql.SQLException;
