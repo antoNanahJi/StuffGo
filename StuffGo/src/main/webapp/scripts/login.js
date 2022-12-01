@@ -10,7 +10,7 @@ const login = () => {
 		})
 		.then((responseJSON) => {
 			if (responseJSON.isLoggedIn) {
-				window.location.href = '/StuffGo/homepage.html';
+				window.location.href = '/StuffGo/index.html';
 			} else {
 				alert('Wrong username or password');
 			}

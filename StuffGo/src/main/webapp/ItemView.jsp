@@ -17,20 +17,20 @@
 	<body>
 		<nav class="navbar navbar-expand-md justify-content-between navigation">
 			<div class="container">
-		    	<a class="navbar-brand" href="http://localhost:8080/StuffGo/homepage.html">StuffGo</a>
+		    	<a class="navbar-brand" href="http://localhost:8080/StuffGo/index.html">StuffGo</a>
 		        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		        	<span class="navbar-toggler-icon"></span>
 		        </button>
 		        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 		        	<ul class="navbar-nav">
 		            	<li class="nav-item active">
-		                	<a class="nav-link" href="#">Catalog</span></a>
+		                	<a class="nav-link" href="http://localhost:8080/StuffGo/index.html">Catalog</span></a>
 		                </li>
 		        		<li class="nav-item">
-		                  	<a class="nav-link" href="#">Login</a>
+		                  	<a class="nav-link" href="http://localhost:8080/StuffGo/login.html">Login</a>
 		                </li>
 		                <li class="nav-item">
-		                  	<a class="nav-link" href="#">Cart</a>
+		                  	<a class="nav-link" href="http://localhost:8080/StuffGo/cart.html">Cart</a>
 		                </li>
 		            </ul>
 		        </div>
@@ -51,8 +51,8 @@
 		        </div>
 		        <div class="row productDetails">
 		        	<div id="input-group">
-						<textarea class="form-control" id="customer_review" aria-label="With textarea">Thank you!!</textarea>
-						 <button type="button" name="ajax" value="true"
+						<textarea class="form-control" id="customer_review" aria-label="With textarea"></textarea>
+						<button type="button" name="ajax" value="true"
             				onclick="addReview('http://localhost:8080/StuffGo/ItemInfo?out=addReview&ID=${itemID}')">Write a customer review</button>
 					</div>        
 		       </div>

@@ -14,7 +14,7 @@ const register = () => {
 		})
 		.then((responseJSON) => {
 			if (responseJSON.isRegistered) {
-				window.location.href = '/StuffGo/homepage.html';
+				window.location.href = '/StuffGo/index.html';
 			} else {
 				alert('Invalid values, maybe username is taken');
 			}
