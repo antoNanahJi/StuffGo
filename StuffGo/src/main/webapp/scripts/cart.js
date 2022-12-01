@@ -66,11 +66,11 @@ function createItems() {
 function swap() {
 	counter++;
 	if (counter % 2 == 1) {
-		document.getElementById("checkout-login").style.display = "block";
-		document.getElementById("checkout").style.display = "none";
-	} else {
 		document.getElementById("checkout-login").style.display = "none";
 		document.getElementById("checkout").style.display = "block";
+	} else {
+		document.getElementById("checkout-login").style.display = "block";
+		document.getElementById("checkout").style.display = "none";
 		counter = 0;
 	}
 }
