@@ -62,11 +62,13 @@ public class ItemInfo extends HttpServlet {
 				
 				if(request.getParameter("out") != null && request.getParameter("out").equals("addReview")) {
 					
-					//if (request.getSession().getAttribute("isLoggedIn") != null && !((boolean) request.getSession().getAttribute("isLoggedIn"))) {
-					//	String target = "/login.html";
-					//	request.getRequestDispatcher(target).forward(request, response);
+					if (request.getSession().getAttribute("username") == null) {
+						System.out.println("Inside the null thing");
+						String target = "login.html";
+						request.getRequestDispatcher(target).forward(request, response);
+						return;
+					}
 						
-					//} else {
 						String userID = "123"; // get from the session
 						String review = "";
 						String reviewDate = "";

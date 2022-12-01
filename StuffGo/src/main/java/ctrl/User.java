@@ -70,13 +70,13 @@ public class User extends HttpServlet {
 		response.setContentType("application/json");
 		try {
 			if (type.equals("login")) {
-				 boolean isLoggedIn = model.getUserModel().loginUser(username, passwordHash);
-				 if (isLoggedIn) {
-					session.setAttribute("isLoggedIn", true);
-					resOut.append("{\"isLoggedIn\": true}");
+				 boolean isLoginSuccess = model.getUserModel().loginUser(username, passwordHash);
+				 if (isLoginSuccess) {
+					session.setAttribute("username", username);
+					resOut.append("{\"username\": \"" + username + "\"}");
 					resOut.flush();
 				 } else {
-					resOut.append("{\"isLoggedIn\": false}");
+					resOut.append("{\"username\": null}");
 					resOut.flush();
 				 }
 			} else if (type.equals("register")) {
@@ -84,20 +84,20 @@ public class User extends HttpServlet {
 				String billing = request.getParameter("billing");
 				String shipping = request.getParameter("shipping");
 				UserBean newUser = new UserBean(username, passwordHash, shipping, billing);
-				boolean isRegistered = model.getUserModel().registerUser(newUser);
-				System.out.println("isRegistered: " + isRegistered);
-				if (isRegistered) {
-					session.setAttribute("isLoggedIn", true);
-					resOut.append("{\"isRegistered\": true}");
+				boolean isRegisterationSuccess = model.getUserModel().registerUser(newUser);
+				System.out.println("isRegistered: " + isRegisterationSuccess);
+				if (isRegisterationSuccess) {
+					session.setAttribute("username", username);
+					resOut.append("{\"username\": \"" + username + "\"}");
 					resOut.flush();
 				} else {
-					resOut.append("{\"isRegistered\": false}");
+					resOut.append("{\"username\": null}");
 					resOut.flush();
 				}
 			} else {
 				// would mean logout
-				session.setAttribute("isLoggedIn", false);
-				resOut.append("{\"isLoggedOut\": true}");
+				session.setAttribute("username", null);
+				resOut.append("{\"username\": null}");
 				resOut.flush();
 			}
 			// TODO: save that user is logged in to the session

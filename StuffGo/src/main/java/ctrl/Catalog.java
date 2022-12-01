@@ -48,7 +48,6 @@ public class Catalog extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
-		request.getSession().setAttribute("isLoggedIn", false);
 		Writer resOut = response.getWriter();
 		try {
 			String brand = request.getParameter("brand");

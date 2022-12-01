@@ -9,7 +9,8 @@ const login = () => {
 			return response.json();
 		})
 		.then((responseJSON) => {
-			if (responseJSON.isLoggedIn) {
+			console.log("received JSON: ", responseJSON);
+			if (responseJSON.username) {
 				window.location.href = '/StuffGo/index.html';
 			} else {
 				alert('Wrong username or password');

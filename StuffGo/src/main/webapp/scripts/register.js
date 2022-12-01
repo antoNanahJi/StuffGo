@@ -13,7 +13,8 @@ const register = () => {
 			return response.json();
 		})
 		.then((responseJSON) => {
-			if (responseJSON.isRegistered) {
+			console.log("received JSON: ", responseJSON);
+			if (responseJSON.username) {
 				window.location.href = '/StuffGo/index.html';
 			} else {
 				alert('Invalid values, maybe username is taken');

@@ -25,7 +25,7 @@ public class UserDAO {
 
 	public boolean login(String username, String passwordHash) throws SQLException {
 		Connection connection = this.ds.getConnection();
-		String query = "SELECT * FROM Users WHERE username = ? AND password = ?";
+		String query = "SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?";
 		PreparedStatement statement = connection.prepareStatement(query);
 		statement.setString(1, username);
 		statement.setString(2, passwordHash);
@@ -42,7 +42,7 @@ public class UserDAO {
 
 	public boolean register(UserBean newUser) throws SQLException {
 		Connection connection = this.ds.getConnection();
-		String query = "INSERT INTO Users (username, password, billing, shipping) values (?, ?, ?, ?)";
+		String query = "INSERT INTO USERS (USERNAME, PASSWORD, BILLING_ADDRESS, SHIPPING_ADDRESS) values (?, ?, ?, ?)";
 		PreparedStatement statement = connection.prepareStatement(query);
 		statement.setString(1, newUser.getUsername());
 		statement.setString(2, newUser.getPassword());
