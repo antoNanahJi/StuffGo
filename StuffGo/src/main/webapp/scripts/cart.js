@@ -1,10 +1,18 @@
 var counter = 0;
+var total = 0;
+var swapCounter = 0;
 
+
+function updateTotal() {
+	document.getElementById("total").value = total;
+}
 function quantityUp(index) {
 	var num = document.getElementById("num" + index);
 	num.value++;
 	var cost = document.getElementById("cost" + index);
 	cost.innerHTML = "$ " + 10 * num.value;
+	total = total + 10;
+	updateTotal();
 }
 
 function quantityDown(index) {
@@ -15,11 +23,15 @@ function quantityDown(index) {
 		var cost = document.getElementById("cost" + index);
 		cost.innerHTML = " $" + 10 * num.value;
 	}
+	total = total - 10;
+	updateTotal();
 }
 
 function createItems() {
 	counter++;
 	var form = document.getElementById("cartForm");
+	total = total + 10;
+	var form = document.getElementById("cart");
 	var fieldset = document.createElement("fieldset");
 	var input = document.createElement("input");
 	var button1 = document.createElement("button");
@@ -29,6 +41,7 @@ function createItems() {
 	fieldset.setAttribute("id", "item" + counter);
 	fieldset.appendChild(text);
 	text =document.createTextNode(" $10");
+	text = document.createTextNode(" $10");
 	cost.setAttribute("id", "cost" + counter);
 	cost.appendChild(text);
 	fieldset.appendChild(cost);
@@ -47,4 +60,17 @@ function createItems() {
 	fieldset.appendChild(button1);
 	fieldset.appendChild(button2);
 	form.appendChild(fieldset);
+	updateTotal();
+}
+
+function swap() {
+	counter++;
+	if (counter % 2 == 1) {
+		document.getElementById("checkout-login").style.display = "block";
+		document.getElementById("checkout").style.display = "none";
+	} else {
+		document.getElementById("checkout-login").style.display = "none";
+		document.getElementById("checkout").style.display = "block";
+		counter = 0;
+	}
 }
