@@ -66,6 +66,26 @@ function doSimpleAjax(address) {
 		console.log(request);
 	};
 	request.send(null);
+	resetRadio();
+}
+//RESET FILTERS FUNCTION 
+function resetRadio() {
+	var brand = document.getElementsByName('brand');
+	var type = document.getElementsByName('type');
+	var category = document.getElementsByName('category');
+	console.log(brand);
+
+	for (i = 0; i < brand.length; i++) {
+	brand[i].checked = false;
+	}
+
+	for (i = 0; i < type.length; i++) {
+		type[i].checked = false;
+	}
+
+	for (i = 0; i < category.length; i++) {
+		category[i].checked = false;
+	}
 }
 //HANDLE AJAX REQUEST
 function handlerLoad(request) {

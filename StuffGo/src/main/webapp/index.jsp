@@ -16,7 +16,6 @@
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
   <link rel="StyleSheet" href="res/main.css" type="text/css" title="cse4413" media="screen, print"/>
-  <script type="text/javascript" src="scripts/item.js">;</script>
 </head>
 
 <body>
@@ -79,6 +78,8 @@
 
           <button type="button" name="ajax" value="true"
             onclick="doSimpleAjax('/StuffGo/home?');">Filter Results</button>
+            <button type="button" name="reset" value=""
+            onclick="resetRadio();">Reset Filters</button>
         </div>
         <div class="col-lg-9 items">
           <div class="row" id="result">
@@ -86,23 +87,8 @@
         </div>
       </div>
     </div>
-  </section>
-  <button type="button" class="btn btn-primary" id="liveToastBtn" onclick(toast.show();)>Show live toast</button>
-
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-  <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <img src="..." class="rounded me-2" alt="...">
-      <strong class="me-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-      Hello, world! This is a toast message.
-    </div>
-  </div>
-</div>
-  
+  </section>  
+  <script type="text/javascript" src="scripts/item.js">;</script>
 </body>
 
 </html>
