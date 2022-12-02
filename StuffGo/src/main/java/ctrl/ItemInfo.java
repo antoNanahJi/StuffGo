@@ -63,13 +63,12 @@ public class ItemInfo extends HttpServlet {
 				if(request.getParameter("out") != null && request.getParameter("out").equals("addReview")) {
 					
 					if (request.getSession().getAttribute("username") == null) {
-						System.out.println("Inside the null thing");
-						String target = "login.html";
-						request.getRequestDispatcher(target).forward(request, response);
+						resOut.write("{\"login\":\"" + false + "\"}");
+						resOut.flush();
 						return;
 					}
 						
-						String userID = "123"; // get from the session
+						String userID = (String) request.getSession().getAttribute("username");
 						String review = "";
 						String reviewDate = "";
 						String ID = "";
@@ -88,15 +87,14 @@ public class ItemInfo extends HttpServlet {
 							reviewDate =  request.getParameter("REVIEWDATE");
 						} 
 						try {
-							int k = model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, review, reviewDate);
-							System.out.print("K: " + k);
+							model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, review, reviewDate);
+							resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\"}");
 						} catch(Exception e) {			
 							resOut.append(e.getMessage());
 						}
 						
-						resOut.write("{\"user\":\"" + userID + "\"}");
-						resOut.flush();
-					//}
+						
+				
 				}
 				if(request.getParameter("out") != null && request.getParameter("out").equals("getReviews")) {
 					StringBuilder jsonData = new StringBuilder();
