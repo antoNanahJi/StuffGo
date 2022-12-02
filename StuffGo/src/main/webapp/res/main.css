@@ -88,4 +88,16 @@ button {
     color: white;
     margin-top: 24px !important;
 }
+label {
+   padding: 12px;
+   border: 0;
+}
+input {
+    padding: 12px;
+    border-radius: 35px;
+    border: 0;
+    border-radius: 35px;
+}
+
+
 
