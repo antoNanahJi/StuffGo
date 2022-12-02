@@ -11,7 +11,7 @@ const login = () => {
 		.then((responseJSON) => {
 			console.log("received JSON: ", responseJSON);
 			if (responseJSON.username) {
-				window.location.href = '/StuffGo/index.html';
+				window.location.href = '/StuffGo/index.jsp';
 			} else {
 				alert('Wrong username or password');
 			}

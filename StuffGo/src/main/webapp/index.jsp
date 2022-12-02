@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,13 +22,16 @@
 <body>
   <nav class="navbar navbar-expand-md justify-content-between navigation">
     <div class="container">
-      <a class="navbar-brand" href="http://localhost:8080/StuffGo/index.html">StuffGo</a>
+      <a class="navbar-brand" href="http://localhost:8080/StuffGo/index.jsp">StuffGo</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
+        <li class="nav-item">
+               	<a class="nav-link"  id="nohov">${username}</a>
+             </li>
          	<li class="nav-item active">
              	<a class="nav-link" href="http://localhost:8080/StuffGo/index.html">Catalog</span></a>
              </li>
@@ -82,6 +87,21 @@
       </div>
     </div>
   </section>
+  <button type="button" class="btn btn-primary" id="liveToastBtn" onclick(toast.show();)>Show live toast</button>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="..." class="rounded me-2" alt="...">
+      <strong class="me-auto">Bootstrap</strong>
+      <small>11 mins ago</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Hello, world! This is a toast message.
+    </div>
+  </div>
+</div>
   
 </body>
 
