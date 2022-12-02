@@ -41,6 +41,10 @@ function addReview(address) {
 		handler(request, true);
 	};
 	request.send(null);
+	//toast code
+	const toastLiveExample = document.getElementById('liveToast');
+	const toast = new bootstrap.Toast(toastLiveExample);
+    toast.show();
 }
 
 function handler(request, oneReview) {

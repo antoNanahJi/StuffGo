@@ -14,7 +14,7 @@
 		<link rel="StyleSheet" href="res/main.css" type="text/css" title="cse4413" media="screen, print"/>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 		
-		<script type="text/javascript" src="scripts/ItemInfo.js">;</script>
+		
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-md justify-content-between navigation">
@@ -69,6 +69,18 @@
 			  </div>
 			</div>
 			</div>
+			  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">Alert</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+       Review was added.
+      </div>
+    </div>
+  </div>
 		</section>
+		<script type="text/javascript" src="scripts/ItemInfo.js">;</script>
 	</body>
 </html>
