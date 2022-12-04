@@ -44,9 +44,10 @@ public class ItemReviewDAO {
 			String userID = r.getString("USERID");
 			String itemID = r.getString("ITEMID");
 			String review = r.getString("REVIEW");
+			int rating = r.getInt("RATING");
 			String reviewDate = r.getString("REVIEWDATE");
 
-			rs.add(new ItemReviewBean(id, userID, itemID, review, reviewDate));
+			rs.add(new ItemReviewBean(id, userID, itemID, review, rating, reviewDate));
 		}
 		
 		r.close();
@@ -56,7 +57,7 @@ public class ItemReviewDAO {
 		return rs;
 	}
 	
-	public int addReview(String ID, String USERID, String ITEMID, String REVIEW, String REVIEWDATE) throws SQLException, NamingException{
+	public int addReview(String ID, String USERID, String ITEMID, String REVIEW, int RATING, String REVIEWDATE, boolean isRating) throws SQLException, NamingException{
 		String preparedStatement = "select * from ITEMREVIEWS where ID=?";
 		
 		Connection con = this.ds.getConnection();
@@ -65,10 +66,16 @@ public class ItemReviewDAO {
 		
 		stmt.setString(1, ID);
 		ResultSet r = stmt.executeQuery();
-		System.out.print("LPLP " + ID);
+		
+		String preReview = "";
+		String preDate = "";
+		int preRating = 0;
+		
 		boolean isFirstReview = true;
 		while (r.next()) {
-			System.out.print("LPLP");
+			preReview = r.getString("REVIEW");
+			preRating = r.getInt("RATING");
+			preDate =  r.getString("REVIEWDATE");
 			isFirstReview = false;
 			break;
 		}
@@ -80,8 +87,12 @@ public class ItemReviewDAO {
 		r.close();
 		stmt.close();
 		con.close();
-
-		return this.insertReview(ID, USERID, ITEMID, REVIEW, REVIEWDATE);
+		
+		if (isRating) {
+			return this.insertReview(ID, USERID, ITEMID, preReview, RATING, preDate);
+		}
+		return this.insertReview(ID, USERID, ITEMID, REVIEW, preRating, REVIEWDATE);
+		
 	}
 	
 	public int deleteReview(String ID) throws SQLException, NamingException{
@@ -96,8 +107,8 @@ public class ItemReviewDAO {
 		return stmt.executeUpdate();
 	}
 	
-	public int insertReview(String ID, String USERID, String ITEMID, String REVIEW, String REVIEWDATE) throws SQLException, NamingException{
-		String preparedStatement = "insert into ITEMREVIEWS values(?,?,?,?,?)";
+	public int insertReview(String ID, String USERID, String ITEMID, String REVIEW, int RATING, String REVIEWDATE) throws SQLException, NamingException{
+		String preparedStatement = "insert into ITEMREVIEWS values(?,?,?,?,?,?)";
 		
 		Connection con = this.ds.getConnection();
 		
@@ -107,8 +118,10 @@ public class ItemReviewDAO {
 		stmt.setString(2, USERID);
 		stmt.setString(3, ITEMID);
 		stmt.setString(4, REVIEW);
-		stmt.setString(5, REVIEWDATE);
+		stmt.setInt(5, RATING);
+		stmt.setString(6, REVIEWDATE);
 		
 		return stmt.executeUpdate();
+		
 	}
 }

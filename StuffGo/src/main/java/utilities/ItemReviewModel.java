@@ -50,7 +50,7 @@ public class ItemReviewModel {
 	 * @throws NamingException
 	 * @throws SQLException
 	 */
-	public int insertReview(String ID, String USERID, String ITEMID, String REVIEW, String REVIEWDATE) throws SQLException, NamingException {
+	public int insertReview(String ID, String USERID, String ITEMID, String REVIEW, String RATING, String REVIEWDATE, boolean isRating) throws SQLException, NamingException {
 		// validate inputs sid, givenname, surname, credittake, and creditgraduate
 		
 		if (ID == null || ID.equals("")) {
@@ -62,14 +62,23 @@ public class ItemReviewModel {
 		if (ITEMID == null || ITEMID.equals("")) {
 			throw new NamingException("ITEMID can not be empty\n");
 		}
-		if (REVIEW == null || REVIEW.equals("")) {
+		if (REVIEW == null) {
 			throw new NamingException("REVIEW can not be empty\n");
 		}
-		if (REVIEWDATE == null || REVIEWDATE.equals("")) {
+		
+		if (RATING == null) {
+			throw new NamingException("RATING can not be empty\n");
+		}
+		int rating = Integer.valueOf(RATING);
+		if (rating < 0) {
+			throw new NamingException("RATING sould be number > 0\n");
+		}
+		
+		if (REVIEWDATE == null) {
 			throw new NamingException("REVIEWDATE can not be empty\n");
 		}
 
-		return this.id.addReview(ID, USERID, ITEMID, REVIEW, REVIEWDATE);
+		return this.id.addReview(ID, USERID, ITEMID, REVIEW, rating, REVIEWDATE, isRating);
 	}
 	
 }

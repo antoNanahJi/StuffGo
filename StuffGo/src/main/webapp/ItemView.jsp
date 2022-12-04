@@ -44,42 +44,59 @@
 		        	<div class="col-lg-7 productImage" style="background-image: url(${image});"></div>
 		            <div class="col-lg-5 productContainer">
 		            	<div class="row productDetails">
-		                	<h3>${name}</h3>
+		                	
+		                	<div style="display: flex;" id="star-container">
+		                		<h3>${name}</h3>
+							</div>
 		                	<p>${description}</p>
 		                	<h3>$ ${price}</h3>
 		                	<label for="Rate"> Rate: </label>
-		                	<div>
-							<div class="bi bi-star-fill"></div>
-		              	</div>        
-		            </div>
+		            	</div>
+		        	</div>
 		        </div>
-		        <div class="row productDetails">
-		        	<div id="input-group">
-						<textarea class="form-control" id="customer_review" aria-label="With textarea"></textarea>
-						<button type="button" name="ajax" value="true"
-            				onclick="addReview('http://localhost:8080/StuffGo/ItemInfo?out=addReview&ID=${itemID}')">Write a customer review</button>
-					</div>        
-		       </div>
-
- 
-			  <div class="row productDetails">
-			    <div style="overflow-y: scroll; height:200px;" id="reviews" >
-
+		        <div class="row">
+		            <div class="col-lg-3 productContainer">
+			        	<div class="row productDetails" style="text-align: center;">
+				        		<p style=" margin: 3px;">How was your experience?</p>
+								<div style="display: flex; margin-left: 25%" >
+									<div id = "star_1" style=" margin-right: 3px;  color: black;" class="bi bi-star" onclick="addRating(1)"></div>
+									<div id = "star_2" style=" margin-right: 3px; color: black;" class="bi bi-star" onclick="addRating(2)"></div>
+									<div id = "star_3" style=" margin-right: 3px; color: black;" class="bi bi-star" onclick="addRating(3)"></div>
+									<div id = "star_4" style=" margin-right: 3px; color: black;" class="bi bi-star" onclick="addRating(4)"></div>
+									<div id = "star_5" style="  color: black;" class="bi bi-star" onclick="addRating(5)"></div>
+								</div>
+							
+								<p  id="star_value" style=" margin: 0px;" >0 of 5</p>
+								<button type="button" id="star_submit" name="ajax" style="visibility: hidden;" value="true" 
+		            				onclick="submitRating('http://localhost:8080/StuffGo/ItemInfo?out=addRating&ID=${itemID}')">Submit</button>
+					      
+				        </div>
+			        </div>
+			        <div class="col-lg-9 productContainer">
+				        <div class="row productDetails">
+				        	<div id="input-group">
+								<textarea class="form-control" id="customer_review" aria-label="With textarea"></textarea>
+								<button type="button" name="ajax" value="true"
+		            				onclick="addReview('http://localhost:8080/StuffGo/ItemInfo?out=addReview&ID=${itemID}')">Write a customer review</button>
+							</div>        
+				        </div>
+					</div>
+				</div>
+ 				<div class = "row">
+				  <div class="row productDetails">
+				    	<div style="overflow-y: scroll; height:200px;" id="reviews" ></div>
+			  	  </div>
+				</div>
+			</div>
+			<div class="toast-container position-fixed bottom-0 end-0 p-3">
+			    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+			      <div class="toast-header">
+			        <strong class="me-auto">Alert</strong>
+			        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+			      </div>
+			      <div class="toast-body" id="toast-message"></div>
 			    </div>
-			  </div>
-			</div>
-			</div>
-			  <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <strong class="me-auto">Alert</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-       Review was added.
-      </div>
-    </div>
-  </div>
+		 	</div>
 		</section>
 		<script type="text/javascript" src="scripts/ItemInfo.js">;</script>
 	</body>

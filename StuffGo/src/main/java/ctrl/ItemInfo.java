@@ -87,7 +87,8 @@ public class ItemInfo extends HttpServlet {
 							reviewDate =  request.getParameter("REVIEWDATE");
 						} 
 						try {
-							model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, review, reviewDate);
+							int k = model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, review, "0", reviewDate, false);
+							System.out.print("\n k: " + k);
 							resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\"}");
 						} catch(Exception e) {			
 							resOut.append(e.getMessage());
@@ -96,13 +97,43 @@ public class ItemInfo extends HttpServlet {
 						
 				
 				}
-				if(request.getParameter("out") != null && request.getParameter("out").equals("getReviews")) {
+				
+				if(request.getParameter("out") != null && request.getParameter("out").equals("addRating")) {
+					
+					if (request.getSession().getAttribute("username") == null) {
+						resOut.write("{\"login\":\"" + false + "\"}");
+						resOut.flush();
+						return;
+					}
+					String userID = (String) request.getSession().getAttribute("username");
+					String ID = "";
+					String rating = "";
+					
+					if(request.getParameter("ID") != null) {
+						ID = request.getParameter("ID");
+					}
+					if(request.getParameter("RATING") != null) {
+						rating = request.getParameter("RATING");
+					}
+					
+					try {
+						int k = model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, "", rating, "", true);
+						System.out.print("\n k: " + k);
+						resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\"}");
+					} catch(Exception e) {			
+						resOut.append(e.getMessage());
+					}
+				}
+
+				if(request.getParameter("out") != null && request.getParameter("out").equals("getReviewsStars")) {
 					StringBuilder jsonData = new StringBuilder();
-					System.out.print("itemID: " + this.itemID);
+					
+					
 					try {
 						List<ItemReviewBean> reviews = model.getItemReviewModel().retriveReviews(this.itemID);
 						if (reviews.size() > 0) {
 							response.setContentType("application/json");
+							int starCount = 0;
 							
 							// Create the JSON data
 							jsonData.append("{ \"reviews\" : [");
@@ -115,11 +146,13 @@ public class ItemInfo extends HttpServlet {
 								jsonData.append(",\"date\":");
 								jsonData.append("\"" + iBean.getReviewDate() + "\"");
 								jsonData.append("}, ");
+								starCount += iBean.getRating();
 							}
-							jsonData.replace(jsonData.length() - 2, jsonData.length(), "]}");
+							jsonData.replace(jsonData.length() - 2, jsonData.length(), "],");
+							jsonData.append(" \"starCount\":\"" + (starCount/reviews.size()) + "\"}");
 							
-							System.out.print(jsonData.toString());
 						}
+						
 					} catch(Exception e) {			
 						jsonData.append(e.getMessage());
 					}

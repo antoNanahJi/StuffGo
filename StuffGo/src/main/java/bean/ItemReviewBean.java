@@ -5,13 +5,15 @@ public class ItemReviewBean {
 	private String userID;
 	private String itemID;
 	private String review;
+	private int rating;
 	private String reviewDate;
 	
-	public ItemReviewBean (String ID, String USERID, String ITEMID, String REVIEW, String REVIEWDATE) {
+	public ItemReviewBean (String ID, String USERID, String ITEMID, String REVIEW, int RATING, String REVIEWDATE) {
 		this.id = ID;
 		this.userID = USERID;
 		this.itemID = ITEMID;
 		this.review = REVIEW;
+		this.rating = RATING;
 		this.reviewDate = REVIEWDATE;
 	}
 	public String getId() {
@@ -43,6 +45,12 @@ public class ItemReviewBean {
 	}
 	public void setReviewDate(String reviewDate) {
 		this.reviewDate = reviewDate;
+	}
+	public int getRating() {
+		return rating;
+	}
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 }
