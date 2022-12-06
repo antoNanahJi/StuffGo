@@ -38,7 +38,7 @@
                	<a class="nav-link" id="loginout" href="http://localhost:8080/StuffGo/login.html">Login</a>
              </li>
              <li class="nav-item">
-               	<a class="nav-link" href="http://localhost:8080/StuffGo/cart.html">Cart</a>
+               	<a class="nav-link" href="http://localhost:8080/StuffGo/cart.jsp">Cart</a>
              </li>
         </ul>
       </div>
