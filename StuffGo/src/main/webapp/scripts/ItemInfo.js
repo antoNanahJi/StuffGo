@@ -29,6 +29,21 @@ function validate() {
 	return ok;
 }
 
+function addItemToCart(address) {
+	var request = new XMLHttpRequest();
+	
+	var request = new XMLHttpRequest();
+	var data = '&';
+	data += 'Quantity=' + document.getElementById( "Quantity").value ;
+	console.log(address + data);
+	request.open('GET', address + data, true);
+	
+	request.onreadystatechange = function () {
+		addToast('Item added to cart!!');
+	};
+	request.send(null);
+}
+
 function addReview(address) {
 	var ok = validate();
 	if (!ok) return;

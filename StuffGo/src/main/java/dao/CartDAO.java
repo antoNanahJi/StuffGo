@@ -15,5 +15,5 @@ public class CartDAO {
 		}
 	}
 	
-	public ItemBean
+	//public ItemBean
 }

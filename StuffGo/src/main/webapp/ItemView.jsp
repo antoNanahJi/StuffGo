@@ -54,7 +54,11 @@
 							</div>
 		                	<p>${description}</p>
 		                	<h3>$ ${price}</h3>
-		                	<label for="Rate"> Rate: </label>
+		                	<label for="Quantity">Quantity:</label>
+							<input type="number" step="1" id="Quantity" name="Quantity" value=1></input>
+		                	<button type="button" name="ajax" value="true" 
+		            				onclick="addItemToCart('http://localhost:8080/StuffGo/ItemInfo?out=addItem&ID=${itemID}')">Add To Cart</button>
+					      
 		            	</div>
 		        	</div>
 		        </div>

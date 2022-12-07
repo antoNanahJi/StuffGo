@@ -3,6 +3,8 @@ package ctrl;
 import java.io.IOException;
 import java.io.Writer;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -97,7 +99,34 @@ public class ItemInfo extends HttpServlet {
 						
 				
 				}
-				
+				if(request.getParameter("out") != null && request.getParameter("out").equals("addItem")) {
+					String itemID = "";
+					int quantity = 0;
+					if(request.getParameter("ID") != null) {
+						itemID = request.getParameter("ID");
+						
+					}
+					if(request.getParameter("Quantity") != null) {
+						quantity = Integer.valueOf(request.getParameter("Quantity"));
+					}
+					
+					if (request.getSession().getAttribute("cartItems") == null) {
+				    	request.getSession().setAttribute("cartItems", "");
+					} else {
+						String cartItems = (String) request.getSession().getAttribute("cartItems");
+						Map<String, Integer> cartItemsMap = toMap(cartItems);
+
+						if (cartItemsMap.containsKey(itemID)) {
+							quantity += cartItemsMap.get(itemID);
+						}
+						cartItemsMap.put(itemID, quantity);
+						cartItems = cartItemsMap.toString();
+						request.getSession().setAttribute("cartItems", cartItems.substring(1, cartItems.length() - 1).replaceAll("\\s", ""));
+						
+					}
+					
+					System.out.print("Cart: " + request.getSession().getAttribute("cartItems").toString());
+				}
 				if(request.getParameter("out") != null && request.getParameter("out").equals("addRating")) {
 					
 					if (request.getSession().getAttribute("username") == null) {
@@ -192,6 +221,23 @@ public class ItemInfo extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	private Map<String, Integer> toMap(String str) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		if (str.length() == 0) {
+			return map;
+		}
+		String[] pairs = str.split(",");
+		
+		int size = pairs.length;
+		for (int i=0;i<size;i++) {
+		    String pair = pairs[i];
+		    String[] keyValue = pair.split("=");
+		    map.put(keyValue[0], Integer.valueOf(keyValue[1]));
+		}
+		return map;
 	}
 
 }
