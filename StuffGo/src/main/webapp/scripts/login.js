@@ -3,6 +3,15 @@ const login = () => {
 	const passwordValue = document.getElementById('passwordInput').value;
 	const passwordToSend = keccak_256(passwordValue);
 
+	if (usernameValue === null || usernameValue === '' || usernameValue.length === 0) {
+		alert('Please enter a username');
+		return;
+	}
+	if (passwordValue === null || passwordValue === '' || passwordValue.length === 0) {
+		alert('Please enter a password');
+		return;
+	}
+
 	fetch(`/StuffGo/User?type=login&username=${usernameValue}&passwordHash=${passwordToSend}`)
 		.then((response) => {
 			console.log('fetched...');

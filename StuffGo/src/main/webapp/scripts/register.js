@@ -5,6 +5,31 @@ const register = () => {
 	const defaultBillingValue = document.getElementById('defaultBillingInput').value;
 	const defaultShippingValue = document.getElementById('defaultShippingInput').value;
 
+	if (usernameValue === null || usernameValue === '' || usernameValue.length === 0) {
+		alert('Please enter a username');
+		return;
+	}
+	if (passwordValue === null || passwordValue === '' || passwordValue.length === 0) {
+		alert('Please enter a password');
+		return;
+	}
+	if (
+		defaultBillingValue === null ||
+		defaultBillingValue === '' ||
+		defaultBillingValue.length === 0
+	) {
+		alert('Please enter a billing info');
+		return;
+	}
+	if (
+		defaultShippingValue === null ||
+		defaultShippingValue === '' ||
+		defaultShippingValue.length === 0
+	) {
+		alert('Please enter a shipping info');
+		return;
+	}
+
 	fetch(
 		`/StuffGo/User?type=register&username=${usernameValue}&passwordHash=${passwordToSend}&billing=${defaultBillingValue}&shipping=${defaultShippingValue}`
 	)
@@ -15,7 +40,7 @@ const register = () => {
 		.then((responseJSON) => {
 			console.log('received JSON: ', responseJSON);
 			if (responseJSON.username) {
-				window.location.href = '/StuffGo/index.html';
+				window.location.href = '/StuffGo/index.jsp';
 			} else {
 				alert('Invalid values, maybe username is taken');
 			}
