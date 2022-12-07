@@ -10,6 +10,12 @@ window.onload = () => {
 	};
 	request.send(null);
 	document.getElementById('customer_review').innerHTML = '';
+	var loginText = document.getElementById('loginout');
+	var nameNav = document.getElementById('nohov');
+	if(nameNav.innerHTML.length!=0){
+		loginText.innerHTML="logout";
+		console.log(loginText.href);
+	}
 };
 
 function validate() {
