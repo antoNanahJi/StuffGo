@@ -10,11 +10,13 @@ window.onload = () => {
 	};
 	request.send(null);
 	document.getElementById('customer_review').innerHTML = '';
-	var loginText = document.getElementById('loginout');
-	var nameNav = document.getElementById('nohov');
-	if (nameNav.innerHTML.length != 0) {
+	const loginText = document.getElementById('loginout');
+	const nameNav = document.getElementById('nohov');
+
+	if (nameNav && nameNav.innerHTML && nameNav.innerHTML.length !== 0) {
+		console.log('nameNav is not empty therefore changing login to logout');
 		loginText.innerHTML = 'logout';
-		console.log(loginText.href);
+		loginText.href = loginText.href.replace('login.jsp', 'logout.jsp');
 	}
 };
 
