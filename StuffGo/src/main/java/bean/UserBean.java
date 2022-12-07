@@ -1,17 +1,25 @@
 package bean;
 
 //Bean class for User.
+/**
+ * @author ziyaicoz
+ *
+ */
 public class UserBean {
 	private String username;
 	private String password;
 	private String shipping;
 	private String billing;
-	
-	public UserBean(String username, String password, String shipping, String billing){
+	private int isAdmin;
+	private String name;
+
+	public UserBean(String username, String password, String shipping, String billing, int isAdmin, String name) {
 		this.username = username;
 		this.password = password;
 		this.shipping = shipping;
 		this.billing = billing;
+		this.isAdmin = isAdmin;
+		this.name = name;
 	}
 
 	public String getUsername() {
@@ -29,7 +37,7 @@ public class UserBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 	public String getShipping() {
 		return shipping;
 	}
@@ -45,4 +53,21 @@ public class UserBean {
 	public void setBilling(String billing) {
 		this.billing = billing;
 	}
+	
+	public int getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }

@@ -4,6 +4,7 @@ const register = () => {
 	const passwordToSend = keccak_256(passwordValue);
 	const defaultBillingValue = document.getElementById('defaultBillingInput').value;
 	const defaultShippingValue = document.getElementById('defaultShippingInput').value;
+	const nameValue = document.getElementById('nameInput').value;
 
 	if (usernameValue === null || usernameValue === '' || usernameValue.length === 0) {
 		alert('Please enter a username');
@@ -29,9 +30,13 @@ const register = () => {
 		alert('Please enter a shipping info');
 		return;
 	}
+	if (nameValue === null || nameValue === '' || nameValue.length === 0) {
+		alert('Please enter a name info');
+		return;
+	}
 
 	fetch(
-		`/StuffGo/User?type=register&username=${usernameValue}&passwordHash=${passwordToSend}&billing=${defaultBillingValue}&shipping=${defaultShippingValue}`
+		`/StuffGo/User?type=register&username=${usernameValue}&passwordHash=${passwordToSend}&billing=${defaultBillingValue}&shipping=${defaultShippingValue}&name=${nameValue}`
 	)
 		.then((response) => {
 			console.log('fetched...');

@@ -1,7 +1,9 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.naming.InitialContext;
@@ -9,6 +11,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import bean.ItemBean;
+import bean.ItemReviewBean;
 import bean.StudentBean;
 import bean.UserBean;
 //DAO for retrieving student database
@@ -43,17 +46,35 @@ public class UserDAO {
 
 	public boolean register(UserBean newUser) throws SQLException {
 		Connection connection = this.ds.getConnection();
-		String query = "INSERT INTO USERS (USERNAME, PASSWORD, BILLING_ADDRESS, SHIPPING_ADDRESS) values (?, ?, ?, ?)";
+		String query = "INSERT INTO USERS (USERNAME, PASSWORD, BILLING_ADDRESS, SHIPPING_ADDRESS, ISADMIN, NAME) values (?, ?, ?, ?, ?, ?)";
 		PreparedStatement statement = connection.prepareStatement(query);
 		statement.setString(1, newUser.getUsername());
 		statement.setString(2, newUser.getPassword());
 		statement.setString(3, newUser.getBilling());
 		statement.setString(4, newUser.getShipping());
+		statement.setInt(5, newUser.getIsAdmin());
+		statement.setString(6, newUser.getName());
 		int resCount = statement.executeUpdate();
 		if (resCount >= 0) {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean isUserAdmin(String username) throws SQLException {
+		Connection connection = this.ds.getConnection();
+		String query = "SELECT * FROM USERS WHERE USERNAME = ?";
+		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1, username);
+		ResultSet results = statement.executeQuery();
+		int isAdminField = 0;
+		if (results.next()) {
+			isAdminField = results.getInt("ISADMIN");
+		}
+		results.close();
+		statement.close();
+		connection.close();
+		return isAdminField == 0 ? false : true;
 	}
 	
 	public String getBillingAddress(String username) throws SQLException {

@@ -3,6 +3,7 @@ package ctrl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.util.List;
 import java.util.Map;
 
 import dao.StudentDAO;
@@ -83,7 +84,8 @@ public class User extends HttpServlet {
 				// TODO: Handle showing error for duplicate username
 				String billing = request.getParameter("billing");
 				String shipping = request.getParameter("shipping");
-				UserBean newUser = new UserBean(username, passwordHash, shipping, billing);
+				String name = request.getParameter("name");
+				UserBean newUser = new UserBean(username, passwordHash, shipping, billing, 0, name);
 				boolean isRegisterationSuccess = model.getUserModel().registerUser(newUser);
 				System.out.println("isRegistered: " + isRegisterationSuccess);
 				if (isRegisterationSuccess) {
@@ -98,8 +100,11 @@ public class User extends HttpServlet {
 				session.setAttribute("username", null);
 				resOut.append("{\"username\": null}");
 				resOut.flush();
+			} else if (type.equals("isAdmin")) {
+				String usernameInSession = (String) session.getAttribute("username");
+				boolean isUserAdmin = model.getUserModel().isUserAdmin(usernameInSession);
+				session.setAttribute("isAdmin", isUserAdmin);
 			}
-			// TODO: save that user is logged in to the session
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

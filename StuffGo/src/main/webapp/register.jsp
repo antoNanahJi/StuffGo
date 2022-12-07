@@ -69,6 +69,15 @@
 					required
 				/>
 </div>
+<div class="row login">
+	<label for="nameInput"><b>Name</b></label>
+	<input
+		type="text"
+		placeholder="Enter Name Info"
+		id="nameInput"
+		required
+	/>
+</div>
 				<button type="submit" onclick="return register()">Register</button>
 			</div>
 		</form>

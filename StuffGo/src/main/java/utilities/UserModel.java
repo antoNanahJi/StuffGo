@@ -27,18 +27,34 @@ public class UserModel {
 		userDAO = new UserDAO();
 	}
 
-	public boolean loginUser(String username, String passwordHash) throws Exception{
-		return this.userDAO.login(username, passwordHash);
+	public boolean loginUser(String username, String passwordHash) {
+    	try {
+    		return this.userDAO.login(username, passwordHash);
+    	} catch (Exception e) {
+    		return false;
+    	}
 	}
 
-    public boolean registerUser(UserBean newUser) throws Exception{
-        return this.userDAO.register(newUser);
+    public boolean registerUser(UserBean newUser) {
+    	try {
+    		return this.userDAO.register(newUser);	
+    	} catch (Exception e) {
+    		return false;
+    	}
     }
+
+	public boolean isUserAdmin(String username) {
+		try {
+			return this.userDAO.isUserAdmin(username);
+		} catch (Exception e) {
+			return false;
+		}
+	} 
     
-    public String returnBillingAddress(String username) throws Exception{
+    public String returnBillingAddress(String username) throws Exception {
         return this.userDAO.getBillingAddress(username);
     }
-    public String returnShippingAddress(String username) throws Exception{
+    public String returnShippingAddress(String username) throws Exception {
         return this.userDAO.getShippingAddress(username);
     }
 }
