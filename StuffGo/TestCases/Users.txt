@@ -1,0 +1,31 @@
+// We are using keccak_256 function on the frontend to hash user's passwords so when sending requests to API we will be sending hashed passwords.
+
+// LOGIN
+// Since user is not created should return {"username": null}
+curl -X GET 'http://localhost:8080/StuffGo/User?type=login&username=zicoz19&passwordHash=8fef2229291b68be841adf029e58b87f39ba144b2d3b0af1760243d0a9bc6a1c'
+
+// REGISTER
+// We will create new user with username = zicoz18 and password = "18"
+// keccak_256("18") = 8fef2229291b68be841adf029e58b87f39ba144b2d3b0af1760243d0a9bc6a1c
+curl -X GET 'http://localhost:8080/StuffGo/User?type=register&username=zicoz18&passwordHash=8fef2229291b68be841adf029e58b87f39ba144b2d3b0af1760243d0a9bc6a1c&billing=someBillingInfo&shipping=someShippingInfo&name=ziyaicoz'
+// Since user is registered we return the registered user's username {"username": "zicoz18"}
+// This request also updates the session value of "username" on the backend. Which represents that user with specific username is logged in
+
+// LOGIN
+// Should be able to login now
+curl -X GET 'http://localhost:8080/StuffGo/User?type=login&username=zicoz18&passwordHash=8fef2229291b68be841adf029e58b87f39ba144b2d3b0af1760243d0a9bc6a1c'
+// Because we registered we do not actually need to login because with registeration session scope of username is already updated as "zicoz18"
+// Since user is logged in we return the logged in user's username {"username": "zicoz18"}
+// If it fails it returns username as null {"username": null}
+
+// LOGOUT
+// Should be able to logout
+curl -X GET 'http://localhost:8080/StuffGo/User?type=logout'
+// For our application when user is logged in we use "username" within session scope to understand which user is logged in.
+// If user wants to logout, they have to send this request and the "username" within the sesion will be updated to null {"username": null}
+
+// ISADMIN
+// Inside our application we have to identify if the logged in user is an admin or not to for the analytics part. 
+curl -X GET 'http://localhost:8080/StuffGo/User?type=isAdmin'
+// This will check the "username" from session scope and will check if the given user with specific "username" is an admin user or not
+// This would update the session value of "isAdmin" and does not provide any response so that we would not expose a checking mechanism for admin accounts
