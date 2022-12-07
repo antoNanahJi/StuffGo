@@ -32,7 +32,7 @@
              	<a class="nav-link" href="http://localhost:8080/StuffGo/index.jsp">Catalog</span></a>
              </li>
      		<li class="nav-item">
-               	<a class="nav-link" id="loginout" href="http://localhost:8080/StuffGo/login.html">Login</a>
+               	<a class="nav-link" id="loginout" href="http://localhost:8080/StuffGo/login.jsp">Login</a>
              </li>
              <li class="nav-item">
                	<a class="nav-link" href="http://localhost:8080/StuffGo/cart.jsp">Cart</a>
@@ -55,7 +55,7 @@
       </div>
       <button type="submit" onclick="return login()">Login</button>
       <div class="row p-3">
-      <a style="text-align:center ;" class="justify-content-center" href="http://localhost:8080/StuffGo/register.html">Do not have an account?</a>
+      <a style="text-align:center ;" class="justify-content-center" href="http://localhost:8080/StuffGo/register.jsp">Do not have an account?</a>
     </div>
 			</div>
     </div>

@@ -26,7 +26,7 @@ public class UserModel {
 	public UserModel() throws ClassNotFoundException{
 		userDAO = new UserDAO();
 	}
-	//return the Map of CSE ID and the student information
+
 	public boolean loginUser(String username, String passwordHash) throws Exception{
 		return this.userDAO.login(username, passwordHash);
 	}

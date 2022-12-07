@@ -13,7 +13,7 @@ const register = () => {
 			return response.json();
 		})
 		.then((responseJSON) => {
-			console.log("received JSON: ", responseJSON);
+			console.log('received JSON: ', responseJSON);
 			if (responseJSON.username) {
 				window.location.href = '/StuffGo/index.html';
 			} else {

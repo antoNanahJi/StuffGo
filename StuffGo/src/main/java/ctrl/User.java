@@ -94,8 +94,7 @@ public class User extends HttpServlet {
 					resOut.append("{\"username\": null}");
 					resOut.flush();
 				}
-			} else {
-				// would mean logout
+			} else if (type.equals("logout")) {
 				session.setAttribute("username", null);
 				resOut.append("{\"username\": null}");
 				resOut.flush();

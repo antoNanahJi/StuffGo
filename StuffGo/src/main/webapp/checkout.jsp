@@ -45,7 +45,7 @@
 					<li class="nav-item active"><a class="nav-link"
 						href="http://localhost:8080/StuffGo/index.jsp">Catalog</span></a></li>
 					<li class="nav-item"><a class="nav-link" id="loginout"
-						href="http://localhost:8080/StuffGo/login.html">Login</a></li>
+						href="http://localhost:8080/StuffGo/login.jsp">Login</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="http://localhost:8080/StuffGo/cart.jsp">Cart</a></li>
 				</ul>
@@ -55,7 +55,7 @@
 	<button onclick="swap()">swap</button>
 	<div id="checkout-login">
 		<h4>Please Login or Register to Complete Purchase</h4>
-		<a href="login.html">Login</a>/<a href="register.html">register</a>
+		<a href="login.jsp">Login</a>/<a href="register.jsp">register</a>
 	</div>
 	<div id="checkout" style="display: none">
 		<Form>

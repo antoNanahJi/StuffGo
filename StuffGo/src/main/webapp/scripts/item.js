@@ -23,13 +23,14 @@ window.onload = () => {
 		console.log(request);
 	};
 	request.send(null);
-	var loginText = document.getElementById('loginout');
-	var nameNav = document.getElementById('nohov');
-	if(nameNav.innerHTML.length!=0){
-		loginText.innerHTML="logout";
-		console.log(loginText.href);
+	const loginText = document.getElementById('loginout');
+	const nameNav = document.getElementById('nohov');
+
+	if (nameNav && nameNav.innerHTML && nameNav.innerHTML.length !== 0) {
+		console.log('nameNav is not empty therefore changing login to logout');
+		loginText.innerHTML = 'logout';
+		loginText.href = loginText.href.replace('login.jsp', 'logout.jsp');
 	}
-	console.log();
 };
 
 // SEND AJAX REQUEST
@@ -75,7 +76,7 @@ function doSimpleAjax(address) {
 	request.send(null);
 	resetRadio();
 }
-//RESET FILTERS FUNCTION 
+//RESET FILTERS FUNCTION
 function resetRadio() {
 	var brand = document.getElementsByName('brand');
 	var type = document.getElementsByName('type');
@@ -83,7 +84,7 @@ function resetRadio() {
 	console.log(brand);
 
 	for (i = 0; i < brand.length; i++) {
-	brand[i].checked = false;
+		brand[i].checked = false;
 	}
 
 	for (i = 0; i < type.length; i++) {
