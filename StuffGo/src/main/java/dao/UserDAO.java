@@ -8,6 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import bean.ItemBean;
 import bean.StudentBean;
 import bean.UserBean;
 //DAO for retrieving student database
@@ -53,5 +54,30 @@ public class UserDAO {
 			return true;
 		}
 		return false;
+	}
+	
+	public String getBillingAddress(String username) throws SQLException {
+		Connection connection = this.ds.getConnection();
+		String query = "SELECT BILLING_ADDRESS FROM USERS WHERE USERNAME = ?";
+		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1, username);
+		ResultSet results  = statement.executeQuery();
+		String result = "";
+		while(results.next()){
+			result = results.getString("BILLING_ADDRESS");
+			}
+		return result;
+	}
+	public String getShippingAddress(String username) throws SQLException {
+		Connection connection = this.ds.getConnection();
+		String query = "SELECT SHIPPING_ADDRESS FROM USERS WHERE USERNAME = ?";
+		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1, username);
+		ResultSet results  = statement.executeQuery();
+		String result = "";
+		while(results.next()){
+			result = results.getString("SHIPPING_ADDRESS");
+			}
+		return result;
 	}
 }

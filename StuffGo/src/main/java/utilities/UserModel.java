@@ -34,4 +34,11 @@ public class UserModel {
     public boolean registerUser(UserBean newUser) throws Exception{
         return this.userDAO.register(newUser);
     }
+    
+    public String returnBillingAddress(String username) throws Exception{
+        return this.userDAO.getBillingAddress(username);
+    }
+    public String returnShippingAddress(String username) throws Exception{
+        return this.userDAO.getShippingAddress(username);
+    }
 }
