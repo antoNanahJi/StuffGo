@@ -103,6 +103,5 @@
 		 	</div>
 		</section>
 		<script type="text/javascript" src="scripts/ItemInfo.js">;</script>
-		<script type="text/javascript" src="scripts/load.js">;</script>
 	</body>
 </html>
