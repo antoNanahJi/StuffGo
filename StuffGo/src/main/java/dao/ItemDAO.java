@@ -41,7 +41,7 @@ public class ItemDAO {
 			
 			query = query.substring(0,query.length()-4);
 		}
-		System.out.println(query);
+		
 		return getTable(query);
 		
 	}
@@ -59,11 +59,12 @@ public class ItemDAO {
 			String type  = r.getString("type1");
 			String name = r.getString("name");
 			String price = r.getString("price");
+			int quantity = r.getInt("quantity");
 			String description = r.getString("description");
 			String reviews = r.getString("reviews");
 			String imageURL = r.getString("image");
 
-			rv.put(ID, new ItemBean(ID, category, brand, type,name, price,
+			rv.put(ID, new ItemBean(ID, category, brand, type,name, price, quantity,
 					description, reviews, imageURL));
 		}
 		r.close();
@@ -94,16 +95,30 @@ public class ItemDAO {
 			String type  = r.getString("type1");
 			String name = r.getString("name");
 			String price = r.getString("price");
+			int quantity = r.getInt("quantity");
 			String description = r.getString("description");
 			String reviews = r.getString("reviews");
 			String imageURL = r.getString("image");
 
-			item = new ItemBean(ID, category, brand, type,name, price,
+			item = new ItemBean(ID, category, brand, type,name, price, quantity,
 					description, reviews, imageURL);
 		}
 		r.close();
 		p.close();
 		con.close();
 		return item;
+	}
+	
+	public int updateQuantity(String ID, int quantity) throws SQLException, NamingException{
+		String query = "update ITEMS set quantity=? where ID=?";
+		
+		Connection con = this.ds.getConnection();
+		
+		PreparedStatement stmt = con.prepareStatement(query);
+		
+		stmt.setString(1, ID);
+		stmt.setInt(2, quantity);
+		
+		return stmt.executeUpdate();
 	}
 }

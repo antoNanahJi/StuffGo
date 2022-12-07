@@ -1,11 +1,6 @@
 package bean;
 
-//Bean class for Student.
-//credit_taken: # of credits that student has taken so far
-//credit_graduate: # of credits that student need to graduate
-//credit_taking: # of credits that student is currently enrolling
-//sid: CSE ID
-//name: full name
+
 public class ItemBean {
 	private String ID;
 	private String category;
@@ -13,11 +8,12 @@ public class ItemBean {
 	private String type1;
 	private String name;
 	private String price;
+	private int quantity;
 	private String description;
 	private String reviews;
 	private String image;
 	
-	public ItemBean(String iD, String category, String brand, String type1, String name, String price,
+	public ItemBean(String iD, String category, String brand, String type1, String name, String price, int quantity,
 			String description, String reviews, String image) {
 		super();
 		ID = iD;
@@ -26,6 +22,7 @@ public class ItemBean {
 		this.type1 = type1;
 		this.name = name;
 		this.price = price;
+		this.quantity = quantity;
 		this.description = description;
 		this.reviews = reviews;
 		this.image = image;
@@ -101,6 +98,14 @@ public class ItemBean {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	
 	

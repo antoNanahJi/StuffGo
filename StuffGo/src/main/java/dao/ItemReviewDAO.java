@@ -38,7 +38,7 @@ public class ItemReviewDAO {
 		stmt.setString(1, ITEMID);
 		ResultSet r = stmt.executeQuery();
 		List<ItemReviewBean> rs = new ArrayList<ItemReviewBean>();
-		System.out.print("lplpl: " + ITEMID);
+
 		while (r.next()) {
 			String id = r.getString("ID");
 			String userID = r.getString("USERID");

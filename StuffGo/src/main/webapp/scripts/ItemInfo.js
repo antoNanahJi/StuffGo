@@ -30,8 +30,16 @@ function validate() {
 }
 
 function addItemToCart(address) {
-	var request = new XMLHttpRequest();
-
+	var el = document.getElementById( "Quantity");
+	if (el.value < el.min) {
+		addToast('Invalid input!!');
+		return;
+	}
+	if (el.value > el.max) {
+		addToast('Out of stock!!');
+		return;
+	}
+	
 	var request = new XMLHttpRequest();
 	var data = '&';
 	data += 'Quantity=' + document.getElementById('Quantity').value;

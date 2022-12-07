@@ -39,7 +39,7 @@ public class ItemReviewModel {
 		if (ITEMID == null || ITEMID.equals("")) {
 			throw new NamingException("ITEM ID should not be empty\n");
 		}
-		System.out.print("ITEMID: " + ITEMID);
+
 		
 		List<ItemReviewBean> rs = this.id.getReviews(ITEMID);
 		return rs;

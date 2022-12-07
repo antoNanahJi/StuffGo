@@ -89,8 +89,7 @@ public class ItemInfo extends HttpServlet {
 							reviewDate =  request.getParameter("REVIEWDATE");
 						} 
 						try {
-							int k = model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, review, "0", reviewDate, false);
-							System.out.print("\n k: " + k);
+							model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, review, "0", reviewDate, false);
 							resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\"}");
 						} catch(Exception e) {			
 							resOut.append(e.getMessage());
@@ -124,8 +123,6 @@ public class ItemInfo extends HttpServlet {
 						request.getSession().setAttribute("cartItems", cartItems.substring(1, cartItems.length() - 1).replaceAll("\\s", ""));
 						
 					}
-					
-					System.out.print("Cart: " + request.getSession().getAttribute("cartItems").toString());
 				}
 				if(request.getParameter("out") != null && request.getParameter("out").equals("addRating")) {
 					
@@ -146,8 +143,7 @@ public class ItemInfo extends HttpServlet {
 					}
 					
 					try {
-						int k = model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, "", rating, "", true);
-						System.out.print("\n k: " + k);
+						model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, "", rating, "", true);
 						resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\"}");
 					} catch(Exception e) {			
 						resOut.append(e.getMessage());
@@ -202,6 +198,7 @@ public class ItemInfo extends HttpServlet {
 				request.setAttribute("name", itemInfo.getName());
 				request.setAttribute("description", itemInfo.getDescription());
 				request.setAttribute("price", itemInfo.getPrice());
+				request.setAttribute("quantity", itemInfo.getQuantity());
 				request.setAttribute("itemID", itemInfo.getID());
 				
 				String target = "/ItemView.jsp";
