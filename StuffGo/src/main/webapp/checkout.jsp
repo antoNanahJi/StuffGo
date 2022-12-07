@@ -65,5 +65,6 @@
 			<button>Submit Order</button>
 		</Form>
 	</div>
+	<script type="text/javascript" src="scripts/load.js">;</script>
 </body>
 </html>

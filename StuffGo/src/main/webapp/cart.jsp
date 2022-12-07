@@ -69,5 +69,6 @@
 			</div>
 		</form>
 	</div>
+	<script type="text/javascript" src="scripts/load.js">;</script>
 </body>
 </html>
