@@ -15,20 +15,27 @@ function quantityUp(index, price) {
 	}
 	else {
 		total = parseInt(document.getElementById("total").value) + price;
-		console.log(total);
 	}
-	document.getElementById("total").value = total;
+	updateTotal();
 }
 
 function quantityDown(index, price) {
 	var num = document.getElementById("num" + index);
-	if (num.value <= 1) { var item = document.getElementById("item" + index); item.remove(); }
+	if (num.value <= 1) {
+		var item = document.getElementById("item" + index);
+		item.remove();
+	}
 	else {
 		num.value--;
 		var cost = document.getElementById("cost" + index);
 		cost.innerHTML = " $" + price * num.value;
 	}
-	total = total - price;
+	if (total != null) {
+		total = total - price;
+	}
+	else {
+		total = parseInt(document.getElementById("total").value) - price;
+	}
 	updateTotal();
 }
 

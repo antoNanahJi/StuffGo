@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,15 +48,18 @@
 			<div id="cart">
 				<c:set var="counter" value="0" scope="page" />
 				<c:set var="total" value="0" scope="page" />
-				<c:forEach items="${items.values()}" var="item">
+				<c:set var="cartItemsSplit" value = "${fn:split(cartItems, ',')}"/>
+				<c:forEach items="${items}" var="item">
 					<c:set var="counter" value="${counter + 1}" scope="page" />
-					<c:set var="total" value="${total + item.getPrice()}" scope="page" />
 					<fieldset id="item${counter}">
 						${item.getBrand()}
 						<button type="button"
 							onClick="quantityDown(${counter}, ${item.getPrice()})">-
 						</button>
-						<input type="number" id="num${counter}" value="1" readonly>
+						<c:set var="split2" value = "${fn:split(cartItemsSplit[counter - 1], '=')}"/>
+						<fmt:parseNumber var = "quantity" type = "number" value = "${split2[1]}" />
+						<input id="num${counter}" value="${split2[1]}" readonly>
+						<c:set var="total" value="${total + item.getPrice() * quantity}" scope="page" />
 						<button type="button"
 							onClick="quantityUp(${counter}, ${item.getPrice()})">+</button>
 						price : <span id="cost${counter}">$${item.getPrice()}</span>

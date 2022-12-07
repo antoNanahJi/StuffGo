@@ -2,6 +2,7 @@ package ctrl;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.naming.NamingException;
@@ -51,7 +52,12 @@ public class Cart extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
 			MainModel model = (MainModel) this.getServletContext().getAttribute("MainModel");
-			Map<String, ItemBean> items = model.getStoreModel().retrieve(null,null,null,null);			
+			ArrayList<ItemBean> items = new ArrayList<ItemBean>();
+			String[] itemStrings = request.getSession().getAttribute("cartItems").toString().split(",");
+			for(String i : itemStrings) {
+				ItemBean item = model.getStoreModel().retreiveItem(i.split("=")[0]);
+				items.add(item);
+			}
 			request.setAttribute("items", items);
 //			for(String key : items.keySet()) {
 //				counter++;
@@ -69,8 +75,19 @@ public class Cart extends HttpServlet {
 		if (request.getParameter("checkout") != null) {
 			target = "/checkout.jsp";
 		}
-		request.getSession().setAttribute("name", "John Smith");
-		request.getSession().setAttribute("address", "100 Main Street, City, Province, Country, A1A 1A1");
+		if(request.getSession().getAttribute("username") != null) {
+			try {
+				MainModel model = (MainModel) this.getServletContext().getAttribute("MainModel");
+				String bAddress = model.getUserModel().returnBillingAddress(request.getSession().getAttribute("username").toString());
+				String sAddress = model.getUserModel().returnShippingAddress(request.getSession().getAttribute("username").toString());
+				request.setAttribute("billingAddress", bAddress);	
+				request.setAttribute("shippingAddress", sAddress);		
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		request.getRequestDispatcher(target).forward(request, response);
 	}
 
