@@ -14,35 +14,35 @@
 		<link rel="StyleSheet" href="res/main.css" type="text/css" title="cse4413" media="screen, print"/>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 		
-		<script type="text/javascript" src="scripts/analytics.js">;</script>
+		
 	</head>
 	<body>
-  <nav class="navbar navbar-expand-md justify-content-between navigation">
-    <div class="container">
-      <a class="navbar-brand" href="http://localhost:8080/StuffGo/index.jsp">StuffGo</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-        <li class="nav-item">
-               	<a class="nav-link"  id="nohov">${username}</a>
-             </li>
-         	<li class="nav-item active">
-             	<a class="nav-link" href="http://localhost:8080/StuffGo/index.jsp">Catalog</span></a>
-             </li>
-     		<li class="nav-item">
-               	<a class="nav-link" id="loginout" href="http://localhost:8080/StuffGo/login.jsp">Login</a>
-             </li>
-             <li class="nav-item">
-               	<a class="nav-link" href="http://localhost:8080/StuffGo/cart.jsp">Cart</a>
-             </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-		 <section>
+  		<nav class="navbar navbar-expand-md justify-content-between navigation">
+    		<div class="container">
+			      <a class="navbar-brand" href="http://localhost:8080/StuffGo/index.jsp">StuffGo</a>
+			      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			        <span class="navbar-toggler-icon"></span>
+			      </button>
+			      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+			        <ul class="navbar-nav">
+			        <li class="nav-item">
+			               	<a class="nav-link"  id="nohov">${username}</a>
+			             </li>
+			         	<li class="nav-item active">
+			             	<a class="nav-link" href="http://localhost:8080/StuffGo/index.jsp">Catalog</span></a>
+			             </li>
+			     		<li class="nav-item">
+			               	<a class="nav-link" id="loginout" href="http://localhost:8080/StuffGo/login.jsp">Login</a>
+			             </li>
+			             <li class="nav-item">
+			               	<a class="nav-link" href="http://localhost:8080/StuffGo/cart.jsp">Cart</a>
+			             </li>
+			        </ul>
+			      </div>
+    		</div>
+  		</nav>
+		<section>
 		 	<div class="container">
 		    	<div class="row">
 		            <div class="col-lg-5 productContainer">
@@ -54,13 +54,14 @@
 		        	</div>
 		        </div>
 		        <div class="row">
-		             <div class="col-lg-5 productContainer">
+		             <div class="col-lg-12 productContainer">
 		            	<div class="row productDetails">
 		                	<div id="result"> </div>
 		            	</div>
 		        	</div>
 		        </div>
-		    </section>
-		
+			</div>
+		</section>
+		<script type="text/javascript" src="scripts/admin.js"></script>
 	</body>
 </html>

@@ -1,6 +1,7 @@
 package ctrl;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,8 @@ public class Analytics extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		ServletContext context = this.getServletContext();
-		
+		Writer resOut = response.getWriter();
+
 		
 		try {
 			// retrieve Students data
@@ -71,7 +73,7 @@ public class Analytics extends HttpServlet {
 					response.setContentType("application/json");
 					
 					// Create the JSON data
-					jsonData.append("{ \"arr\" : [");
+					jsonData.append("{ \"records\" : [");
 					
 					for (WebsiteUsageBean wBean : records) {
 						jsonData.append("{\"ipAddress\":");
@@ -86,7 +88,10 @@ public class Analytics extends HttpServlet {
 					}
 					jsonData.replace(jsonData.length() - 2, jsonData.length(), "]}");
 				}
-				System.out.print("lplp" + jsonData.toString());
+				if (jsonData.length() > 0) {
+					resOut.write(jsonData.toString());
+					resOut.flush();
+				}
 			}
 		} catch(SQLException | NamingException e) {			
 			System.out.print(e.getMessage());

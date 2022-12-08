@@ -97,7 +97,6 @@ public class WebsiteUsageDAO {
 		stmt.setString(3, itemID);
 		stmt.setString(4, event.toString());
 		
-		System.out.print("ipAddress: " + ipAddress + " date: " + date + " itemID: " + itemID + " event: " + event );
 		return stmt.executeUpdate();
 	
 	}

@@ -67,7 +67,7 @@ public class ItemInfo extends HttpServlet {
 		if (request.getSession().getAttribute("eventDate") == null) {
 			Date date = new Date();
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-			System.out.println();
+			
 			request.getSession().setAttribute("eventDate",formatter.format(date).substring(0, 10));
 		}
 		
@@ -223,8 +223,8 @@ public class ItemInfo extends HttpServlet {
 				request.setAttribute("quantity", itemInfo.getQuantity());
 				request.setAttribute("itemID", itemInfo.getID());
 			
-				int k = model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.VIEW);
-				System.out.print("\n k: " + k);
+				model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.VIEW);
+				
 				String target = "/ItemView.jsp";
 				request.getRequestDispatcher(target).forward(request, response);
 			}

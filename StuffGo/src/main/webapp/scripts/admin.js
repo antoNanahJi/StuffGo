@@ -1,14 +1,15 @@
 /**
  * Validate function for user inputs
  */
- 
+
 
 /**
  * Applies ajax
  */
 function reportWebsiteUsage(address){
 	var request = new XMLHttpRequest();
-	request.open("GET", (address), true);
+	
+	request.open("GET", address, true);
 	request.onreadystatechange = function() {
 		handler(request);
 	};
@@ -21,6 +22,7 @@ function reportWebsiteUsage(address){
 function handler(request){
 	
 	if ((request.readyState == 4) && (request.status == 200)){
+		
 		var target = document.getElementById("result");
 		target.innerHTML = "";
 		//here you want to add parse the json and display individual key,
@@ -44,7 +46,7 @@ function addTable(target, jsonData) {
 	if (target != null && jsonData != null) {
 			var myTable = document.createElement("TABLE");
 			myTable.setAttribute("id", "myTable");
-		
+			myTable.setAttribute("class", "table");
 			
 			var r1 = document.createElement("TR");
 			  		  
