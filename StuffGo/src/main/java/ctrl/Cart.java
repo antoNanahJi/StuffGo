@@ -59,8 +59,10 @@ public class Cart extends HttpServlet {
 			itemStrings = itemObj.toString().split(",");
 			}
 			for(String i : itemStrings) {
-				ItemBean item = model.getStoreModel().retreiveItem(i.split("=")[0]);
-				items.add(item);
+				if (!i.equals("")) {
+					ItemBean item = model.getStoreModel().retreiveItem(i.split("=")[0]);
+					items.add(item);
+				}
 			}
 			request.setAttribute("items", items);
 //			for(String key : items.keySet()) {
