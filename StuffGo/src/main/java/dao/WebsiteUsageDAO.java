@@ -38,7 +38,7 @@ public class WebsiteUsageDAO {
 
 		while (r.next()) {
 			String ip = r.getString("IPADDRESS");
-			String date = r.getString("DATE");
+			String date = r.getString("DAY");
 			String itemID = r.getString("ITEMID");
 			String event = r.getString("EVENT");
 

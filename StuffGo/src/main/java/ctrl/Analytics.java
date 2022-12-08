@@ -22,7 +22,7 @@ import utilities.eventTypes;
 /**
  * Servlet implementation class Analytics
  */
-@WebServlet("/Admin")
+@WebServlet("/Analytics")
 public class Analytics extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,13 +33,26 @@ public class Analytics extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+	public void init() throws ServletException {
+		super.init();
+		try {
+
+			// SisModel instance save in context attribute
+			MainModel model = MainModel.getInstance();
+			this.getServletContext().setAttribute("MainModel", model);
+
+		} catch (ClassNotFoundException e) {
+			throw new ServletException("Class Not Found!" + e);
+		}
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		StringBuilder jsonData = new StringBuilder();
+		
 		ServletContext context = this.getServletContext();
 		
 		
@@ -49,7 +62,7 @@ public class Analytics extends HttpServlet {
 			
 			if(request.getParameter("out") != null && request.getParameter("out").equals("WebsiteUsage"))
 			{
-				
+				StringBuilder jsonData = new StringBuilder();
 				
 				List<WebsiteUsageBean> records = model.getWebsiteUsageModel().retriveRecords();
 				System.out.println("Ajax call");//this is for testing at server side...
@@ -73,10 +86,10 @@ public class Analytics extends HttpServlet {
 					}
 					jsonData.replace(jsonData.length() - 2, jsonData.length(), "]}");
 				}
-			
+				System.out.print("lplp" + jsonData.toString());
 			}
 		} catch(SQLException | NamingException e) {			
-			jsonData.append(e.getMessage());
+			System.out.print(e.getMessage());
 		}
 		
 		if (request.getParameter("out") == null) {
@@ -86,7 +99,7 @@ public class Analytics extends HttpServlet {
 			//	return;
 			//}
 			
-			String target = "/Analytics.jsp";
+			String target = "/Analytics.html";
 			request.getRequestDispatcher(target).forward(request, response);
 		}
 	}
