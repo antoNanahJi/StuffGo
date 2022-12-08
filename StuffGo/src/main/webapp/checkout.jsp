@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +50,7 @@
 					<li class="nav-item"><a class="nav-link" id="loginout"
 						href="http://localhost:8080/StuffGo/login.jsp">Login</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="http://localhost:8080/StuffGo/cart.jsp">Cart</a></li>
+						href="http://localhost:8080/StuffGo/Cart">Cart</a></li>
 				</ul>
 			</div>
 		</div>
@@ -74,6 +77,14 @@
 			<h4>Enter Payment Method</h4>
 			<label for="creditCard">Card #: </label> <input name="creditCard"
 				id="creditCard"> <br />
+			<h4>Order Details</h4>
+			<c:forEach items="${items}" var="item">
+				<p>${item.key[0]}</p>
+				<p>${item.key[1]}</p>	
+				<br />
+				<p>${item.value.getBrand()}</p>
+				<br />
+			</c:forEach>
 			<button>Submit Order</button>
 
 		</Form>

@@ -18,7 +18,7 @@ import bean.ItemBean;
 /**
  * Servlet implementation class Cart
  */
-@WebServlet({ "/Cart", "/Cart/*" })
+@WebServlet("/Cart")
 public class Cart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -53,7 +53,11 @@ public class Cart extends HttpServlet {
 		try {
 			MainModel model = (MainModel) this.getServletContext().getAttribute("MainModel");
 			ArrayList<ItemBean> items = new ArrayList<ItemBean>();
-			String[] itemStrings = request.getSession().getAttribute("cartItems").toString().split(",");
+			Object itemObj = request.getSession().getAttribute("cartItems");
+			String itemStrings[] = {};
+			if(itemObj != null) {
+			itemStrings = itemObj.toString().split(",");
+			}
 			for(String i : itemStrings) {
 				ItemBean item = model.getStoreModel().retreiveItem(i.split("=")[0]);
 				items.add(item);
@@ -72,22 +76,22 @@ public class Cart extends HttpServlet {
 			e.printStackTrace();
 		}
 		String target = "/cart.jsp";
-		if (request.getParameter("checkout") != null) {
-			target = "/checkout.jsp";
-		}
-		if(request.getSession().getAttribute("username") != null) {
-			try {
-				MainModel model = (MainModel) this.getServletContext().getAttribute("MainModel");
-				String bAddress = model.getUserModel().returnBillingAddress(request.getSession().getAttribute("username").toString());
-				String sAddress = model.getUserModel().returnShippingAddress(request.getSession().getAttribute("username").toString());
-				request.setAttribute("billingAddress", bAddress);	
-				request.setAttribute("shippingAddress", sAddress);		
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+//		if (request.getParameter("checkout") != null) {
+//			target = "/checkout.jsp";
+//		}
+//		if(request.getSession().getAttribute("username") != null) {
+//			try {
+//				MainModel model = (MainModel) this.getServletContext().getAttribute("MainModel");
+//				String bAddress = model.getUserModel().returnBillingAddress(request.getSession().getAttribute("username").toString());
+//				String sAddress = model.getUserModel().returnShippingAddress(request.getSession().getAttribute("username").toString());
+//				request.setAttribute("billingAddress", bAddress);	
+//				request.setAttribute("shippingAddress", sAddress);		
+//
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 		request.getRequestDispatcher(target).forward(request, response);
 	}
 
