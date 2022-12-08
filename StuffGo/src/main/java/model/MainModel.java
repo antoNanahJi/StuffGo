@@ -4,6 +4,7 @@ import javax.naming.NamingException;
 import utilities.ItemReviewModel;
 import utilities.StoreModel;
 import utilities.UserModel;
+import utilities.WebsiteUsageModel;
 
 /**
  * The application model class
@@ -16,6 +17,7 @@ public class MainModel {
 	private ItemReviewModel itemReviewModel;
 	private StoreModel storeModel;
 	private UserModel userModel;
+	private WebsiteUsageModel websiteUsageModel;
 	
 	/***
 	 * Creates and returns a singleton instance of this class
@@ -26,6 +28,7 @@ public class MainModel {
 			instance.itemReviewModel = new ItemReviewModel();
 			instance.storeModel = new StoreModel();
 			instance.userModel = new UserModel();
+			instance.websiteUsageModel = new WebsiteUsageModel();
 		}
 		return instance;
 	}
@@ -40,6 +43,10 @@ public class MainModel {
 	
 	public UserModel getUserModel(){
 		return this.userModel;
+	}
+	
+	public WebsiteUsageModel getWebsiteUsageModel(){
+		return this.websiteUsageModel;
 	}
 
 }

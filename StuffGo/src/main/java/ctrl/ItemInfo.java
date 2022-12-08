@@ -3,7 +3,9 @@ package ctrl;
 import java.io.IOException;
 import java.io.Writer;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,7 @@ import bean.ItemReviewBean;
 import bean.StudentBean;
 import model.MainModel;
 import model.SisModel;
+import utilities.eventTypes;
 
 /**
  * Servlet implementation class ItemInfo
@@ -55,7 +58,22 @@ public class ItemInfo extends HttpServlet {
 		
 		ServletContext context = this.getServletContext();
 		Writer resOut = response.getWriter();
+
 		
+		if (request.getSession().getAttribute("clientIP") == null) {
+			request.getSession().setAttribute("clientIP", request.getRemoteAddr());
+		}
+		
+		if (request.getSession().getAttribute("eventDate") == null) {
+			Date date = new Date();
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			System.out.println();
+			request.getSession().setAttribute("eventDate",formatter.format(date).substring(0, 10));
+		}
+		
+		String  clientIP = (String) request.getSession().getAttribute("clientIP");
+		String	date = (String) request.getSession().getAttribute("eventDate");
+	
 		
 		
 		try {
@@ -90,6 +108,7 @@ public class ItemInfo extends HttpServlet {
 						} 
 						try {
 							model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, review, "0", reviewDate, false);
+							model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.SUBMIT_REVIEW);
 							resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\"}");
 						} catch(Exception e) {			
 							resOut.append(e.getMessage());
@@ -123,6 +142,8 @@ public class ItemInfo extends HttpServlet {
 						request.getSession().setAttribute("cartItems", cartItems.substring(1, cartItems.length() - 1).replaceAll("\\s", ""));
 						
 					}
+					
+					model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.ADD_CART);
 				}
 				if(request.getParameter("out") != null && request.getParameter("out").equals("addRating")) {
 					
@@ -144,6 +165,7 @@ public class ItemInfo extends HttpServlet {
 					
 					try {
 						model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, "", rating, "", true);
+						model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.SUBMIT_RATING);
 						resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\"}");
 					} catch(Exception e) {			
 						resOut.append(e.getMessage());
@@ -200,7 +222,9 @@ public class ItemInfo extends HttpServlet {
 				request.setAttribute("price", itemInfo.getPrice());
 				request.setAttribute("quantity", itemInfo.getQuantity());
 				request.setAttribute("itemID", itemInfo.getID());
-				
+			
+				int k = model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.VIEW);
+				System.out.print("\n k: " + k);
 				String target = "/ItemView.jsp";
 				request.getRequestDispatcher(target).forward(request, response);
 			}

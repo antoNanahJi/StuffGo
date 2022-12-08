@@ -33,11 +33,12 @@ function validate() {
 
 function addItemToCart(address) {
 	var el = document.getElementById( "Quantity");
-	if (el.value < el.min) {
+	if (parseInt(el.value) < parseInt(el.min)) {
 		addToast('Invalid input!!');
 		return;
 	}
-	if (el.value > el.max) {
+	console.log(el.max);
+	if (parseInt(el.value) > parseInt(el.max)) {
 		addToast('Out of stock!!');
 		return;
 	}
