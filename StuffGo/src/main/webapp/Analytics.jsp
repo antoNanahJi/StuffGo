@@ -49,6 +49,8 @@
 		            	<div class="row productDetails">
 		                	<button type="button" name="ajax" value="true" 
 		            				onclick="reportWebsiteUsage('http://localhost:8080/StuffGo/Analytics?out=WebsiteUsage')">Get Website Usage Report</button>
+					      	<button type="button" name="ajax" value="true" 
+		            				onclick="reportMonthlyItemSell('http://localhost:8080/StuffGo/Analytics?out=MonthlyItemReport')">Get Monthly Item Report</button>
 					      	
 		            	</div>
 		        	</div>

@@ -1,6 +1,92 @@
 /**
  * Validate function for user inputs
  */
+function reportMonthlyItemSell(address){
+	var request = new XMLHttpRequest();
+	
+	request.open("GET", address, true);
+	request.onreadystatechange = function() {
+		handlerA(request);
+	};
+	request.send(null);
+}
+
+/**
+ * Called after the ajax request is success
+ */
+function handlerA(request){
+	
+	if ((request.readyState == 4) && (request.status == 200)){
+		
+		var target = document.getElementById("result");
+		target.innerHTML = "";
+		console.log(request.responseText);
+		//here you want to add parse the json and display individual key,
+		//values pairs as html elements ( tables, paragraphs, etc..)
+		if (request.responseText && request.responseText.charAt(0) == "{") {
+			var rs=JSON.parse(request.responseText);
+			
+			if (rs.records && rs.records.length > 0) {
+				addTableA(target, rs.records);	
+			}
+
+		}
+	}
+}
+
+/**
+ * Adds table to the html
+ */
+function addTableA(target, jsonData) {
+ 	var months = ["","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		
+	if (target != null && jsonData != null) {
+			var myTable = document.createElement("TABLE");
+			myTable.setAttribute("id", "myTable");
+			myTable.setAttribute("class", "table");
+			
+			
+			var r = document.createElement("TR");
+			var h1 = document.createElement("TH");
+			h1.innerHTML = "Item ID";
+			r.appendChild(h1);	
+			
+			var h2 = document.createElement("TH");
+			h2.innerHTML = "Quantity";
+			r.appendChild(h2);	
+				
+			var r1 = document.createElement("TR");
+			for(var i=0; i<months.length; i++) {		  
+				var h = document.createElement("TH");
+				h.innerHTML = months[i];			  
+				r1.appendChild(h);		
+			}
+			myTable.appendChild(r);
+			myTable.appendChild(r1);
+			
+			var size = jsonData.length;
+			for (var i=0; i<size; i++) {
+				var r = document.createElement("TR");
+				myTable.appendChild(r);
+				
+				var td1 = document.createElement("TD");
+				td1.innerHTML = jsonData[i].itemID;
+				r.appendChild(td1);
+				console.log(jsonData[i]);
+				var s = jsonData[i].quantity.length;
+				for(var k=0; k < s; k++) {		  
+					var td = document.createElement("TD");
+					td.innerHTML = jsonData[i].quantity[k];		  
+					r.appendChild(td);	
+				}
+				
+				  
+				myTable.appendChild(r);
+			}
+			
+			target.appendChild(myTable);
+	}
+}
 
 
 /**

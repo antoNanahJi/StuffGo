@@ -66,9 +66,8 @@ public class ItemInfo extends HttpServlet {
 		
 		if (request.getSession().getAttribute("eventDate") == null) {
 			Date date = new Date();
-			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-			
-			request.getSession().setAttribute("eventDate",formatter.format(date).substring(0, 10));
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+			request.getSession().setAttribute("eventDate",formatter.format(date));
 		}
 		
 		String  clientIP = (String) request.getSession().getAttribute("clientIP");
@@ -142,8 +141,8 @@ public class ItemInfo extends HttpServlet {
 						request.getSession().setAttribute("cartItems", cartItems.substring(1, cartItems.length() - 1).replaceAll("\\s", ""));
 						
 					}
-					
 					model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.ADD_CART);
+					
 				}
 				if(request.getParameter("out") != null && request.getParameter("out").equals("addRating")) {
 					

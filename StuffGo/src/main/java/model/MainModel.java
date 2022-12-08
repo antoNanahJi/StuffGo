@@ -1,6 +1,8 @@
 package model;
 
 import javax.naming.NamingException;
+
+import utilities.ItemPurchasedModel;
 import utilities.ItemReviewModel;
 import utilities.StoreModel;
 import utilities.UserModel;
@@ -18,6 +20,7 @@ public class MainModel {
 	private StoreModel storeModel;
 	private UserModel userModel;
 	private WebsiteUsageModel websiteUsageModel;
+	private ItemPurchasedModel itemPurchasedModel;
 	
 	/***
 	 * Creates and returns a singleton instance of this class
@@ -29,6 +32,7 @@ public class MainModel {
 			instance.storeModel = new StoreModel();
 			instance.userModel = new UserModel();
 			instance.websiteUsageModel = new WebsiteUsageModel();
+			instance.itemPurchasedModel = new ItemPurchasedModel();
 		}
 		return instance;
 	}
@@ -47,6 +51,10 @@ public class MainModel {
 	
 	public WebsiteUsageModel getWebsiteUsageModel(){
 		return this.websiteUsageModel;
+	}
+
+	public ItemPurchasedModel getItemPurchasedModel() {
+		return itemPurchasedModel;
 	}
 
 }

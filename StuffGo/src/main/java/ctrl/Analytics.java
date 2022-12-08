@@ -93,6 +93,36 @@ public class Analytics extends HttpServlet {
 					resOut.flush();
 				}
 			}
+			
+			if(request.getParameter("out") != null && request.getParameter("out").equals("MonthlyItemReport"))
+			{
+				StringBuilder jsonData = new StringBuilder();
+				
+				Map<String,int[]> records = model.getItemPurchasedModel().retriveRecords();
+				System.out.println("Ajax call");//this is for testing at server side...
+				
+				if (records.size() > 0) {
+					response.setContentType("application/json");
+					
+					// Create the JSON data
+					jsonData.append("{ \"records\" : [");
+					
+					for (String item : records.keySet()) {
+						jsonData.append("{\"itemID\":");
+						jsonData.append("\"" + item + "\"");
+						jsonData.append(", \"quantity\": [");
+						for(int q: records.get(item)) {
+							jsonData.append("\"" + q + "\", ");
+						}
+						jsonData.replace(jsonData.length() - 2, jsonData.length(), "]}, ");
+					}
+					jsonData.replace(jsonData.length() - 2, jsonData.length(), "]}");
+				}
+				if (jsonData.length() > 0) {
+					resOut.write(jsonData.toString());
+					resOut.flush();
+				}
+			}
 		} catch(SQLException | NamingException e) {			
 			System.out.print(e.getMessage());
 		}
