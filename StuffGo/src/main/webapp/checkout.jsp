@@ -61,8 +61,9 @@
 		<a href="login.jsp">Login</a>/<a href="register.jsp">register</a>
 	</div>
 	<div id="checkout" style="display: none">
-		<Form>
+		<Form method="get">
 			<h4>Confirm Billing and Shipping Info</h4>
+			<input name="cart" value="${param['cart']}" readonly style="display:none">
 			<h5>Billing</h5>
 			<label for="billingName">Name: </label> <input name="billingName"
 				id="billingName" value="${username}"> <br /> <label
@@ -80,12 +81,13 @@
 			<h4>Order Details</h4>
 			<c:forEach items="${items}" var="item">
 				<p>${item.key[0]}</p>
-				<p>${item.key[1]}</p>	
+				<p>${item.key[1]}</p>
 				<br />
 				<p>${item.value.getBrand()}</p>
 				<br />
 			</c:forEach>
-			<button>Submit Order</button>
+			<button type="submit" name="submit" value="true">Submit
+				Order</button>
 
 		</Form>
 	</div>

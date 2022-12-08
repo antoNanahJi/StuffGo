@@ -86,6 +86,15 @@ public class Checkout extends HttpServlet {
 		}
 		System.out.println(items);
 		System.out.println(request.getParameter("cart"));
+		// checks if order was submitted
+		if (request.getParameter("submit") != null) {
+			// add to db
+			System.out.println("Order Submitted!");
+			System.out.println(
+					"Billing " + request.getParameter("billingName") + " at " + request.getParameter("billingAddress"));
+			System.out.println("Shipping to " + request.getParameter("shippingName") + " at "
+					+ request.getParameter("shippingAddress"));
+		}
 		request.setAttribute("items", items);
 		String target = "/checkout.jsp";
 		request.getRequestDispatcher(target).forward(request, response);
