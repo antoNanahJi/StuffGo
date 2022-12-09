@@ -2,7 +2,11 @@ package ctrl;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.naming.NamingException;
@@ -13,7 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.ItemBean;
+import bean.ItemReviewBean;
 import model.MainModel;
+import utilities.eventTypes;
 
 /**
  * Servlet implementation class Checkout
@@ -71,11 +77,13 @@ public class Checkout extends HttpServlet {
 		}
 		Map<String[], ItemBean> items = new HashMap<String[], ItemBean>();
 		String cartSplit[] = cartString.split("_");
+		Map<String, Integer> cartItems = new HashMap<>();
 		for (int i = 0; i < cartSplit.length - 1; i++) {
 			String itemSplit[] = cartSplit[i].split("-");
 			try {
 				
 				ItemBean item = model.getStoreModel().retreiveItem(itemSplit[0]);
+				cartItems.put(itemSplit[0], Integer.valueOf(itemSplit[1]));
 				items.put(itemSplit, item);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -90,6 +98,28 @@ public class Checkout extends HttpServlet {
 		// checks if order was submitted
 		if (request.getParameter("submit") != null) {
 			// add to db
+			try {
+				String clientIP = "";
+				String date = "";
+				String userID = (String) request.getSession().getAttribute("username");
+				if (request.getSession().getAttribute("clientIP") != null) {
+					clientIP = (String) request.getSession().getAttribute("clientIP");
+				}
+				
+				if (request.getSession().getAttribute("eventDate") != null) {
+					date = (String) request.getSession().getAttribute("eventDate");
+				}
+				
+				if(!date.equals("") && !clientIP.equals("")) {
+					for (String key : cartItems.keySet()) {
+						model.getWebsiteUsageModel().insertRecord(clientIP, date, key, eventTypes.PURCHASE);
+						model.getItemPurchasedModel().insertRecord(key, date.substring(3, 5), cartItems.get(key), userID);
+					}
+				}
+			} catch (SQLException | NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
 			System.out.println("Order Submitted!");
 			System.out.println(
 					"Billing " + request.getParameter("billingName") + " at " + request.getParameter("billingAddress"));

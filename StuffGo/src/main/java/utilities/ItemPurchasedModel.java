@@ -54,7 +54,7 @@ public class ItemPurchasedModel {
 		if (userID == null || userID.equals("")) {
 			throw new NamingException("User ID can not be empty\n");
 		}
-		if (date == null || date.equals("")) {
+		if (date == null || date.equals("") || date.length() != 2) {
 			throw new NamingException("Date can not be empty\n");
 		}
 		if (itemID == null || itemID.equals("")) {

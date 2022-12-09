@@ -73,10 +73,7 @@ public class ItemInfo extends HttpServlet {
 		String  clientIP = (String) request.getSession().getAttribute("clientIP");
 		String	date = (String) request.getSession().getAttribute("eventDate");
 	
-		
-		
 		try {
-			
 			MainModel model = (MainModel) context.getAttribute("MainModel");
 				
 				if(request.getParameter("out") != null && request.getParameter("out").equals("addReview")) {
