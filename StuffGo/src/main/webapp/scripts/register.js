@@ -1,11 +1,14 @@
 const register = () => {
+	// Get values from input tags
 	const usernameValue = document.getElementById('usernameInput').value;
 	const passwordValue = document.getElementById('passwordInput').value;
+	// Hash the password so that it is not exposed to the server
 	const passwordToSend = keccak_256(passwordValue);
 	const defaultBillingValue = document.getElementById('defaultBillingInput').value;
 	const defaultShippingValue = document.getElementById('defaultShippingInput').value;
 	const nameValue = document.getElementById('nameInput').value;
 
+	// Make sure that the user has entered the required fields
 	if (usernameValue === null || usernameValue === '' || usernameValue.length === 0) {
 		alert('Please enter a username');
 		return;
@@ -35,6 +38,7 @@ const register = () => {
 		return;
 	}
 
+	// Send the necessarry info for registering a user to the server
 	fetch(
 		`/StuffGo/User?type=register&username=${usernameValue}&passwordHash=${passwordToSend}&billing=${defaultBillingValue}&shipping=${defaultShippingValue}&name=${nameValue}`
 	)
@@ -45,8 +49,10 @@ const register = () => {
 		.then((responseJSON) => {
 			console.log('received JSON: ', responseJSON);
 			if (responseJSON.username) {
+				// Redirect user to index page if registeration is successful
 				window.location.href = '/StuffGo/index.jsp';
 			} else {
+				// Alert the user that registeration failed on the server side
 				alert('Invalid values, maybe username is taken');
 			}
 		})

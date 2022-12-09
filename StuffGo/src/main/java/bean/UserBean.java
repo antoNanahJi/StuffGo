@@ -6,11 +6,11 @@ package bean;
  *
  */
 public class UserBean {
-	private String username;
+	private String username; // Primary key for the Users table
 	private String password;
 	private String shipping;
 	private String billing;
-	private int isAdmin;
+	private int isAdmin; // If this value is 0 user is not an admin else user is an admin
 	private String name;
 
 	public UserBean(String username, String password, String shipping, String billing, int isAdmin, String name) {

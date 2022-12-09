@@ -23,7 +23,7 @@ import bean.UserBean;
 
 
 /**
- * Servlet implementation class SIS
+ * Servlet implementation class User
  */
 @WebServlet("/User")
 public class User extends HttpServlet {
@@ -37,7 +37,6 @@ public class User extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 	
-	// Initialize helper class called SIS and saved it on Servlet Context
 	@Override
 	public void init() throws ServletException {
 		super.init();
@@ -56,53 +55,72 @@ public class User extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	// Handles every request related to Users
+	// Expects "type" parameter in the query to understand which operation to execute
+	// Possible "type"s => login, register, logout, isAdmin 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		MainModel model = (MainModel) this.getServletContext().getAttribute("MainModel");
 		HttpSession session = request.getSession();
 		
-		String username = request.getParameter("username");
-		String passwordHash = request.getParameter("passwordHash");
+
 		String type = request.getParameter("type");
-		System.out.println("username: " + username);
-		System.out.println("passwordHash: " + passwordHash);
 		
 		Writer resOut = response.getWriter();
 		response.setContentType("application/json");
 		try {
 			if (type.equals("login")) {
+				// Get username and password parameters from request
+				String username = request.getParameter("username");
+				String passwordHash = request.getParameter("passwordHash");
+				// Execute login
 				 boolean isLoginSuccess = model.getUserModel().loginUser(username, passwordHash);
 				 if (isLoginSuccess) {
+					 // Set username attribute of session to the logged in user's username
 					session.setAttribute("username", username);
+					 // Send a JSON response with the logged in user's username
 					resOut.append("{\"username\": \"" + username + "\"}");
 					resOut.flush();
 				 } else {
+					 // If login was not successfull, return JSON with username being null
 					resOut.append("{\"username\": null}");
 					resOut.flush();
 				 }
 			} else if (type.equals("register")) {
-				// TODO: Handle showing error for duplicate username
+				// Get user info from request
+				String username = request.getParameter("username");
+				String passwordHash = request.getParameter("passwordHash");
 				String billing = request.getParameter("billing");
 				String shipping = request.getParameter("shipping");
 				String name = request.getParameter("name");
 				UserBean newUser = new UserBean(username, passwordHash, shipping, billing, 0, name);
+				// Execute register
 				boolean isRegisterationSuccess = model.getUserModel().registerUser(newUser);
-				System.out.println("isRegistered: " + isRegisterationSuccess);
 				if (isRegisterationSuccess) {
+					// Just like login "Set username attribute of session to the logged in user's username"
 					session.setAttribute("username", username);
+					// Just like login "Send a JSON response with the logged in user's username"
 					resOut.append("{\"username\": \"" + username + "\"}");
 					resOut.flush();
 				} else {
+					// Just like login "If registeration was not successfull, return JSON with username being null"
 					resOut.append("{\"username\": null}");
 					resOut.flush();
 				}
 			} else if (type.equals("logout")) {
+				// Execute logout by setting username attribute of session to be null
 				session.setAttribute("username", null);
+				// Return JSON with username value being null
 				resOut.append("{\"username\": null}");
 				resOut.flush();
 			} else if (type.equals("isAdmin")) {
+				// To not expose admin accounts, we have decided to only allow to check if a user is admin after they are logged in
+				// So, the username in the session will be used to check if the user is admin
 				String usernameInSession = (String) session.getAttribute("username");
+				if (usernameInSession == null) return;
+				// Execute isAdmin check
 				boolean isUserAdmin = model.getUserModel().isUserAdmin(usernameInSession);
+				// Set "isAdmin" attribute of session to be true or false accordingly 
 				session.setAttribute("isAdmin", isUserAdmin);
 			}
 		} catch (Exception e) {
