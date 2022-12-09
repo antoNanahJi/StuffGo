@@ -67,4 +67,12 @@ public class ItemPurchasedModel {
 		return this.id.insertRecord(itemID, date, quantity, userID);
 	}
 	
+	public List<String> getPurchasedHistory(String userID) throws SQLException, NamingException {
+		if (userID == null || userID.equals("")) {
+			throw new NamingException("User ID can not be empty\n");
+		}
+		
+		return this.id.getPurchasedHistory(userID);
+	}
+	
 }

@@ -78,5 +78,29 @@ public class ItemPurchasedDAO {
 		return stmt.executeUpdate();
 	
 	}
+	
+	public List<String> getPurchasedHistory(String userID)throws SQLException, NamingException{
+		String preparedStatement = "select ITEMID from ITEMPURCHASED where USERID=?";
+		
+		Connection con = this.ds.getConnection();
+		
+		PreparedStatement stmt = con.prepareStatement(preparedStatement);
+		stmt.setString(1, userID);
+		
+		ResultSet r = stmt.executeQuery();
+		List<String> rv = new ArrayList<String>();
+		
+
+		while (r.next()) {
+			String itemID = r.getString("ITEMID");
+			rv.add(itemID);
+		}
+		
+		r.close();
+		stmt.close();
+		con.close();
+		
+		return rv;
+	}
 
 }

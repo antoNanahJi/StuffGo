@@ -37,7 +37,7 @@ function addItemToCart(address) {
 		addToast('Invalid input!!');
 		return;
 	}
-	console.log(el.max);
+
 	if (parseInt(el.value) > parseInt(el.max)) {
 		addToast('Out of stock!!');
 		return;
@@ -89,6 +89,10 @@ function reviewHandler(request, oneReview) {
 			}
 
 			if (oneReview) {
+				if (rs.reviewAdded == 'false') {
+					addToast('Sorry ' + rs.user + '! To add a review you need to purchase this item.');
+					return;
+				}
 				var review = document.getElementById('customer_review').value;
 				var today = new Date();
 				var dd = String(today.getDate()).padStart(2, '0');
@@ -163,7 +167,11 @@ function ratingHandler(request, oneReview) {
 					location.href = 'http://localhost:8080/StuffGo/login.jsp';
 					return;
 				}
-
+				
+				if (rs.ratingAdded == 'false') {
+					addToast('Sorry ' + rs.user + '! To add a rating you need to purchase this item.');
+					return;
+				}
 				//toast code
 				addToast('Thank you ' + rs.user + ' for sharing your experience!!');
 			} else {

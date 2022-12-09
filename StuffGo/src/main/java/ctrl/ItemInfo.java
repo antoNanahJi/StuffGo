@@ -83,15 +83,15 @@ public class ItemInfo extends HttpServlet {
 						resOut.flush();
 						return;
 					}
-						
-						String userID = (String) request.getSession().getAttribute("username");
-						String review = "";
-						String reviewDate = "";
-						String ID = "";
-						
-						if(request.getParameter("ID") != null) {
-							ID = request.getParameter("ID");
-						}
+					
+					String userID = (String) request.getSession().getAttribute("username");
+					String review = "";
+					String reviewDate = "";
+					String ID = "";
+
+					if(request.getParameter("ID") != null) {
+						ID = request.getParameter("ID");
+					}
 								
 						// Get credit taken value
 						if(request.getParameter("REVIEW") != null) {
@@ -103,9 +103,16 @@ public class ItemInfo extends HttpServlet {
 							reviewDate =  request.getParameter("REVIEWDATE");
 						} 
 						try {
-							model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, review, "0", reviewDate, false);
-							model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.SUBMIT_REVIEW);
-							resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\"}");
+							List<String> purchasedHistory = model.getItemPurchasedModel().getPurchasedHistory(userID);
+						
+							if (!purchasedHistory.contains(ID)) {
+								resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\", " + "\"reviewAdded\":\"" + false + "\"}");
+							} else {								
+								model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, review, "0", reviewDate, false);
+								model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.SUBMIT_REVIEW);
+								resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\", " + "\"reviewAdded\":\"" + true + "\"}");
+								
+							}
 						} catch(Exception e) {			
 							resOut.append(e.getMessage());
 						}
@@ -160,9 +167,16 @@ public class ItemInfo extends HttpServlet {
 					}
 					
 					try {
-						model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, "", rating, "", true);
-						model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.SUBMIT_RATING);
-						resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\"}");
+						List<String> purchasedHistory = model.getItemPurchasedModel().getPurchasedHistory(userID);
+				
+						if (!purchasedHistory.contains(ID)) {
+							resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\", " + "\"ratingAdded\":\"" + false + "\"}");
+						} else {
+							model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, "", rating, "", true);
+							model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.SUBMIT_RATING);
+							resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\", " + "\"ratingAdded\":\"" + true + "\"}");
+							
+						}
 					} catch(Exception e) {			
 						resOut.append(e.getMessage());
 					}
