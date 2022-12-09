@@ -59,7 +59,7 @@
 					<fieldset id="item${counter}">
 						${item.getBrand()}
 						<button type="button"
-							onClick="quantityDown(${counter}, ${item.getPrice()})">-
+							onClick="quantityDown(${counter}, ${item.getID()}, ${item.getPrice()}, 'http://localhost:8080/StuffGo/Cart?out=changeItem')">-
 						</button>
 						<c:set var="split2"
 							value="${fn:split(cartItemsSplit[counter - 1], '=')}" />
@@ -68,13 +68,13 @@
 						<c:set var="total" value="${total + item.getPrice() * quantity}"
 							scope="page" />
 						<button type="button"
-							onClick="quantityUp(${counter}, ${item.getPrice()})">+</button>
-						price : <span id="cost${counter}">$${item.getPrice()}</span>
+							onClick="quantityUp(${counter}, ${item.getID()}, ${item.getPrice()}, 'http://localhost:8080/StuffGo/Cart?out=changeItem')">+</button>
+						price : <span id="cost${counter}">$${item.getPrice() * quantity}</span>
 						<c:set var="cart" value="${cart}${item.getID()}-${quantity}_" />
 					</fieldset>
 					<br />
 				</c:forEach>
-				<input name="cart" value="${cart}" readonly style="display:none">
+				<input name="cart" value="${cart}" readonly style="display: none">
 			</div>
 			<div class="login">
 				<Label for="total">Total: $</Label> <input type="number"

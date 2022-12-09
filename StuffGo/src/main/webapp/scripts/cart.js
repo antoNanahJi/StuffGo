@@ -2,33 +2,31 @@ var counter = 0;
 var total;
 var swapCounter = 0;
 
-function updateTotal() {
-	document.getElementById("total").value = total;
-}
-function quantityUp(index, price) {
+function quantityUp(index, id, price, address) {
 	var num = document.getElementById("num" + index);
 	num.value++;
 	var cost = document.getElementById("cost" + index);
-	cost.innerHTML = "$ " + price * num.value;
+	cost.innerHTML = "$" + price * num.value;
 	if (total != null) {
 		total = total + price;
 	}
 	else {
 		total = parseInt(document.getElementById("total").value) + price;
 	}
-	updateTotal();
+	changeItemQuantity(address, id, num.value);
 }
 
-function quantityDown(index, price) {
+function quantityDown(index, id, price, address) {
 	var num = document.getElementById("num" + index);
 	if (num.value <= 1) {
+		num.value--;
 		var item = document.getElementById("item" + index);
 		item.remove();
 	}
 	else {
 		num.value--;
 		var cost = document.getElementById("cost" + index);
-		cost.innerHTML = " $" + price * num.value;
+		cost.innerHTML = "$" + price * num.value;
 	}
 	if (total != null) {
 		total = total - price;
@@ -36,9 +34,17 @@ function quantityDown(index, price) {
 	else {
 		total = parseInt(document.getElementById("total").value) - price;
 	}
-	updateTotal();
+	changeItemQuantity(address, id, num.value);
 }
 
+function changeItemQuantity(address, id, quantity){
+	var request = new XMLHttpRequest();
+	data = '&changedItemID=' + id + "&changedItemQuantity=" + quantity;
+	console.log(address + data);
+	request.open('GET', address + data);
+	request.send(null);
+	document.getElementById("total").value = total;
+}
 function swap() {
 	counter++;
 	if (counter % 2 == 1) {

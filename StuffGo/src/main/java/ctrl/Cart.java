@@ -50,15 +50,15 @@ public class Cart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		try {
-			MainModel model = (MainModel) this.getServletContext().getAttribute("MainModel");
-			ArrayList<ItemBean> items = new ArrayList<ItemBean>();
-			Object itemObj = request.getSession().getAttribute("cartItems");
-			String itemStrings[] = {};
-			if(itemObj != null) {
+		MainModel model = (MainModel) this.getServletContext().getAttribute("MainModel");
+		ArrayList<ItemBean> items = new ArrayList<ItemBean>();
+		Object itemObj = request.getSession().getAttribute("cartItems");
+		String itemStrings[] = {};
+		if (itemObj != null) {
 			itemStrings = itemObj.toString().split(",");
-			}
-			for(String i : itemStrings) {
+		}
+		try {
+			for (String i : itemStrings) {
 				if (!i.equals("")) {
 					ItemBean item = model.getStoreModel().retreiveItem(i.split("=")[0]);
 					items.add(item);
@@ -76,6 +76,25 @@ public class Cart extends HttpServlet {
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		if (request.getParameter("out") != null && request.getParameter("out").equals("changeItem")) {
+			String newItemString = "";
+			for (String i : itemStrings) {
+				String[] iSplit = i.split("=");
+				iSplit[1] = iSplit[1] + ",";
+				if (("00" + request.getParameter("changedItemID")).equals(iSplit[0])) {
+					if (Integer.parseInt(request.getParameter("changedItemQuantity")) <= 0) {
+						i = "";
+					} else {
+						iSplit[1] = request.getParameter("changedItemQuantity") + ",";
+						i = iSplit[0] + '=' + iSplit[1];
+					}
+				} else {
+					i = iSplit[0] + '=' + iSplit[1];
+				}
+				newItemString += i;
+			}
+			request.getSession().setAttribute("cartItems", newItemString);
 		}
 		String target = "/cart.jsp";
 //		if (request.getParameter("checkout") != null) {
