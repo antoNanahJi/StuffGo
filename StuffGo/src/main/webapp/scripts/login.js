@@ -24,8 +24,17 @@ const login = () => {
 		.then((responseJSON) => {
 			console.log('received JSON: ', responseJSON);
 			if (responseJSON.username) {
+				var target = '/StuffGo/index.jsp';
+				
+				// Redirect user to admin page if login was from Analytics page
+				if (responseJSON.AdminPage != null && responseJSON.AdminPage == 'true') {
+					target = '/StuffGo/Analytics';
+				}
+
 				// Redirect user to index page if login is successful
-				window.location.href = '/StuffGo/index.jsp';
+				window.location.href = target;
+				
+
 			} else {
 				// Alert the user that login failed on the server side
 				alert('Wrong username or password');

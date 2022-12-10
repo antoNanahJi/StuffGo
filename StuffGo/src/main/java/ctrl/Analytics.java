@@ -128,13 +128,26 @@ public class Analytics extends HttpServlet {
 		}
 		
 		if (request.getParameter("out") == null) {
-			//if (request.getSession().getAttribute("username") == null) {
-			//	resOut.write("{\"login\":\"" + false + "\"}");
-			//	resOut.flush();
-			//	return;
-			//}
 			
-			String target = "/Analytics.html";
+			String target = "/Analytics.jsp";
+			if (request.getSession().getAttribute("username") == null) {
+				request.getSession().setAttribute("AdminPage", true);
+				target = "/login.jsp";
+			}
+			
+			boolean isAdmin = false;
+			if (request.getSession().getAttribute("isAdmin") != null) {
+				isAdmin = (boolean) request.getSession().getAttribute("isAdmin");
+			}
+			if (!isAdmin) {
+				request.setAttribute("AdminDisplay", "none");
+				request.setAttribute("AdminMessage", "Please login with Admin account.");
+			} else {
+				request.setAttribute("AdminDisplay", "block");
+				request.setAttribute("AdminMessage", "");
+			}
+			
+			
 			request.getRequestDispatcher(target).forward(request, response);
 		}
 	}

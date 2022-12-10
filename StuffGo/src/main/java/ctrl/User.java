@@ -79,7 +79,15 @@ public class User extends HttpServlet {
 					 // Set username attribute of session to the logged in user's username
 					session.setAttribute("username", username);
 					 // Send a JSON response with the logged in user's username
-					resOut.append("{\"username\": \"" + username + "\"}");
+					resOut.append("{\"username\": \"" + username + "\"");
+
+					// Redirect user to admin page if login was from Analytics page
+					if (request.getSession().getAttribute("AdminPage") != null) {
+						resOut.append(", \"AdminPage\": \"" + request.getSession().getAttribute("AdminPage") +  "\"");
+						request.getSession().setAttribute("AdminPage", false);
+					}
+					
+					resOut.append("}");
 					resOut.flush();
 				 } else {
 					 // If login was not successfull, return JSON with username being null
@@ -122,6 +130,7 @@ public class User extends HttpServlet {
 				boolean isUserAdmin = model.getUserModel().isUserAdmin(usernameInSession);
 				// Set "isAdmin" attribute of session to be true or false accordingly 
 				session.setAttribute("isAdmin", isUserAdmin);
+			
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

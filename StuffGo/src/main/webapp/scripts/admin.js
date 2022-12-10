@@ -1,3 +1,15 @@
+window.onload = () => {
+
+	const loginText = document.getElementById('loginout');
+	const nameNav = document.getElementById('nohov');
+
+	if (nameNav && nameNav.innerHTML && nameNav.innerHTML.length !== 0) {
+		console.log('nameNav is not empty therefore changing login to logout');
+		loginText.innerHTML = 'logout';
+		loginText.href = loginText.href.replace('login.jsp', 'logout.jsp');
+	}
+};
+
 /**
  * Validate function for user inputs
  */

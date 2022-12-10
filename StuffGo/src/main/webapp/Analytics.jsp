@@ -44,7 +44,7 @@
   		</nav>
 		<section>
 		 	<div class="container">
-		    	<div class="row">
+		    	<div class="row" id="button-container" style="display: ${AdminDisplay}">
 		            <div class="col-lg-5 productContainer">
 		            	<div class="row productDetails">
 		                	<button type="button" name="ajax" value="true" 
@@ -58,7 +58,7 @@
 		        <div class="row">
 		             <div class="col-lg-12 productContainer">
 		            	<div class="row productDetails">
-		                	<div id="result"> </div>
+		                	<div id="result">${AdminMessage} </div>
 		            	</div>
 		        	</div>
 		        </div>
