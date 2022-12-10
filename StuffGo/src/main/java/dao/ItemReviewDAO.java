@@ -6,20 +6,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import bean.EnrollmentBean;
-import bean.ItemBean;
 import bean.ItemReviewBean;
 
+/**
+ * This class is responsible to retrieve data from ITEMREVIEWS table
+ * @author antoji
+ *
+ */
 public class ItemReviewDAO {
-	
+	// Private attributes
 	private DataSource ds;
 	
+	/**
+	 * Constructor
+	 * @throws ClassNotFoundException
+	 */
 	public ItemReviewDAO() throws ClassNotFoundException{
 		try {
 			ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS");
@@ -28,6 +34,10 @@ public class ItemReviewDAO {
 		}
 	}
 	
+	/**
+	 * @return data from the ITEMREVIEWS table where ITEMID is equal to given ITEMID
+	 * @throws SQLException, NamingException
+	 */
 	public List<ItemReviewBean> getReviews(String ITEMID)throws SQLException, NamingException{
 		String preparedStatement = "select * from ITEMREVIEWS where ITEMID=?";
 		
@@ -57,6 +67,12 @@ public class ItemReviewDAO {
 		return rs;
 	}
 	
+	/**
+	 * Adds record into the ITEMREVIEWS table if it does not exist
+	 * @return number of inserted rows into ITEMREVIEWS table
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
 	public int addReview(String ID, String USERID, String ITEMID, String REVIEW, int RATING, String REVIEWDATE, boolean isRating) throws SQLException, NamingException{
 		String preparedStatement = "select * from ITEMREVIEWS where ID=?";
 		
@@ -95,6 +111,11 @@ public class ItemReviewDAO {
 		
 	}
 	
+	/**
+	 * @return number of deleted rows from ITEMREVIEWS table
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
 	public int deleteReview(String ID) throws SQLException, NamingException{
 		String preparedStatement = "delete from ITEMREVIEWS where ID=?";
 		
@@ -107,6 +128,11 @@ public class ItemReviewDAO {
 		return stmt.executeUpdate();
 	}
 	
+	/**
+	 * @return number of inserted rows into ITEMREVIEWS table
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
 	public int insertReview(String ID, String USERID, String ITEMID, String REVIEW, int RATING, String REVIEWDATE) throws SQLException, NamingException{
 		String preparedStatement = "insert into ITEMREVIEWS values(?,?,?,?,?,?)";
 		

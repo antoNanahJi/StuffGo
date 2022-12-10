@@ -2,17 +2,15 @@ package utilities;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 
 import dao.WebsiteUsageDAO;
-import bean.ItemReviewBean;
 import bean.WebsiteUsageBean;
 
 
 /**
- * The application model class
+ * The website usage model class
  * @author antoji
  *
  */
@@ -20,6 +18,9 @@ public class WebsiteUsageModel {
 	// Private attributes
 	private WebsiteUsageDAO id;
 	
+	/**
+	 * Constructor
+	 */
 	public WebsiteUsageModel() {
 		try {
 			this.id = new WebsiteUsageDAO();
@@ -30,7 +31,7 @@ public class WebsiteUsageModel {
 	}
 	
 	/**
-	 * @return data from STUDENTS table where surname contains namePrefix and credit_taken equals credit_taken 
+	 * @return data from the VISITEVENT table 
 	 * @throws IOException
 	 * @throws SQLException
 	 */
@@ -41,12 +42,12 @@ public class WebsiteUsageModel {
 	}
 	
 	/**
-	 * @return number of inserted rows into STUDENTS table
+	 * @return number of inserted rows into VISITEVENT table
 	 * @throws NamingException
 	 * @throws SQLException
 	 */
 	public  int insertRecord(String ipAddress, String date, String itemID, eventTypes event) throws SQLException, NamingException {
-		// validate inputs sid, givenname, surname, credittake, and creditgraduate
+		// validate inputs ipAddress, date, itemID, and event
 		
 		if (ipAddress == null || ipAddress.equals("")) {
 			throw new NamingException("IP address can not be empty\n");

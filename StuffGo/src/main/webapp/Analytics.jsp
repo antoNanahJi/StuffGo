@@ -14,7 +14,6 @@
 		<link rel="StyleSheet" href="res/main.css" type="text/css" title="cse4413" media="screen, print"/>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 		
-		
 	</head>
 	<body>
   		<nav class="navbar navbar-expand-md justify-content-between navigation">

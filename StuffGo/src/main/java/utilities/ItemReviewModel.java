@@ -1,8 +1,6 @@
 package utilities;
 
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 
@@ -11,7 +9,7 @@ import bean.ItemReviewBean;
 
 
 /**
- * The application model class
+ * The item review model class
  * @author antoji
  *
  */
@@ -19,6 +17,9 @@ public class ItemReviewModel {
 	// Private attributes
 	private ItemReviewDAO id;
 	
+	/**
+	 * Constructor
+	 */
 	public ItemReviewModel() {
 		try {
 			this.id = new ItemReviewDAO();
@@ -29,9 +30,8 @@ public class ItemReviewModel {
 	}
 	
 	/**
-	 * @return data from STUDENTS table where surname contains namePrefix and credit_taken equals credit_taken 
-	 * @throws IOException
-	 * @throws SQLException
+	 * @return data from the ITEMREVIEWS table where ITEMID is equal to given ITEMID
+	 * @throws SQLException, NamingException
 	 */
 	public List<ItemReviewBean> retriveReviews(String ITEMID) throws SQLException, NamingException {
 		// validate inputs namePrefix, creditTaken
@@ -46,12 +46,12 @@ public class ItemReviewModel {
 	}
 	
 	/**
-	 * @return number of inserted rows into STUDENTS table
+	 * @return number of inserted rows from ITEMREVIEWS table
 	 * @throws NamingException
 	 * @throws SQLException
 	 */
 	public int insertReview(String ID, String USERID, String ITEMID, String REVIEW, String RATING, String REVIEWDATE, boolean isRating) throws SQLException, NamingException {
-		// validate inputs sid, givenname, surname, credittake, and creditgraduate
+		// validate inputs ID, USERID, ITEMID, REVIEW, RATING, and REVIEWDATE
 		
 		if (ID == null || ID.equals("")) {
 			throw new NamingException("ID can not be empty\n");

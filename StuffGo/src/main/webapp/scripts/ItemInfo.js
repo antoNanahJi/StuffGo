@@ -1,5 +1,5 @@
 /**
- *
+ * On load
  */
 window.onload = () => {
 	var request = new XMLHttpRequest();
@@ -20,6 +20,8 @@ window.onload = () => {
 	}
 };
 
+
+// Validate user input
 function validate() {
 	var ok = true;
 	var p = document.getElementById('customer_review').value;
@@ -31,6 +33,7 @@ function validate() {
 	return ok;
 }
 
+// Add this item to cart
 function addItemToCart(address) {
 	var el = document.getElementById( "Quantity");
 	if (parseInt(el.value) < parseInt(el.min)) {
@@ -55,6 +58,7 @@ function addItemToCart(address) {
 	request.send(null);
 }
 
+// Add a new revirew to this item using Ajax call
 function addReview(address) {
 	var ok = validate();
 	if (!ok) return;
@@ -76,6 +80,8 @@ function addReview(address) {
 	request.send(null);
 }
 
+
+// Called after the ajax request is success for adding revirew
 function reviewHandler(request, oneReview) {
 	if (request.readyState == 4 && request.status == 200) {
 		var target = document.getElementById('reviews');
@@ -127,6 +133,8 @@ function reviewHandler(request, oneReview) {
 	}
 }
 
+
+// Add new review into the review list
 function addParagraph(parent, user, review, date) {
 	let resu = '';
 
@@ -138,6 +146,8 @@ function addParagraph(parent, user, review, date) {
 	parent.innerHTML += resu;
 }
 
+
+// Add a new rating to this item using Ajax call 
 function submitRating(address) {
 	var request = new XMLHttpRequest();
 	var data = '&';
@@ -151,6 +161,7 @@ function submitRating(address) {
 	request.send(null);
 }
 
+// Update the stars
 function addStar(parent) {
 	let resu = '';
 
@@ -158,6 +169,7 @@ function addStar(parent) {
 	parent.innerHTML += resu;
 }
 
+// Called after the ajax request is success for adding rating
 function ratingHandler(request, oneReview) {
 	if (request.readyState == 4 && request.status == 200) {
 		if (request.responseText != null && request.responseText != '') {
@@ -185,6 +197,7 @@ function ratingHandler(request, oneReview) {
 	}
 }
 
+// Updates the rating star color
 function addRating(id) {
 	for (var i = 1; i <= id; i++) {
 		document.getElementById('star_' + i).classList.add('bi-star-fill');
@@ -201,6 +214,7 @@ function addRating(id) {
 	document.getElementById('star_submit').style.visibility = 'visible';
 }
 
+// Adds a toast
 function addToast(msg) {
 	document.getElementById('toast-message').innerHTML = msg;
 	const toastLiveExample = document.getElementById('liveToast');

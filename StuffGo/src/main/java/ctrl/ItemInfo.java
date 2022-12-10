@@ -58,12 +58,13 @@ public class ItemInfo extends HttpServlet {
 		
 		ServletContext context = this.getServletContext();
 		Writer resOut = response.getWriter();
-
 		
+		// Set the clientIP value
 		if (request.getSession().getAttribute("clientIP") == null) {
 			request.getSession().setAttribute("clientIP", request.getRemoteAddr());
 		}
 		
+		// Set the eventDate value
 		if (request.getSession().getAttribute("eventDate") == null) {
 			Date date = new Date();
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -74,156 +75,184 @@ public class ItemInfo extends HttpServlet {
 		String	date = (String) request.getSession().getAttribute("eventDate");
 	
 		try {
+			// Get the model
 			MainModel model = (MainModel) context.getAttribute("MainModel");
 				
-				if(request.getParameter("out") != null && request.getParameter("out").equals("addReview")) {
-					
-					if (request.getSession().getAttribute("username") == null) {
-						resOut.write("{\"login\":\"" + false + "\"}");
-						resOut.flush();
-						return;
-					}
-					
-					String userID = (String) request.getSession().getAttribute("username");
-					String review = "";
-					String reviewDate = "";
-					String ID = "";
-
-					if(request.getParameter("ID") != null) {
-						ID = request.getParameter("ID");
-					}
-								
-						// Get credit taken value
-						if(request.getParameter("REVIEW") != null) {
-							review =  request.getParameter("REVIEW");
-						}
-						
-						// Get credit taken value
-						if(request.getParameter("REVIEWDATE") != null) {
-							reviewDate =  request.getParameter("REVIEWDATE");
-						} 
-						try {
-							List<String> purchasedHistory = model.getItemPurchasedModel().getPurchasedHistory(userID);
-						
-							if (!purchasedHistory.contains(ID)) {
-								resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\", " + "\"reviewAdded\":\"" + false + "\"}");
-							} else {								
-								model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, review, "0", reviewDate, false);
-								model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.SUBMIT_REVIEW);
-								resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\", " + "\"reviewAdded\":\"" + true + "\"}");
-								
-							}
-						} catch(Exception e) {			
-							resOut.append(e.getMessage());
-						}
-						
-						
+			// Insert a new user review into database
+			if(request.getParameter("out") != null && request.getParameter("out").equals("addReview")) {
 				
+				// To make sure the user is logged in
+				if (request.getSession().getAttribute("username") == null) {
+					resOut.write("{\"login\":\"" + false + "\"}");
+					resOut.flush();
+					return;
 				}
-				if(request.getParameter("out") != null && request.getParameter("out").equals("addItem")) {
-					String itemID = "";
-					int quantity = 0;
-					if(request.getParameter("ID") != null) {
+					
+				String userID = (String) request.getSession().getAttribute("username");
+				String review = "";
+				String reviewDate = "";
+				String ID = "";
+
+				// Get the unique ID
+				if(request.getParameter("ID") != null) {
+					ID = request.getParameter("ID");
+				}
+								
+				// Get REVIEW value
+				if(request.getParameter("REVIEW") != null) {
+					review =  request.getParameter("REVIEW");
+				}
+						
+				// Get REVIEWDATE value
+				if(request.getParameter("REVIEWDATE") != null) {
+					reviewDate =  request.getParameter("REVIEWDATE");
+				} 
+				
+				try {
+					List<String> purchasedHistory = model.getItemPurchasedModel().getPurchasedHistory(userID);
+					
+					// To make sure the user can add review only if they bought the item
+					if (!purchasedHistory.contains(ID)) {
+						resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\", " + "\"reviewAdded\":\"" + false + "\"}");
+					} else {								
+						
+						// Insert a new SUBMIT_REVIEW event
+						model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.SUBMIT_REVIEW);
+						
+						model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, review, "0", reviewDate, false);
+						resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\", " + "\"reviewAdded\":\"" + true + "\"}");
+								
+					}
+				} catch(Exception e) {			
+					resOut.append(e.getMessage());
+				}
+			}
+			
+			// Add the item into cart
+			if(request.getParameter("out") != null && request.getParameter("out").equals("addItem")) {
+				String itemID = "";
+				int quantity = 0;
+				
+				// Get the unique ID
+				if(request.getParameter("ID") != null) {
 						itemID = request.getParameter("ID");
-						
-					}
-					if(request.getParameter("Quantity") != null) {
-						quantity = Integer.valueOf(request.getParameter("Quantity"));
-					}
-					
-					if (request.getSession().getAttribute("cartItems") == null) {
-				    	request.getSession().setAttribute("cartItems", "");
-					} else {
-						String cartItems = (String) request.getSession().getAttribute("cartItems");
-						Map<String, Integer> cartItemsMap = toMap(cartItems);
-
-						if (cartItemsMap.containsKey(itemID)) {
-							quantity += cartItemsMap.get(itemID);
-						}
-						cartItemsMap.put(itemID, quantity);
-						cartItems = cartItemsMap.toString();
-						request.getSession().setAttribute("cartItems", cartItems.substring(1, cartItems.length() - 1).replaceAll("\\s", ""));
-						
-					}
-					model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.ADD_CART);
-					
 				}
-				if(request.getParameter("out") != null && request.getParameter("out").equals("addRating")) {
-					
-					if (request.getSession().getAttribute("username") == null) {
-						resOut.write("{\"login\":\"" + false + "\"}");
-						resOut.flush();
-						return;
-					}
-					String userID = (String) request.getSession().getAttribute("username");
-					String ID = "";
-					String rating = "";
-					
-					if(request.getParameter("ID") != null) {
-						ID = request.getParameter("ID");
-					}
-					if(request.getParameter("RATING") != null) {
-						rating = request.getParameter("RATING");
-					}
-					
-					try {
-						List<String> purchasedHistory = model.getItemPurchasedModel().getPurchasedHistory(userID);
 				
-						if (!purchasedHistory.contains(ID)) {
-							resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\", " + "\"ratingAdded\":\"" + false + "\"}");
-						} else {
-							model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, "", rating, "", true);
-							model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.SUBMIT_RATING);
-							resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\", " + "\"ratingAdded\":\"" + true + "\"}");
-							
-						}
-					} catch(Exception e) {			
-						resOut.append(e.getMessage());
-					}
+				// Get the Quantity
+				if(request.getParameter("Quantity") != null) {
+					quantity = Integer.valueOf(request.getParameter("Quantity"));
 				}
+					
+				// Update the cartItems map
+				if (request.getSession().getAttribute("cartItems") == null) {
+				   	request.getSession().setAttribute("cartItems", "");
+				} else {
+					String cartItems = (String) request.getSession().getAttribute("cartItems");
+					Map<String, Integer> cartItemsMap = toMap(cartItems);
 
-				if(request.getParameter("out") != null && request.getParameter("out").equals("getReviewsStars")) {
-					StringBuilder jsonData = new StringBuilder();
-					
-					
-					try {
-						List<ItemReviewBean> reviews = model.getItemReviewModel().retriveReviews(this.itemID);
-						if (reviews.size() > 0) {
-							response.setContentType("application/json");
-							int starCount = 0;
-							
-							// Create the JSON data
-							jsonData.append("{ \"reviews\" : [");
-							
-							for (ItemReviewBean iBean : reviews) {
-								jsonData.append("{\"user\":");
-								jsonData.append("\"" + iBean.getUserID() + "\"");
-								jsonData.append(",\"review\":");
-								jsonData.append("\"" + iBean.getReview() + "\"");
-								jsonData.append(",\"date\":");
-								jsonData.append("\"" + iBean.getReviewDate() + "\"");
-								jsonData.append("}, ");
-								starCount += iBean.getRating();
-							}
-							jsonData.replace(jsonData.length() - 2, jsonData.length(), "],");
-							jsonData.append(" \"starCount\":\"" + (starCount/reviews.size()) + "\"}");
-							
-						}
+					if (cartItemsMap.containsKey(itemID)) {
+						quantity += cartItemsMap.get(itemID);
+					}
+					cartItemsMap.put(itemID, quantity);
+					cartItems = cartItemsMap.toString();
+					request.getSession().setAttribute("cartItems", cartItems.substring(1, cartItems.length() - 1).replaceAll("\\s", ""));
 						
-					} catch(Exception e) {			
-						jsonData.append(e.getMessage());
-					}
-					
-					if (jsonData.length() > 0) {
-						resOut.write(jsonData.toString());
-						resOut.flush();
-					}
 				}
+				
+				// Insert a new ADD_CART event
+				model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.ADD_CART);
+					
+			}
+			
+			// Insert a new rating
+			if(request.getParameter("out") != null && request.getParameter("out").equals("addRating")) {
+					
+				// To make sure the user is logged in
+				if (request.getSession().getAttribute("username") == null) {
+					resOut.write("{\"login\":\"" + false + "\"}");
+					resOut.flush();
+					return;
+				}
+				
+				String userID = (String) request.getSession().getAttribute("username");
+				String ID = "";
+				String rating = "";
+					
+				// Get unique ID
+				if(request.getParameter("ID") != null) {
+					ID = request.getParameter("ID");
+				}
+				
+				// Get Rating value
+				if(request.getParameter("RATING") != null) {
+					rating = request.getParameter("RATING");
+				}
+					
+				try {
+					List<String> purchasedHistory = model.getItemPurchasedModel().getPurchasedHistory(userID);
+					
+					// To make sure the user can add rating only if they bought the item
+					if (!purchasedHistory.contains(ID)) {
+						resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\", " + "\"ratingAdded\":\"" + false + "\"}");
+					} else {
+						// Insert a new SUBMIT_RATING event
+						model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.SUBMIT_RATING);
+						
+						model.getItemReviewModel().insertReview(userID + '-' + ID, userID, ID, "", rating, "", true);
+						resOut.write("{\"login\":\"" + true + "\", " + "\"user\":\"" + userID + "\", " + "\"ratingAdded\":\"" + true + "\"}");
+					}
+				} catch(Exception e) {			
+					resOut.append(e.getMessage());
+				}
+			}
+
+			// Get the reviews and the average rating for this item
+			if(request.getParameter("out") != null && request.getParameter("out").equals("getReviewsStars")) {
+				StringBuilder jsonData = new StringBuilder();
+					
+				try {
+					List<ItemReviewBean> reviews = model.getItemReviewModel().retriveReviews(this.itemID);
+					if (reviews.size() > 0) {
+						response.setContentType("application/json");
+						int starCount = 0;
+							
+						// Create the JSON data
+						jsonData.append("{ \"reviews\" : [");
+							
+						for (ItemReviewBean iBean : reviews) {
+							jsonData.append("{\"user\":");
+							jsonData.append("\"" + iBean.getUserID() + "\"");
+							jsonData.append(",\"review\":");
+							jsonData.append("\"" + iBean.getReview() + "\"");
+							jsonData.append(",\"date\":");
+							jsonData.append("\"" + iBean.getReviewDate() + "\"");
+							jsonData.append("}, ");
+							starCount += iBean.getRating();
+						}
+						jsonData.replace(jsonData.length() - 2, jsonData.length(), "],");
+						jsonData.append(" \"starCount\":\"" + (starCount/reviews.size()) + "\"}");
+							
+					}
+						
+				} catch(Exception e) {			
+					jsonData.append(e.getMessage());
+				}
+				
+				if (jsonData.length() > 0) {
+					resOut.write(jsonData.toString());
+					resOut.flush();
+				}
+			}
+			
+			// Get this item info from database and send it to front end
 			if (request.getParameter("out") == null) {
+			
+				// Get the item ID
 				if(request.getParameter("ID") != null) {
 					this.itemID = request.getParameter("ID");
 					
 				}
+				
 				ItemBean itemInfo = model.getStoreModel().retreiveItem(this.itemID);
 				
 				request.setAttribute("image", itemInfo.getImage());
@@ -235,10 +264,10 @@ public class ItemInfo extends HttpServlet {
 			
 				model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.VIEW);
 				
+				//Redirect to ItemView.jsp
 				String target = "/ItemView.jsp";
 				request.getRequestDispatcher(target).forward(request, response);
 			}
-
 			
 		} catch (Exception e) {
 			System.out.println("error");
@@ -254,6 +283,9 @@ public class ItemInfo extends HttpServlet {
 		doGet(request, response);
 	}
 	
+	/**
+	 * Converts the given string into map
+	 */
 	private Map<String, Integer> toMap(String str) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		

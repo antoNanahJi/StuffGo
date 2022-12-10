@@ -1,7 +1,5 @@
 package model;
 
-import javax.naming.NamingException;
-
 import utilities.ItemPurchasedModel;
 import utilities.ItemReviewModel;
 import utilities.StoreModel;
@@ -37,22 +35,37 @@ public class MainModel {
 		return instance;
 	}
 	
+	/**
+	 * @return Item Review Model
+	 */
 	public ItemReviewModel getItemReviewModel(){
 		return this.itemReviewModel;
 	}
 	
+	/**
+	 * @return Store Model
+	 */
 	public StoreModel getStoreModel(){
 		return this.storeModel;
 	}
 	
+	/**
+	 * @return User Model
+	 */
 	public UserModel getUserModel(){
 		return this.userModel;
 	}
 	
+	/**
+	 * @return Website Usage Model
+	 */
 	public WebsiteUsageModel getWebsiteUsageModel(){
 		return this.websiteUsageModel;
 	}
 
+	/**
+	 * @return Item Purchased Model
+	 */
 	public ItemPurchasedModel getItemPurchasedModel() {
 		return itemPurchasedModel;
 	}

@@ -35,6 +35,10 @@ public class Analytics extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
+    /**
+     * @see HttpServlet#init(ServletConfig)
+     */
+    @Override
 	public void init() throws ServletException {
 		super.init();
 		try {
@@ -56,12 +60,12 @@ public class Analytics extends HttpServlet {
 		
 		ServletContext context = this.getServletContext();
 		Writer resOut = response.getWriter();
-
 		
 		try {
-			// retrieve Students data
+			// Get the model
 			MainModel model = (MainModel) context.getAttribute("MainModel");
 			
+			// Get the website usage report
 			if(request.getParameter("out") != null && request.getParameter("out").equals("WebsiteUsage"))
 			{
 				StringBuilder jsonData = new StringBuilder();
@@ -94,6 +98,7 @@ public class Analytics extends HttpServlet {
 				}
 			}
 			
+			// Get the monthly item sold report
 			if(request.getParameter("out") != null && request.getParameter("out").equals("MonthlyItemReport"))
 			{
 				StringBuilder jsonData = new StringBuilder();
@@ -127,14 +132,18 @@ public class Analytics extends HttpServlet {
 			System.out.print(e.getMessage());
 		}
 		
+		// Redirect to Analytics page
 		if (request.getParameter("out") == null) {
 			
 			String target = "/Analytics.jsp";
+			
+			// To make sure the  user is logged in
 			if (request.getSession().getAttribute("username") == null) {
 				request.getSession().setAttribute("AdminPage", true);
 				target = "/login.jsp";
 			}
 			
+			// To make sure the logged in user is Admin
 			boolean isAdmin = false;
 			if (request.getSession().getAttribute("isAdmin") != null) {
 				isAdmin = (boolean) request.getSession().getAttribute("isAdmin");
@@ -147,7 +156,7 @@ public class Analytics extends HttpServlet {
 				request.setAttribute("AdminMessage", "");
 			}
 			
-			
+			// Redirect to target page
 			request.getRequestDispatcher(target).forward(request, response);
 		}
 	}

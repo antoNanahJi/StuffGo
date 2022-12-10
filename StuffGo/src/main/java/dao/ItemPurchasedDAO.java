@@ -13,14 +13,20 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import bean.EnrollmentBean;
-import bean.ItemReviewBean;
-import bean.WebsiteUsageBean;
-import utilities.eventTypes;
 
+/**
+ * This class is responsible to retrieve data from ITEMPURCHASED table
+ * @author antoji
+ *
+ */
 public class ItemPurchasedDAO {
+	// Private attributes
 	private DataSource ds;
 	
+	/**
+	 * Constructor
+	 * @throws ClassNotFoundException
+	 */
 	public ItemPurchasedDAO() throws ClassNotFoundException{
 		try {
 			ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS");
@@ -29,6 +35,10 @@ public class ItemPurchasedDAO {
 		}
 	}
 	
+	/**
+	 * @return data from the ITEMPURCHASED table
+	 * @throws SQLException, NamingException
+	 */
 	public Map<String, int[]> getRecords()throws SQLException, NamingException{
 		String preparedStatement = "select * from ITEMPURCHASED";
 		
@@ -62,7 +72,11 @@ public class ItemPurchasedDAO {
 		return rv;
 	}
 	
-	
+	/**
+	 * @return number of inserted rows from ITEMPURCHASED table
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
 	public int insertRecord(String itemID, String date, int quantity, String userID) throws SQLException, NamingException{
 		String preparedStatement = "insert into ITEMPURCHASED values(?,?,?,?)";
 		
@@ -79,6 +93,11 @@ public class ItemPurchasedDAO {
 	
 	}
 	
+	/**
+	 * @return List containing the users purchased history
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
 	public List<String> getPurchasedHistory(String userID)throws SQLException, NamingException{
 		String preparedStatement = "select ITEMID from ITEMPURCHASED where USERID=?";
 		

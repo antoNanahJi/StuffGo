@@ -1,3 +1,4 @@
+// On load
 window.onload = () => {
 
 	const loginText = document.getElementById('loginout');
@@ -11,35 +12,33 @@ window.onload = () => {
 };
 
 /**
- * Validate function for user inputs
+ * Get the Monthly Item Sell report
  */
 function reportMonthlyItemSell(address){
 	var request = new XMLHttpRequest();
 	
 	request.open("GET", address, true);
 	request.onreadystatechange = function() {
-		handlerA(request);
+		handlerMonthlyItemSell(request);
 	};
 	request.send(null);
 }
 
 /**
- * Called after the ajax request is success
+ * Called after the ajax request is success for Monthly Item Sell
  */
-function handlerA(request){
+function handlerMonthlyItemSell(request){
 	
 	if ((request.readyState == 4) && (request.status == 200)){
 		
 		var target = document.getElementById("result");
 		target.innerHTML = "";
-		console.log(request.responseText);
-		//here you want to add parse the json and display individual key,
-		//values pairs as html elements ( tables, paragraphs, etc..)
+		
 		if (request.responseText && request.responseText.charAt(0) == "{") {
 			var rs=JSON.parse(request.responseText);
 			
 			if (rs.records && rs.records.length > 0) {
-				addTableA(target, rs.records);	
+				addMonthlyItemTable(target, rs.records);	
 			}
 
 		}
@@ -47,9 +46,9 @@ function handlerA(request){
 }
 
 /**
- * Adds table to the html
+ * Adds table to the html for Monthly Item Sell
  */
-function addTableA(target, jsonData) {
+function addMonthlyItemTable(target, jsonData) {
  	var months = ["","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 		
 	if (target != null && jsonData != null) {
@@ -102,22 +101,22 @@ function addTableA(target, jsonData) {
 
 
 /**
- * Applies ajax
+ * Applies ajax to get Website Usage
  */
 function reportWebsiteUsage(address){
 	var request = new XMLHttpRequest();
 	
 	request.open("GET", address, true);
 	request.onreadystatechange = function() {
-		handler(request);
+		handlerWebsiteUsage(request);
 	};
 	request.send(null);
 }
 
 /**
- * Called after the ajax request is success
+ * Called after the ajax request is success for Website Usage
  */
-function handler(request){
+function handlerWebsiteUsage(request){
 	
 	if ((request.readyState == 4) && (request.status == 200)){
 		
@@ -129,7 +128,7 @@ function handler(request){
 			var rs=JSON.parse(request.responseText);
 			
 			if (rs.records && rs.records.length > 0) {
-				addTable(target, rs.records);	
+				addUsageTable(target, rs.records);	
 			}
 
 		}
@@ -137,9 +136,9 @@ function handler(request){
 }
 
 /**
- * Adds table to the html
+ * Adds table to the html for Website Usage
  */
-function addTable(target, jsonData) {
+function addUsageTable(target, jsonData) {
  
 	if (target != null && jsonData != null) {
 			var myTable = document.createElement("TABLE");
