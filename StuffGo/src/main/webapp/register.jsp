@@ -29,7 +29,7 @@
                	<a class="nav-link"  id="nohov">${username}</a>
              </li>
          	<li class="nav-item active">
-             	<a class="nav-link" href="http://localhost:8080/StuffGo/index.html">Catalog</span></a>
+             	<a class="nav-link" href="http://localhost:8080/StuffGo/index.jsp">Catalog</span></a>
              </li>
      		<li class="nav-item">
                	<a class="nav-link" id="loginout" href="http://localhost:8080/StuffGo/login.jsp">Login</a>
