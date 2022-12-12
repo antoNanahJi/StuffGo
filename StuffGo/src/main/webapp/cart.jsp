@@ -71,7 +71,9 @@
 							scope="page" />
 						<button type="button" class="qup"
 							onClick="quantityUp(${counter}, ${item.getID()}, ${item.getPrice()}, 'http://localhost:8080/StuffGo/Cart?out=changeItem')">+</button>
+						<h5 style="margin-top:12px">
 						price : <span id="cost${counter}">$${item.getPrice() * quantity}</span>
+						</h5>
 						<c:set var="cart" value="${cart}${item.getID()}-${quantity}_" />
 					</fieldset>
 					<br />
