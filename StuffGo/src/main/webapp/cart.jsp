@@ -56,7 +56,7 @@
 				<c:set var="cart" value="" />
 				<c:forEach items="${items}" var="item">
 					<c:set var="counter" value="${counter + 1}" scope="page" />
-					<fieldset id="item${counter}">
+					<fieldset id="item${counter}" class="border border-success p-3">
 					<h4>
 					${item.getBrand()}
 					</h4>
