@@ -56,7 +56,7 @@
 				<c:set var="cart" value="" />
 				<c:forEach items="${items}" var="item">
 					<c:set var="counter" value="${counter + 1}" scope="page" />
-					<fieldset id="item${counter}">
+					<fieldset id="item${counter}" class="border border-success p-3">
 					<h4>
 					${item.getBrand()}
 					</h4>
@@ -71,7 +71,9 @@
 							scope="page" />
 						<button type="button" class="qup"
 							onClick="quantityUp(${counter}, ${item.getID()}, ${item.getPrice()}, 'http://localhost:8080/StuffGo/Cart?out=changeItem')">+</button>
+						<h5 style="margin-top:12px">
 						price : <span id="cost${counter}">$${item.getPrice() * quantity}</span>
+						</h5>
 						<c:set var="cart" value="${cart}${item.getID()}-${quantity}_" />
 					</fieldset>
 					<br />
