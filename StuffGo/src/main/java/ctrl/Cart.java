@@ -76,6 +76,9 @@ public class Cart extends HttpServlet {
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		if (request.getParameter("out") != null && request.getParameter("out").equals("changeItem")) {
 			String newItemString = "";

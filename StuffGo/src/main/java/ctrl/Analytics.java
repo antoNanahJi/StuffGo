@@ -145,16 +145,8 @@ public class Analytics extends HttpServlet {
 			
 			// To make sure the logged in user is Admin
 			boolean isAdmin = false;
-			if (request.getSession().getAttribute("isAdmin") != null) {
-				isAdmin = (boolean) request.getSession().getAttribute("isAdmin");
-			}
-			if (!isAdmin) {
-				request.setAttribute("AdminDisplay", "none");
-				request.setAttribute("AdminMessage", "Please login with Admin account.");
-			} else {
-				request.setAttribute("AdminDisplay", "block");
-				request.setAttribute("AdminMessage", "");
-			}
+			
+			
 			
 			// Redirect to target page
 			request.getRequestDispatcher(target).forward(request, response);

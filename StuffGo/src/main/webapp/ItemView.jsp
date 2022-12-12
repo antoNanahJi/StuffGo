@@ -54,8 +54,8 @@
 							</div>
 		                	<p>${description}</p>
 		                	<h3>$ ${price}</h3>
-		                	<label for="Quantity">Quantity:</label>
-							<input type="number" step="1" id="Quantity" name="Quantity" value="1" min="1" max="${quantity}"></input>
+		                	<label style="display:flex; align-items:center; width:90px" for="Quantity">Quantity:</label>
+							<input style="width:50%" type="number" step="1" id="Quantity" name="Quantity" value="1" min="1" max="${quantity}"></input>
 		                	<button type="button" name="ajax" value="true" 
 		            				onclick="addItemToCart('http://localhost:8080/StuffGo/ItemInfo?out=addItem&ID=${itemID}')">Add To Cart</button>
 					      
@@ -66,7 +66,7 @@
 		            <div class="col-lg-3 productContainer">
 			        	<div class="row productDetails" style="text-align: center;">
 				        		<p style=" margin: 3px;">How was your experience?</p>
-								<div style="display: flex; margin-left: 25%" >
+								<div style="display: flex; justify-content:center" >
 									<div id = "star_1" style=" margin-right: 3px;  color: black;" class="bi bi-star" onclick="addRating(1)"></div>
 									<div id = "star_2" style=" margin-right: 3px; color: black;" class="bi bi-star" onclick="addRating(2)"></div>
 									<div id = "star_3" style=" margin-right: 3px; color: black;" class="bi bi-star" onclick="addRating(3)"></div>

@@ -104,6 +104,19 @@ button {
 #nohov {
 	color:white;
 }
+.qup {
+	width:70px;
+	padding:0px;
+	padding-top:12px;
+	padding-bottom:12px;
+}
+.qdown {
+	padding-bottom:12px;
+	width:70px;
+	padding:0px;
+	padding-top:12px;
+	padding-bottom:12px;
+}
 
 
 

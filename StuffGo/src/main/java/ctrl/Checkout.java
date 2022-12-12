@@ -91,6 +91,9 @@ public class Checkout extends HttpServlet {
 			} catch (NamingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		System.out.println(items);
