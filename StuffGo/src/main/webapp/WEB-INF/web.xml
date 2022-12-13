@@ -10,4 +10,16 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>Start</welcome-file>
   </welcome-file-list>
+   <error-page>
+ <error-code>404</error-code>
+ <location>/res/my404.jsp</location>
+ </error-page>
+  <error-page>
+ <exception-type>java.lang.IOException</exception-type>
+ <location>/res/myException.jsp</location>
+ </error-page>
+ <error-page>
+ <exception-type>javax.servlet.ServletException</exception-type>
+ <location>/res/myException.jsp</location>
+ </error-page>
 </web-app>

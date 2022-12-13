@@ -149,55 +149,55 @@ function addParagraphs(parent, rs) {
 function addFilters(parent, rs) {
 	let resu = '';
 	resu += '<h5>Brands</h5>';
+	let setBrand =  [...new Set(rs.items.map(datum => datum.brand))];
+	console.log("are " + setBrand);
 	[
-		...new Set(
-			rs.items.map(
+			setBrand.map(
 				(item) =>
 					(resu +=
 						'<input type="radio" id="' +
-						item.brand +
+						item +
 						'" name="brand" value="' +
-						item.brand +
+						item +
 						'">' +
 						'<label for="html">' +
-						item.brand +
+						item +
 						'</label><br>')
 			)
-		),
 	];
 	resu += '<h5>Types</h5>';
+	let setTypes =  [...new Set(rs.items.map(datum => datum.type))];
+	console.log("are " + setTypes);
 	[
-		...new Set(
-			rs.items.map(
+			setTypes.map(
 				(item) =>
 					(resu +=
 						'<input type="radio" id="' +
-						item.type +
+						item +
 						'" name="type" value="' +
-						item.type +
+						item +
 						'">' +
 						'<label for="html">' +
-						item.type +
+						item +
 						'</label><br>')
 			)
-		),
 	];
 	resu += '<h5>Categories</h5>';
+	let setCategories =  [...new Set(rs.items.map(datum => datum.category))];
+	console.log("are " + setCategories);
 	[
-		...new Set(
-			rs.items.map(
+			setCategories.map(
 				(item) =>
 					(resu +=
 						'<input type="radio" id="' +
-						item.category +
+						item +
 						'" name="category" value="' +
-						item.category +
+						item +
 						'">' +
 						'<label for="html">' +
-						item.category +
+						item +
 						'</label><br>')
 			)
-		),
 	];
 	parent.innerHTML = resu;
 	console.log(rs);

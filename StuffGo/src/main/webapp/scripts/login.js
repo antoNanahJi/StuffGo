@@ -7,11 +7,11 @@ const login = () => {
 
 	// Make sure that the user has entered the required fields
 	if (usernameValue === null || usernameValue === '' || usernameValue.length === 0) {
-		alert('Please enter a username');
+		addToast('Please enter a username');
 		return;
 	}
 	if (passwordValue === null || passwordValue === '' || passwordValue.length === 0) {
-		alert('Please enter a password');
+		addToast('Please enter a password');
 		return;
 	}
 
@@ -37,8 +37,15 @@ const login = () => {
 
 			} else {
 				// Alert the user that login failed on the server side
-				alert('Wrong username or password');
+				addToast('Wrong username or password');
 			}
 		})
 		.catch('cannot fetch...');
 };
+// Adds a toast
+function addToast(msg) {
+	document.getElementById('toast-message').innerHTML = msg;
+	const toastLiveExample = document.getElementById('liveToast');
+	const toast = new bootstrap.Toast(toastLiveExample);
+	toast.show();
+}

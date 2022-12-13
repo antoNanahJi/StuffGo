@@ -10,11 +10,11 @@ const register = () => {
 
 	// Make sure that the user has entered the required fields
 	if (usernameValue === null || usernameValue === '' || usernameValue.length === 0) {
-		alert('Please enter a username');
+		addToast('Please enter a username');
 		return;
 	}
 	if (passwordValue === null || passwordValue === '' || passwordValue.length === 0) {
-		alert('Please enter a password');
+		addToast('Please enter a password');
 		return;
 	}
 	if (
@@ -22,7 +22,7 @@ const register = () => {
 		defaultBillingValue === '' ||
 		defaultBillingValue.length === 0
 	) {
-		alert('Please enter a billing info');
+		addToast('Please enter a billing info');
 		return;
 	}
 	if (
@@ -30,11 +30,11 @@ const register = () => {
 		defaultShippingValue === '' ||
 		defaultShippingValue.length === 0
 	) {
-		alert('Please enter a shipping info');
+		addToast('Please enter a shipping info');
 		return;
 	}
 	if (nameValue === null || nameValue === '' || nameValue.length === 0) {
-		alert('Please enter a name info');
+		addToast('Please enter a name info');
 		return;
 	}
 
@@ -53,8 +53,14 @@ const register = () => {
 				window.location.href = '/StuffGo/index.jsp';
 			} else {
 				// Alert the user that registeration failed on the server side
-				alert('Invalid values, maybe username is taken');
+				addToast('Invalid values, maybe username is taken');
 			}
 		})
 		.catch('cannot fetch...');
 };
+function addToast(msg) {
+	document.getElementById('toast-message').innerHTML = msg;
+	const toastLiveExample = document.getElementById('liveToast');
+	const toast = new bootstrap.Toast(toastLiveExample);
+	toast.show();
+}

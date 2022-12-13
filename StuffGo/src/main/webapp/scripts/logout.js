@@ -11,7 +11,7 @@ const logout = () => {
 				// Redirect user
 				window.location.href = '/StuffGo/index.jsp';
 			} else {
-				alert('Could not logout');
+				addToast('Could not logout');
 			}
 		})
 		.catch('cannot fetch...');
@@ -21,3 +21,9 @@ const logout = () => {
 window.onload = () => {
 	logout();
 };
+function addToast(msg) {
+	document.getElementById('toast-message').innerHTML = msg;
+	const toastLiveExample = document.getElementById('liveToast');
+	const toast = new bootstrap.Toast(toastLiveExample);
+	toast.show();
+}
