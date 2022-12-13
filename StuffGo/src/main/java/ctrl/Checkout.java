@@ -78,7 +78,7 @@ public class Checkout extends HttpServlet {
 		Map<String[], ItemBean> items = new HashMap<String[], ItemBean>();
 		String cartSplit[] = cartString.split("_");
 		Map<String, Integer> cartItems = new HashMap<>();
-		for (int i = 0; i < cartSplit.length; i++) {
+		for (int i = 0; i < cartSplit.length - 1; i++) {
 			String itemSplit[] = cartSplit[i].split("-");
 			try {
 				ItemBean item = model.getStoreModel().retreiveItem(itemSplit[0]);

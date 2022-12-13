@@ -1,6 +1,5 @@
 // On load
 window.onload = () => {
-
 	const loginText = document.getElementById('loginout');
 	const nameNav = document.getElementById('nohov');
 
@@ -36,6 +35,11 @@ function handlerMonthlyItemSell(request){
 		
 		if (request.responseText && request.responseText.charAt(0) == "{") {
 			var rs=JSON.parse(request.responseText);
+			
+			if (rs.login == 'false') {
+				location.href = 'http://localhost:8080/StuffGo/login.jsp';
+				return;
+			}
 			
 			if (rs.records && rs.records.length > 0) {
 				addMonthlyItemTable(target, rs.records);	
@@ -126,6 +130,11 @@ function handlerWebsiteUsage(request){
 		//values pairs as html elements ( tables, paragraphs, etc..)
 		if (request.responseText && request.responseText.charAt(0) == "{") {
 			var rs=JSON.parse(request.responseText);
+			
+			if (rs.login == 'false') {
+				location.href = 'http://localhost:8080/StuffGo/login.jsp';
+				return;
+			}
 			
 			if (rs.records && rs.records.length > 0) {
 				addUsageTable(target, rs.records);	

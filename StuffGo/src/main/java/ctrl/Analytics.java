@@ -68,6 +68,13 @@ public class Analytics extends HttpServlet {
 			// Get the website usage report
 			if(request.getParameter("out") != null && request.getParameter("out").equals("WebsiteUsage"))
 			{
+				// To make sure the user is logged in
+				if (request.getSession().getAttribute("username") == null) {
+					resOut.write("{\"login\":\"" + false + "\"}");
+					resOut.flush();
+					return;
+				}
+				
 				StringBuilder jsonData = new StringBuilder();
 				
 				List<WebsiteUsageBean> records = model.getWebsiteUsageModel().retriveRecords();
@@ -90,7 +97,8 @@ public class Analytics extends HttpServlet {
 						jsonData.append("\"" + wBean.getEvent() + "\"");
 						jsonData.append("}, ");
 					}
-					jsonData.replace(jsonData.length() - 2, jsonData.length(), "]}");
+					jsonData.replace(jsonData.length() - 2, jsonData.length(), "], ");
+					resOut.write("\"login\":\"" + false + "\"}");
 				}
 				if (jsonData.length() > 0) {
 					resOut.write(jsonData.toString());
@@ -101,6 +109,13 @@ public class Analytics extends HttpServlet {
 			// Get the monthly item sold report
 			if(request.getParameter("out") != null && request.getParameter("out").equals("MonthlyItemReport"))
 			{
+				// To make sure the user is logged in
+				if (request.getSession().getAttribute("username") == null) {
+					resOut.write("{\"login\":\"" + false + "\"}");
+					resOut.flush();
+					return;
+				}
+				
 				StringBuilder jsonData = new StringBuilder();
 				
 				Map<String,int[]> records = model.getItemPurchasedModel().retriveRecords();
@@ -121,7 +136,8 @@ public class Analytics extends HttpServlet {
 						}
 						jsonData.replace(jsonData.length() - 2, jsonData.length(), "]}, ");
 					}
-					jsonData.replace(jsonData.length() - 2, jsonData.length(), "]}");
+					jsonData.replace(jsonData.length() - 2, jsonData.length(), "], ");
+					resOut.write("\"login\":\"" + false + "\"}");
 				}
 				if (jsonData.length() > 0) {
 					resOut.write(jsonData.toString());

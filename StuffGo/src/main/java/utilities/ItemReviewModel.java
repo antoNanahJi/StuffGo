@@ -39,6 +39,10 @@ public class ItemReviewModel {
 		if (ITEMID == null || ITEMID.equals("")) {
 			throw new NamingException("ITEM ID should not be empty\n");
 		}
+		
+		if (Security.containsXSS(ITEMID) || Security.containsSQL(ITEMID)) {
+			throw new NamingException("ITEM ID is not valid\n");
+		}
 
 		
 		List<ItemReviewBean> rs = this.id.getReviews(ITEMID);
@@ -69,13 +73,27 @@ public class ItemReviewModel {
 		if (RATING == null) {
 			throw new NamingException("RATING can not be empty\n");
 		}
-		int rating = Integer.valueOf(RATING);
-		if (rating < 0) {
-			throw new NamingException("RATING sould be number > 0\n");
-		}
 		
 		if (REVIEWDATE == null) {
 			throw new NamingException("REVIEWDATE can not be empty\n");
+		}
+		
+		if (Security.containsXSS(REVIEW) || Security.containsSQL(REVIEW)) {
+			throw new NamingException("REVIEW is not valid\n");
+		}
+		if (Security.containsXSS(RATING) || Security.containsSQL(RATING)) {
+			throw new NamingException("RATING is not valid\n");
+		}
+		if (Security.containsXSS(REVIEWDATE) || Security.containsSQL(REVIEWDATE)) {
+			throw new NamingException("REVIEWDATE is not valid\n");
+		}
+		if (Security.containsXSS(ITEMID) || Security.containsSQL(ITEMID)) {
+			throw new NamingException("ITEM ID is not valid\n");
+		}
+		
+		int rating = Integer.valueOf(RATING);
+		if (rating < 0) {
+			throw new NamingException("RATING sould be number > 0\n");
 		}
 
 		return this.id.addReview(ID, USERID, ITEMID, REVIEW, rating, REVIEWDATE, isRating);

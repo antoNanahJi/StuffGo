@@ -24,12 +24,37 @@ window.onload = () => {
 // Validate user input
 function validate() {
 	var ok = true;
+	var SQLCommandsList = [			
+		    "CREATE",
+			"DROP",
+			"ALTER",
+			"TRUNCATE",			
+			"INSERT",
+			"UPDATE",
+			"DELETE",			
+			"GRANT",
+			"REVOKE",
+			"COMMIT",			
+			"ROLLBACK",
+			"SAVE",
+			"SELECT"]
 	var p = document.getElementById('customer_review').value;
+	const arr = p.split(" ");
 	if (!p) {
 		addToast('Please write a review!');
 		ok = false;
 	}
-
+	
+	if (SQLCommandsList.includes(arr[0].toUpperCase())) {
+		addToast('Please write a valid review!');
+		ok = false;
+	}
+	
+	if (p.includes("script") || p.includes("style")) {
+		addToast('Please write a valid review!');
+		ok = false;
+	}
+	
 	return ok;
 }
 

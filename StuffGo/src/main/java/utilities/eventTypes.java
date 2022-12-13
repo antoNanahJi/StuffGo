@@ -1,5 +1,8 @@
 package utilities;
 
+/**
+ * Website event types
+ */
 public enum eventTypes {
 	  VIEW,
 	  SUBMIT_RATING,

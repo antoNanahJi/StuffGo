@@ -8,9 +8,7 @@ import dao.ItemDAO;
 
 public class StoreModel {
 	private ItemDAO itemData;
-	private static final String[] SQL_COMMANDS = { "SELECT", "UPDATE", "DELETE", "INSERT INTO", "CREATE DATABASE",
-			"ALTER DATABASE", "CREATE TABLE", "ALTER TABLE", "DROP TABLE", "CREATE INDEX", "DROP INDEX", "=", ";",
-			"*" };
+
 
 	public StoreModel() throws ClassNotFoundException {
 		itemData = new ItemDAO();
@@ -20,23 +18,35 @@ public class StoreModel {
 	// return the Map of CSE ID and the student information
 	public Map<String, ItemBean> retrieve(String brand, String type, String category, String ID) throws Exception {
 		if (brand != null) {
-			if (checkForInjection(brand)) {
+			if (Security.containsSQL(brand)) {
 				throw new Exception("SQL Injection Attempt");
+			}
+			if (Security.containsXSS(brand)) {
+				throw new Exception("XSS Attempt");
 			}
 		}
 		if (type != null) {
-			if (checkForInjection(type)) {
+			if (Security.containsSQL(type)) {
 				throw new Exception("SQL Injection Attempt");
+			}
+			if (Security.containsXSS(type)) {
+				throw new Exception("XSS Attempt");
 			}
 		}
 		if (category != null) {
-			if (checkForInjection(category)) {
+			if (Security.containsSQL(category)) {
 				throw new Exception("SQL Injection Attempt");
+			}
+			if (Security.containsXSS(category)) {
+				throw new Exception("XSS Attempt");
 			}
 		}
 		if (ID != null) {
-			if (checkForInjection(ID)) {
+			if (Security.containsSQL(ID)) {
 				throw new Exception("SQL Injection Attempt");
+			}
+			if (Security.containsXSS(ID)) {
+				throw new Exception("XSS Attempt");
 			}
 		}
 
@@ -45,22 +55,18 @@ public class StoreModel {
 
 	public ItemBean retreiveItem(String ID) throws Exception {
 		if (ID != null) {
-			if (checkForInjection(ID)) {
+			if (Security.containsSQL(ID)) {
 				throw new Exception("SQL Injection Attempt");
+			} 
+			if (Security.containsXSS(ID)) {
+				throw new Exception("XSS Attempt");
 			}
 		}
 
 		return this.itemData.retrieveItem(ID);
 	}
 
-	private boolean checkForInjection(String paramToCheck) {
-		for (int i = 0; i < SQL_COMMANDS.length; i++) {
-			if (paramToCheck.contains(SQL_COMMANDS[i])) {
-				return true;
-			}
-		}
-		return false;
-	}
+
 
 	public int updateQuantity(String ID, int quantity) throws SQLException, NamingException {
 		return this.itemData.updateQuantity(ID, quantity);

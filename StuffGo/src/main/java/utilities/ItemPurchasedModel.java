@@ -61,6 +61,14 @@ public class ItemPurchasedModel {
 		if (quantity < 0) {
 			throw new NamingException("Quantity should be a number >= 0\n");
 		}
+		
+		if (Security.containsXSS(itemID) || Security.containsSQL(itemID)) {
+			throw new NamingException("itemID is not valid\n");
+		}
+		if (Security.containsXSS(date) || Security.containsSQL(date)) {
+			throw new NamingException("itemID is not valid\n");
+		}
+		
 
 		return this.id.insertRecord(itemID, date, quantity, userID);
 	}

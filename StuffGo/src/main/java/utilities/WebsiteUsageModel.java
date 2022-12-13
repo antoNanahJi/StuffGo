@@ -61,6 +61,10 @@ public class WebsiteUsageModel {
 		if (event == null) {
 			throw new NamingException("Event can not be empty\n");
 		}
+		
+		if (Security.containsXSS(itemID) || Security.containsSQL(itemID)) {
+			throw new NamingException("itemID is not valid\n");
+		}
 
 		return this.id.addRecord(ipAddress, date, itemID, event);
 	}
