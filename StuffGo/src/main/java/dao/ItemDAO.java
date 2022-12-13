@@ -116,8 +116,9 @@ public class ItemDAO {
 		
 		PreparedStatement stmt = con.prepareStatement(query);
 		
-		stmt.setString(1, ID);
-		stmt.setInt(2, quantity);
+		stmt.setInt(1, quantity);
+		stmt.setString(2, ID);
+
 		
 		return stmt.executeUpdate();
 	}

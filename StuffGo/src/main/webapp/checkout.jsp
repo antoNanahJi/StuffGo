@@ -16,7 +16,7 @@
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
 <title>Checkout</title>
-<script src="scripts/cart.js"></script>
+<script src="scripts/checkout.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -30,7 +30,11 @@
 <link rel="StyleSheet" href="res/main.css" type="text/css"
 	title="cse4413" media="screen, print" />
 </head>
-<body>
+<c:set var="function" value="loadLogin()" />
+<c:if test="${username != null}">
+	<c:set var="function" value="loadCheckout()" />
+</c:if>
+<body onload="${function}">
 	<nav class="navbar navbar-expand-md justify-content-between navigation">
 		<div class="container">
 			<a class="navbar-brand"
@@ -55,15 +59,17 @@
 			</div>
 		</div>
 	</nav>
-	<button onclick="swap()">swap</button>
 	<div id="checkout-login">
 		<h4>Please Login or Register to Complete Purchase</h4>
 		<a href="login.jsp">Login</a>/<a href="register.jsp">register</a>
 	</div>
 	<div id="checkout" style="display: none">
-		<Form method="get">
+		<span id="ccCounter" style="display: none">${applicationScope['creditCounter']}</span>
+		<Form method="get"
+			onSubmit="return validate('http://localhost:8080/StuffGo/Checkout?out=count')">
 			<h4>Confirm Billing and Shipping Info</h4>
-			<input name="cart" value="${param['cart']}" readonly style="display:none">
+			<input name="cart" value="${param['cart']}" readonly
+				style="display: none">
 			<h5>Billing</h5>
 			<label for="billingName">Name: </label> <input name="billingName"
 				id="billingName" value="${username}"> <br /> <label
@@ -76,15 +82,12 @@
 				name="shippingAddress" id="shippingAddress"
 				value="${shippingAddress}">
 			<h4>Enter Payment Method</h4>
-			<label for="creditCard">Card #: </label> <input name="creditCard"
+			<label for="creditCard">Card #: </label> <input type = "number" name="creditCard"
 				id="creditCard"> <br />
 			<h4>Order Details</h4>
 			<c:forEach items="${items}" var="item">
-				<p>${item.key[0]}</p>
-				<p>${item.key[1]}</p>
-				<br />
-				<p>${item.value.getBrand()}</p>
-				<br />
+				<p>${item.value.getName()}${item.value.getBrand()} quantity
+					${item.key[1]} ${item.value.getQuantity()}</p>
 			</c:forEach>
 			<button type="submit" name="submit" value="true">Submit
 				Order</button>

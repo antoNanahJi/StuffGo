@@ -78,10 +78,9 @@ public class Checkout extends HttpServlet {
 		Map<String[], ItemBean> items = new HashMap<String[], ItemBean>();
 		String cartSplit[] = cartString.split("_");
 		Map<String, Integer> cartItems = new HashMap<>();
-		for (int i = 0; i < cartSplit.length - 1; i++) {
+		for (int i = 0; i < cartSplit.length; i++) {
 			String itemSplit[] = cartSplit[i].split("-");
 			try {
-				
 				ItemBean item = model.getStoreModel().retreiveItem(itemSplit[0]);
 				cartItems.put(itemSplit[0], Integer.valueOf(itemSplit[1]));
 				items.put(itemSplit, item);
@@ -96,10 +95,21 @@ public class Checkout extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(items);
-		System.out.println(request.getParameter("cart"));
+		// counts number of credit cards submitted, to reject every 3rd.
+		int creditCounter;
+		if (request.getServletContext().getAttribute("creditCounter") != null && (int) request.getServletContext().getAttribute("creditCounter") <= 3) {
+			creditCounter = (int) request.getServletContext().getAttribute("creditCounter");
+		} else {
+			creditCounter = 1;
+			request.getServletContext().setAttribute("creditCounter", creditCounter);
+		}
+		if (request.getParameter("out") != null && request.getParameter("out").equals("count")) {
+			creditCounter++;
+			request.getServletContext().setAttribute("creditCounter", creditCounter);
+		}
+
 		// checks if order was submitted
-		if (request.getParameter("submit") != null) {
+		if (request.getParameter("submit") != null && request.getParameter("submit").equals("true")) {
 			// add to db
 			try {
 				String clientIP = "";
@@ -108,31 +118,36 @@ public class Checkout extends HttpServlet {
 				if (request.getSession().getAttribute("clientIP") != null) {
 					clientIP = (String) request.getSession().getAttribute("clientIP");
 				}
-				
+
 				if (request.getSession().getAttribute("eventDate") != null) {
 					date = (String) request.getSession().getAttribute("eventDate");
 				}
-				
-				if(!date.equals("") && !clientIP.equals("")) {
+
+				if (!date.equals("") && !clientIP.equals("")) {
 					for (String key : cartItems.keySet()) {
 						model.getWebsiteUsageModel().insertRecord(clientIP, date, key, eventTypes.PURCHASE);
-						model.getItemPurchasedModel().insertRecord(key, date.substring(3, 5), cartItems.get(key), userID);
+						model.getItemPurchasedModel().insertRecord(key, date.substring(3, 5), cartItems.get(key),
+								userID);
+						int stuff = model.getStoreModel().retreiveItem(key).getQuantity() - cartItems.get(key);
+						int test = model.getStoreModel().updateQuantity(key, stuff);
 					}
 				}
-			} catch (SQLException | NamingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			System.out.println("Order Submitted!");
 			System.out.println(
 					"Billing " + request.getParameter("billingName") + " at " + request.getParameter("billingAddress"));
 			System.out.println("Shipping to " + request.getParameter("shippingName") + " at "
 					+ request.getParameter("shippingAddress"));
+			// clear cart
+			request.getSession().setAttribute("cartItems", "");
 		}
+
 		request.setAttribute("items", items);
 		String target = "/checkout.jsp";
 		request.getRequestDispatcher(target).forward(request, response);
-
 	}
 
 	/**

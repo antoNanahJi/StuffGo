@@ -64,7 +64,7 @@ public class Cart extends HttpServlet {
 					items.add(item);
 				}
 			}
-			request.setAttribute("items", items);
+			request.getSession().setAttribute("items", items);
 //			for(String key : items.keySet()) {
 //				counter++;
 //				request.setAttribute("itemName"+ counter, items.get(key).getBrand());
