@@ -71,19 +71,28 @@
 			<input name="cart" value="${param['cart']}" readonly
 				style="display: none">
 			<h5>Billing</h5>
-			<label for="billingName">Name: </label> <input name="billingName"
-				id="billingName" value="${username}"> <br /> <label
-				for="billingAddress">Address: </label> <input name="billingAddress"
-				id="billingAddress" value="${billingAddress}">
+			<div class="row login">
+			<label for="billingName">Name: </label>
+			<input name="billingName" id="billingName" value="${username}"> 
+				</div>
+				<div class="row login"> 
+				<label for="billingAddress">Address: </label> 
+				<input name="billingAddress" id="billingAddress" value="${billingAddress}">
+				</div>
 			<h5>Shipping</h5>
-			<label for="shippingName">Name: </label> <input name="shippingName"
-				id="shippingName" value="${username}"> <br /> <label
-				for="shippingAddress">Address: </label> <input
-				name="shippingAddress" id="shippingAddress"
-				value="${shippingAddress}">
+			<div class="row login">
+			<label for="shippingName">Name: </label> 
+			<input name="shippingName" id="shippingName" value="${username}"> 
+			</div> 
+				<div class="row login">
+				<label for="shippingAddress">Address: </label> 
+				<input name="shippingAddress" id="shippingAddress" value="${shippingAddress}">
+				</div>
 			<h4>Enter Payment Method</h4>
-			<label for="creditCard">Card #: </label> <input type = "number" name="creditCard"
-				id="creditCard"> <br />
+			<div class="row login">
+			<label for="creditCard">Card #: </label> 
+			<input type = "number" name="creditCard" id="creditCard"> 
+			</div>
 			<h4>Order Details</h4>
 			<c:forEach items="${items}" var="item">
 				<p>${item.value.getName()}${item.value.getBrand()} quantity
