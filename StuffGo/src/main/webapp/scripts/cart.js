@@ -2,8 +2,13 @@ var counter = 0;
 var total;
 var swapCounter = 0;
 
-function quantityUp(index, id, price, address) {
+function quantityUp(index, id, price, quantity, address) {
 	var num = document.getElementById("num" + index);
+
+	if(num.value >= quantity) {
+		return
+	}
+	
 	num.value++;
 	var cost = document.getElementById("cost" + index);
 	cost.innerHTML = "$" + price * num.value;

@@ -71,7 +71,7 @@
 						<c:set var="total" value="${total + item.getPrice() * quantity}"
 							scope="page" />
 						<button type="button" class="qup"
-							onClick="quantityUp(${counter}, ${item.getID()}, ${item.getPrice()}, 'http://localhost:8080/StuffGo/Cart?out=changeItem')">+</button>
+							onClick="quantityUp(${counter}, ${item.getID()}, ${item.getPrice()}, ${item.getQuantity()}, 'http://localhost:8080/StuffGo/Cart?out=changeItem')">+</button>
 						<h5 style="margin-top: 12px">
 							price : <span id="cost${counter}">$${item.getPrice() *
 								quantity}</span>
