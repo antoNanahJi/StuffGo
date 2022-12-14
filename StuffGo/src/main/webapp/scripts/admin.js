@@ -37,7 +37,7 @@ function handlerMonthlyItemSell(request){
 			var rs=JSON.parse(request.responseText);
 			console.log(rs);
 			if (rs.login == 'false') {
-				location.href = 'http://localhost:8080/StuffGo/login.jsp';
+				location.href = 'https://stuffgoapp.azurewebsites.net/login.jsp';
 				return;
 			}
 			
@@ -132,7 +132,7 @@ function handlerWebsiteUsage(request){
 			var rs=JSON.parse(request.responseText);
 			
 			if (rs.login == 'false') {
-				location.href = 'http://localhost:8080/StuffGo/login.jsp';
+				location.href = 'https://stuffgoapp.azurewebsites.net/login.jsp';
 				return;
 			}
 			

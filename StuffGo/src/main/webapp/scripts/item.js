@@ -17,7 +17,7 @@ const sqlValues = [
 
 window.onload = () => {
 	var request = new XMLHttpRequest();
-	request.open('GET', 'http://localhost:8080/StuffGo/home', true);
+	request.open('GET', 'https://stuffgoapp.azurewebsites.net/home', true);
 	request.onreadystatechange = function () {
 		handlerLoad(request);
 		console.log(request);
@@ -132,7 +132,7 @@ function addParagraphs(parent, rs) {
 				'style="background-image:linear-gradient(to bottom, rgba(128, 128, 128, 0),rgba(128, 128, 128, 0.2), rgb(128, 128, 128 ,1)), url(' +
 				datum.image +
 				');" ' +
-				'href="http://localhost:8080/StuffGo/ItemInfo?ID=' +
+				'href="https://stuffgoapp.azurewebsites.net/ItemInfo?ID=' +
 				datum.ID +
 				'">' +
 				'<h6>' +
