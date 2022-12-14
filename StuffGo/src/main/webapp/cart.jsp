@@ -61,7 +61,7 @@
 						<img src="${item.getImage()}" width="133" height="75">
 						<h6>${item.getName()}</h6>
 						<p>${item.getBrand()}</p>
-						<button type="button"
+						<button type="button" class="qdown"
 							onClick="quantityDown(${counter}, ${item.getID()}, ${item.getPrice()}, 'http://localhost:8080/StuffGo/Cart?out=changeItem')">-
 						</button>
 						<c:set var="split2"
