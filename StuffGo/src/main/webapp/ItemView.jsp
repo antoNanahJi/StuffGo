@@ -19,7 +19,7 @@
 	<body>
 		 <nav class="navbar navbar-expand-md justify-content-between navigation">
 		    <div class="container">
-			      <a class="navbar-brand" href="http://localhost:8080/StuffGo/index.jsp">StuffGo</a>
+			      <a class="navbar-brand" href="https://stuffgoapp.azurewebsites.net/index.jsp">StuffGo</a>
 			      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
 			        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			        <span class="navbar-toggler-icon"></span>
@@ -30,13 +30,13 @@
 					               	<a class="nav-link"  id="nohov">${username}</a>
 					        </li>
 					        <li class="nav-item active">
-					             	<a class="nav-link" href="http://localhost:8080/StuffGo/index.jsp">Catalog</span></a>
+					             	<a class="nav-link" href="https://stuffgoapp.azurewebsites.net/index.jsp">Catalog</span></a>
 					        </li>
 					     	<li class="nav-item">
-					               	<a class="nav-link" id="loginout" href="http://localhost:8080/StuffGo/login.jsp">Login</a>
+					               	<a class="nav-link" id="loginout" href="https://stuffgoapp.azurewebsites.net/login.jsp">Login</a>
 					        </li>
 					        <li class="nav-item">
-					              	<a class="nav-link" href="http://localhost:8080/StuffGo/Cart">Cart</a>
+					              	<a class="nav-link" href="https://stuffgoapp.azurewebsites.net/Cart">Cart</a>
 					        </li>
 				        </ul>
 			      </div>
@@ -57,7 +57,7 @@
 		                	<label style="display:flex; align-items:center; width:90px" for="Quantity">Quantity:</label>
 							<input style="width:50%" type="number" step="1" id="Quantity" name="Quantity" value="1" min="1" max="${quantity}"></input>
 		                	<button type="button" name="ajax" value="true" 
-		            				onclick="addItemToCart('http://localhost:8080/StuffGo/ItemInfo?out=addItem&ID=${itemID}')">Add To Cart</button>
+		            				onclick="addItemToCart('https://stuffgoapp.azurewebsites.net/ItemInfo?out=addItem&ID=${itemID}')">Add To Cart</button>
 					      
 		            	</div>
 		        	</div>
@@ -76,7 +76,7 @@
 							
 								<p  id="star_value" style=" margin: 0px;" >0 of 5</p>
 								<button type="button" id="star_submit" name="ajax" style="visibility: hidden;" value="true" 
-		            				onclick="submitRating('http://localhost:8080/StuffGo/ItemInfo?out=addRating&ID=${itemID}')">Submit</button>
+		            				onclick="submitRating('https://stuffgoapp.azurewebsites.net/ItemInfo?out=addRating&ID=${itemID}')">Submit</button>
 					      
 				        </div>
 			        </div>
@@ -85,7 +85,7 @@
 				        	<div id="input-group">
 								<textarea class="form-control" id="customer_review" aria-label="With textarea"></textarea>
 								<button type="button" name="ajax" value="true"
-		            				onclick="addReview('http://localhost:8080/StuffGo/ItemInfo?out=addReview&ID=${itemID}')">Write a customer review</button>
+		            				onclick="addReview('https://stuffgoapp.azurewebsites.net/ItemInfo?out=addReview&ID=${itemID}')">Write a customer review</button>
 							</div>        
 				        </div>
 					</div>

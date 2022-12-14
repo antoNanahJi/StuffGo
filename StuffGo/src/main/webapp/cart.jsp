@@ -26,7 +26,7 @@
 	<nav class="navbar navbar-expand-md justify-content-between navigation">
 		<div class="container">
 			<a class="navbar-brand"
-				href="http://localhost:8080/StuffGo/index.jsp">StuffGo</a>
+				href="https://stuffgoapp.azurewebsites.net/index.jsp">StuffGo</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarNav" aria-controls="navbarNav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -38,11 +38,11 @@
 					<li class="nav-item"><a class="nav-link" id="nohov">${username}</a>
 					</li>
 					<li class="nav-item active"><a class="nav-link"
-						href="http://localhost:8080/StuffGo/index.jsp">Catalog</span></a></li>
+						href="https://stuffgoapp.azurewebsites.net/index.jsp">Catalog</span></a></li>
 					<li class="nav-item"><a class="nav-link" id="loginout"
-						href="http://localhost:8080/StuffGo/login.jsp">Login</a></li>
+						href="https://stuffgoapp.azurewebsites.net/login.jsp">Login</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="http://localhost:8080/StuffGo/Cart">Cart</a></li>
+						href="https://stuffgoapp.azurewebsites.net/Cart">Cart</a></li>
 				</ul>
 			</div>
 		</div>
@@ -62,7 +62,7 @@
 						<h6>${item.getName()}</h6>
 						<p>${item.getBrand()}</p>
 						<button type="button" class="qdown"
-							onClick="quantityDown(${counter}, ${item.getID()}, ${item.getPrice()}, 'http://localhost:8080/StuffGo/Cart?out=changeItem')">-
+							onClick="quantityDown(${counter}, ${item.getID()}, ${item.getPrice()}, 'https://stuffgoapp.azurewebsites.net/Cart?out=changeItem')">-
 						</button>
 						<c:set var="split2"
 							value="${fn:split(cartItemsSplit[counter - 1], '=')}" />
@@ -71,7 +71,7 @@
 						<c:set var="total" value="${total + item.getPrice() * quantity}"
 							scope="page" />
 						<button type="button" class="qup"
-							onClick="quantityUp(${counter}, ${item.getID()}, ${item.getPrice()}, ${item.getQuantity()}, 'http://localhost:8080/StuffGo/Cart?out=changeItem')">+</button>
+							onClick="quantityUp(${counter}, ${item.getID()}, ${item.getPrice()}, ${item.getQuantity()}, 'https://stuffgoapp.azurewebsites.net/Cart?out=changeItem')">+</button>
 						<h5 style="margin-top: 12px">
 							price : <span id="cost${counter}">$${item.getPrice() *
 								quantity}</span>

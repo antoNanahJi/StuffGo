@@ -18,7 +18,7 @@
 	<body>
   <nav class="navbar navbar-expand-md justify-content-between navigation">
     <div class="container">
-      <a class="navbar-brand" href="http://localhost:8080/StuffGo/index.jsp">StuffGo</a>
+      <a class="navbar-brand" href="https://stuffgoapp.azurewebsites.net/index.jsp">StuffGo</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -29,13 +29,13 @@
                	<a class="nav-link"  id="nohov">${username}</a>
              </li>
          	<li class="nav-item active">
-             	<a class="nav-link" href="http://localhost:8080/StuffGo/index.jsp">Catalog</span></a>
+             	<a class="nav-link" href="https://stuffgoapp.azurewebsites.net/index.jsp">Catalog</span></a>
              </li>
      		<li class="nav-item">
-               	<a class="nav-link" id="loginout" href="http://localhost:8080/StuffGo/login.jsp">Login</a>
+               	<a class="nav-link" id="loginout" href="https://stuffgoapp.azurewebsites.net/login.jsp">Login</a>
              </li>
              <li class="nav-item">
-               	<a class="nav-link" href="http://localhost:8080/StuffGo/Cart">Cart</a>
+               	<a class="nav-link" href="https://stuffgoapp.azurewebsites.net/Cart">Cart</a>
              </li>
         </ul>
       </div>
@@ -55,7 +55,7 @@
       </div>
       <button type="submit" onclick="return login()">Login</button>
       <div class="row p-3">
-      <a style="text-align:center ;" class="justify-content-center" href="http://localhost:8080/StuffGo/register.jsp">Do not have an account?</a>
+      <a style="text-align:center ;" class="justify-content-center" href="https://stuffgoapp.azurewebsites.net/register.jsp">Do not have an account?</a>
     </div>
 			</div>
     </div>
