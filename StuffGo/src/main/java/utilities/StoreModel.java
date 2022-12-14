@@ -6,7 +6,13 @@ import bean.ItemBean;
 import javax.naming.NamingException;
 import dao.ItemDAO;
 
+/**
+ * This DAO class is responsible to retrieve data from Database and Form Queries
+ * @author Philip Michalowski
+ *
+ */
 public class StoreModel {
+	
 	private ItemDAO itemData;
 
 

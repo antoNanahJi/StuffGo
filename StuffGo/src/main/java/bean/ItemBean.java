@@ -1,6 +1,10 @@
 package bean;
 
-
+/**
+ * This class is used to create item Object
+ * @author Philip Michalowski
+ *
+ */
 public class ItemBean {
 	private String ID;
 	private String category;

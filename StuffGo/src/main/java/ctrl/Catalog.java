@@ -13,7 +13,9 @@ import bean.ItemBean;
 import model.MainModel;
 
 /**
- * Servlet implementation class SIS
+ * Servlet implementation class Catalog
+ * @author Philip Michalowski
+ *
  */
 @WebServlet("/home")
 public class Catalog extends HttpServlet {

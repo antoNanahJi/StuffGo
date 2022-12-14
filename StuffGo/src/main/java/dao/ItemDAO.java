@@ -7,9 +7,15 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import bean.ItemBean;
-//DAO for retrieving student database
+
+/**
+ * This DAO class is responsible to retrieve data from Database and Form Queries
+ * @author Philip Michalowski
+ *
+ */
 public class ItemDAO {
 
+	
 	private DataSource ds;
 	public ItemDAO() throws ClassNotFoundException{
 		try {
