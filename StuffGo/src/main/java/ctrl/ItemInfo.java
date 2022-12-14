@@ -145,7 +145,7 @@ public class ItemInfo extends HttpServlet {
 					
 				// Update the cartItems map
 				if (request.getSession().getAttribute("cartItems") == null) {
-				   	request.getSession().setAttribute("cartItems", "");
+				   	request.getSession().setAttribute("cartItems", itemID + "=" + quantity);
 				} else {
 					String cartItems = (String) request.getSession().getAttribute("cartItems");
 					Map<String, Integer> cartItemsMap = toMap(cartItems);
@@ -156,7 +156,6 @@ public class ItemInfo extends HttpServlet {
 					cartItemsMap.put(itemID, quantity);
 					cartItems = cartItemsMap.toString();
 					request.getSession().setAttribute("cartItems", cartItems.substring(1, cartItems.length() - 1).replaceAll("\\s", ""));
-						
 				}
 				
 				// Insert a new ADD_CART event
