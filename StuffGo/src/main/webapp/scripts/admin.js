@@ -35,7 +35,7 @@ function handlerMonthlyItemSell(request){
 		
 		if (request.responseText && request.responseText.charAt(0) == "{") {
 			var rs=JSON.parse(request.responseText);
-			
+			console.log(rs);
 			if (rs.login == 'false') {
 				location.href = 'http://localhost:8080/StuffGo/login.jsp';
 				return;

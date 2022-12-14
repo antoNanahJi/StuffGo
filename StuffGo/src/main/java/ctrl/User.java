@@ -87,6 +87,11 @@ public class User extends HttpServlet {
 						request.getSession().setAttribute("AdminPage", false);
 					}
 					
+					// Check if the user is admin
+					boolean isUserAdmin = model.getUserModel().isUserAdmin(username);
+					// Set "isAdmin" attribute of session to be true or false accordingly 
+					session.setAttribute("isAdmin", isUserAdmin);
+					
 					resOut.append("}");
 					resOut.flush();
 				 } else {

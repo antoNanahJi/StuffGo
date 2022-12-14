@@ -98,7 +98,7 @@ public class Analytics extends HttpServlet {
 						jsonData.append("}, ");
 					}
 					jsonData.replace(jsonData.length() - 2, jsonData.length(), "], ");
-					resOut.write("\"login\":\"" + false + "\"}");
+					jsonData.append("\"login\":\"" + true + "\"}");
 				}
 				if (jsonData.length() > 0) {
 					resOut.write(jsonData.toString());
@@ -137,7 +137,7 @@ public class Analytics extends HttpServlet {
 						jsonData.replace(jsonData.length() - 2, jsonData.length(), "]}, ");
 					}
 					jsonData.replace(jsonData.length() - 2, jsonData.length(), "], ");
-					resOut.write("\"login\":\"" + false + "\"}");
+					jsonData.append("\"login\":\"" + true + "\"}");
 				}
 				if (jsonData.length() > 0) {
 					resOut.write(jsonData.toString());
