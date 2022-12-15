@@ -2,9 +2,7 @@ package ctrl;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,9 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.ItemBean;
 import bean.ItemReviewBean;
-import bean.StudentBean;
 import model.MainModel;
-import model.SisModel;
 import utilities.eventTypes;
 
 /**

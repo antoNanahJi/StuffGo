@@ -116,7 +116,7 @@ public class ItemReviewDAO {
 	 * @throws NamingException
 	 * @throws SQLException
 	 */
-	public int deleteReview(String ID) throws SQLException, NamingException{
+	private int deleteReview(String ID) throws SQLException, NamingException{
 		String preparedStatement = "delete from ITEMREVIEWS where ID=?";
 		
 		Connection con = this.ds.getConnection();
@@ -133,7 +133,7 @@ public class ItemReviewDAO {
 	 * @throws NamingException
 	 * @throws SQLException
 	 */
-	public int insertReview(String ID, String USERID, String ITEMID, String REVIEW, int RATING, String REVIEWDATE) throws SQLException, NamingException{
+	private int insertReview(String ID, String USERID, String ITEMID, String REVIEW, int RATING, String REVIEWDATE) throws SQLException, NamingException{
 		String preparedStatement = "insert into ITEMREVIEWS values(?,?,?,?,?,?)";
 		
 		Connection con = this.ds.getConnection();

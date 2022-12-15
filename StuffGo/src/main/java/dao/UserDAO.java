@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 
 import bean.ItemBean;
 import bean.ItemReviewBean;
-import bean.StudentBean;
 import bean.UserBean;
 //DAO for retrieving users database
 public class UserDAO {

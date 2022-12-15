@@ -110,7 +110,7 @@ public class WebsiteUsageDAO {
 	 * @throws NamingException
 	 * @throws SQLException
 	 */
-	public int insertRecord(String ipAddress, String date, String itemID, eventTypes event) throws SQLException, NamingException{
+	private int insertRecord(String ipAddress, String date, String itemID, eventTypes event) throws SQLException, NamingException{
 		String preparedStatement = "insert into VISITEVENT values(?,?,?,?)";
 		
 		Connection con = this.ds.getConnection();

@@ -2,6 +2,7 @@ package utilities;
 
 /**
  * Website event types
+ * @author antoji
  */
 public enum eventTypes {
 	  VIEW,

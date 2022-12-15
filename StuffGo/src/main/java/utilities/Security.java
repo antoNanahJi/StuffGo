@@ -1,9 +1,8 @@
 package utilities;
 
-import java.io.IOException;
-
 /**
  * This class used to validate inputs from SQL injections and XSS
+ * @author antoji
  */
 public class Security {
 	// private variables

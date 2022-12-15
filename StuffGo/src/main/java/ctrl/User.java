@@ -1,14 +1,8 @@
 package ctrl;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.List;
-import java.util.Map;
 
-import dao.StudentDAO;
-import model.SisModel;
-import utilities.View;
 import model.MainModel;
 
 
