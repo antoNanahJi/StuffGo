@@ -40,10 +40,17 @@ function validate(address) {
 function loadLogin() {
 	document.getElementById("checkout-login").style.display = "block";
 	document.getElementById("checkout").style.display = "none";
+	document.getElementById("confirmedMsg").style.display = "none";
+	
 }
 function loadCheckout() {
 	document.getElementById("checkout-login").style.display = "none";
 	document.getElementById("checkout").style.display = "block";
+	document.getElementById("confirmedMsg").style.display = "none";
+	logout();
+}
+
+function logout(){
 	console.log('running on load');
 	// In the navbar we have a login button, this button should be logout if the user is logged in
 	const loginText = document.getElementById('loginout');
@@ -78,4 +85,9 @@ function addToast(msg) {
 	toast.show();
 }
 
-
+function loadSubmitted() {
+		document.getElementById("confirmedMsg").style.display = "block";
+		document.getElementById("checkout").style.display = "none";
+		document.getElementById("checkout-login").style.display = "none";
+		logout();
+}

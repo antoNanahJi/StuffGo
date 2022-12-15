@@ -31,7 +31,10 @@
 	title="cse4413" media="screen, print" />
 </head>
 <c:set var="function" value="loadLogin()" />
-<c:if test="${username != null}">
+<c:if test="${Submitted != null && Submitted == true}">
+	<c:set var="function" value="loadSubmitted()" />
+</c:if>
+<c:if test="${username != null && Submitted == false }">
 	<c:set var="function" value="loadCheckout()" />
 </c:if>
 <body onload="${function}">
@@ -63,6 +66,13 @@
 	<div id="checkout-login">
 		<h4>Please Login or Register to Complete Purchase</h4>
 		<a href="login.jsp">Login</a>/<a href="register.jsp">register</a>
+	</div>
+	<div id="confirmedMsg" style="display: none;">
+	        <div class="col-lg-12 productContainer">
+	           	<div class="row productDetails">
+	               	<p>Order Successfully Completed.</p>
+	           	</div>
+	    </div>
 	</div>
 	<div id="checkout" style="display: none; max-width:600px;margin-bottom:74px" class="container filter">
 		<span id="ccCounter" style="display: none">${applicationScope['creditCounter']}</span>

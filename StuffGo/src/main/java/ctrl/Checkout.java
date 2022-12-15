@@ -1,6 +1,7 @@
 package ctrl;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -107,9 +108,10 @@ public class Checkout extends HttpServlet {
 			creditCounter++;
 			request.getServletContext().setAttribute("creditCounter", creditCounter);
 		}
-
+		request.setAttribute("Submitted", false);
 		// checks if order was submitted
 		if (request.getParameter("submit") != null && request.getParameter("submit").equals("true")) {
+			Writer resOut = response.getWriter();
 			// add to db
 			try {
 				String clientIP = "";
@@ -132,17 +134,16 @@ public class Checkout extends HttpServlet {
 						int test = model.getStoreModel().updateQuantity(key, stuff);
 					}
 				}
+				
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			System.out.println("Order Submitted!");
-			System.out.println(
-					"Billing " + request.getParameter("billingName") + " at " + request.getParameter("billingAddress"));
-			System.out.println("Shipping to " + request.getParameter("shippingName") + " at "
-					+ request.getParameter("shippingAddress"));
 			// clear cart
 			request.getSession().setAttribute("cartItems", "");
+			request.setAttribute("Submitted", true);
 		}
 
 		request.setAttribute("items", items);
