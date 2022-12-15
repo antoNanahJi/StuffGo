@@ -63,14 +63,14 @@
 		<h4>Please Login or Register to Complete Purchase</h4>
 		<a href="login.jsp">Login</a>/<a href="register.jsp">register</a>
 	</div>
-	<div id="checkout" style="display: none">
+	<div id="checkout" style="display: none; max-width:600px ;" class="container filter">
 		<span id="ccCounter" style="display: none">${applicationScope['creditCounter']}</span>
 		<Form method="get"
 			onSubmit="return validate('https://stuffgoapp.azurewebsites.net/Checkout?out=count')">
 			<h4>Confirm Billing and Shipping Info</h4>
 			<input name="cart" value="${param['cart']}" readonly
 				style="display: none">
-			<h5>Billing</h5>
+			<h5 style="padding-top: 24px;">Billing</h5>
 			<div class="row login">
 			<label for="billingName">Name: </label>
 			<input name="billingName" id="billingName" value="${username}"> 
@@ -79,7 +79,7 @@
 				<label for="billingAddress">Address: </label> 
 				<input name="billingAddress" id="billingAddress" value="${billingAddress}">
 				</div>
-			<h5>Shipping</h5>
+			<h5 style="padding-top: 24px;">Shipping</h5>
 			<div class="row login">
 			<label for="shippingName">Name: </label> 
 			<input name="shippingName" id="shippingName" value="${username}"> 
@@ -88,12 +88,12 @@
 				<label for="shippingAddress">Address: </label> 
 				<input name="shippingAddress" id="shippingAddress" value="${shippingAddress}">
 				</div>
-			<h4>Enter Payment Method</h4>
+			<h4 style="padding-top: 24px;">Enter Payment Method</h4>
 			<div class="row login">
 			<label for="creditCard">Card #: </label> 
 			<input type = "number" name="creditCard" id="creditCard"> 
 			</div>
-			<h4>Order Details</h4>
+			<h4 style="padding-top: 24px;">Order Details</h4>
 			<c:forEach items="${items}" var="item">
 				<p>${item.value.getName()}${item.value.getBrand()} quantity
 					${item.key[1]} ${item.value.getQuantity()}</p>

@@ -54,7 +54,7 @@
           </form>
 
           <button type="button" name="ajax" value="true"
-            onclick="doSimpleAjax('/StuffGo/home?');">Filter Results</button>
+            onclick="doSimpleAjax('/home?');">Filter Results</button>
             <button type="button" name="reset" value=""
             onclick="resetRadio();">Reset Filters</button>
         </div>
