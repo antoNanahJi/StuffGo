@@ -18,7 +18,7 @@
 	<body>
   		<nav class="navbar navbar-expand-md justify-content-between navigation">
     		<div class="container">
-			      <a class="navbar-brand" href="https://stuffgoapp.azurewebsites.net/index.jsp">StuffGo</a>
+			      <a class="navbar-brand" href="./index.jsp">StuffGo</a>
 			      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
 			        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			        <span class="navbar-toggler-icon"></span>
@@ -29,13 +29,13 @@
 			               	<a class="nav-link"  id="nohov">${username}</a>
 			             </li>
 			         	<li class="nav-item active">
-			             	<a class="nav-link" href="https://stuffgoapp.azurewebsites.net/index.jsp">Catalog</span></a>
+			             	<a class="nav-link" href="./index.jsp">Catalog</span></a>
 			             </li>
 			     		<li class="nav-item">
-			               	<a class="nav-link" id="loginout" href="https://stuffgoapp.azurewebsites.net/login.jsp">Login</a>
+			               	<a class="nav-link" id="loginout" href="./login.jsp">Login</a>
 			             </li>
 			             <li class="nav-item">
-			               	<a class="nav-link" href="https://stuffgoapp.azurewebsites.net/Cart">Cart</a>
+			               	<a class="nav-link" href="./Cart">Cart</a>
 			             </li>
 			        </ul>
 			      </div>
@@ -47,9 +47,9 @@
 		            <div class="col-lg-5 productContainer">
 		            	<div class="row productDetails">
 		                	<button type="button" name="ajax" value="true" 
-		            				onclick="reportWebsiteUsage('https://stuffgoapp.azurewebsites.net/Analytics?out=WebsiteUsage')">Get Website Usage Report</button>
+		            				onclick="reportWebsiteUsage('./Analytics?out=WebsiteUsage')">Get Website Usage Report</button>
 					      	<button type="button" name="ajax" value="true" 
-		            				onclick="reportMonthlyItemSell('https://stuffgoapp.azurewebsites.net/Analytics?out=MonthlyItemReport')">Get Monthly Item Report</button>
+		            				onclick="reportMonthlyItemSell('./Analytics?out=MonthlyItemReport')">Get Monthly Item Report</button>
 					      	
 		            	</div>
 		        	</div>

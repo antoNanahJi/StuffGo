@@ -40,7 +40,7 @@ const register = () => {
 
 	// Send the necessarry info for registering a user to the server
 	fetch(
-		`/User?type=register&username=${usernameValue}&passwordHash=${passwordToSend}&billing=${defaultBillingValue}&shipping=${defaultShippingValue}&name=${nameValue}`
+		`./User?type=register&username=${usernameValue}&passwordHash=${passwordToSend}&billing=${defaultBillingValue}&shipping=${defaultShippingValue}&name=${nameValue}`
 	)
 		.then((response) => {
 			console.log('fetched...');
@@ -50,7 +50,7 @@ const register = () => {
 			console.log('received JSON: ', responseJSON);
 			if (responseJSON.username) {
 				// Redirect user to index page if registeration is successful
-				window.location.href = '/index.jsp';
+				window.location.href = './index.jsp';
 			} else {
 				// Alert the user that registeration failed on the server side
 				addToast('Invalid values, maybe username is taken');

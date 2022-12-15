@@ -16,7 +16,7 @@ const login = () => {
 	}
 
 	// Send the username and password to the server
-	fetch(`/User?type=login&username=${usernameValue}&passwordHash=${passwordToSend}`)
+	fetch(`./User?type=login&username=${usernameValue}&passwordHash=${passwordToSend}`)
 		.then((response) => {
 			console.log('fetched...');
 			return response.json();
@@ -24,11 +24,11 @@ const login = () => {
 		.then((responseJSON) => {
 			console.log('received JSON: ', responseJSON);
 			if (responseJSON.username) {
-				var target = '/index.jsp';
+				var target = './index.jsp';
 				
 				// Redirect user to admin page if login was from Analytics page
 				if (responseJSON.AdminPage != null && responseJSON.AdminPage == 'true') {
-					target = '/Analytics';
+					target = './Analytics';
 				}
 
 				// Redirect user to index page if login is successful

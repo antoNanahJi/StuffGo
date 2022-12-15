@@ -3,7 +3,7 @@
  */
 window.onload = () => {
 	var request = new XMLHttpRequest();
-	request.open('GET', 'https://stuffgoapp.azurewebsites.net/ItemInfo?out=getReviewsStars', true);
+	request.open('GET', './ItemInfo?out=getReviewsStars', true);
 	request.onreadystatechange = function () {
 		reviewHandler(request, false);
 		ratingHandler(request, false);
@@ -115,7 +115,7 @@ function reviewHandler(request, oneReview) {
 		if (request.responseText != null && request.responseText != '') {
 			var rs = JSON.parse(request.responseText);
 			if (rs.login == 'false') {
-				location.href = 'https://stuffgoapp.azurewebsites.net/login.jsp';
+				location.href = './login.jsp';
 				return;
 			}
 
@@ -201,7 +201,7 @@ function ratingHandler(request, oneReview) {
 			var rs = JSON.parse(request.responseText);
 			if (oneReview) {
 				if (rs.login == 'false') {
-					location.href = 'https://stuffgoapp.azurewebsites.net/login.jsp';
+					location.href = './login.jsp';
 					return;
 				}
 				

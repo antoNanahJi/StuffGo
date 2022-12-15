@@ -38,7 +38,7 @@
 	<nav class="navbar navbar-expand-md justify-content-between navigation">
 		<div class="container">
 			<a class="navbar-brand"
-				href="https://stuffgoapp.azurewebsites.net/index.jsp">StuffGo</a>
+				href="./index.jsp">StuffGo</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarNav" aria-controls="navbarNav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -50,11 +50,11 @@
 					<li class="nav-item"><a class="nav-link" id="nohov">${username}</a>
 					</li>
 					<li class="nav-item active"><a class="nav-link"
-						href="https://stuffgoapp.azurewebsites.net/index.jsp">Catalog</span></a></li>
+						href="./index.jsp">Catalog</span></a></li>
 					<li class="nav-item"><a class="nav-link" id="loginout"
-						href="https://stuffgoapp.azurewebsites.net/login.jsp">Login</a></li>
+						href="./login.jsp">Login</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="https://stuffgoapp.azurewebsites.net/Cart">Cart</a></li>
+						href="./Cart">Cart</a></li>
 				</ul>
 			</div>
 		</div>
@@ -66,7 +66,7 @@
 	<div id="checkout" style="display: none; max-width:600px ;" class="container filter">
 		<span id="ccCounter" style="display: none">${applicationScope['creditCounter']}</span>
 		<Form method="get"
-			onSubmit="return validate('https://stuffgoapp.azurewebsites.net/Checkout?out=count')">
+			onSubmit="return validate('./Checkout?out=count')">
 			<h4>Confirm Billing and Shipping Info</h4>
 			<input name="cart" value="${param['cart']}" readonly
 				style="display: none">

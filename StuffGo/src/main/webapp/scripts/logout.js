@@ -1,6 +1,6 @@
 const logout = () => {
 	// Send request to server to logout
-	fetch('/User?type=logout')
+	fetch('./User?type=logout')
 		.then((response) => {
 			// console.log('fetched...');
 			return response.json();
@@ -9,7 +9,7 @@ const logout = () => {
 			// console.log('received JSON: ', responseJSON);
 			if (responseJSON.username === null) {
 				// Redirect user
-				window.location.href = '/index.jsp';
+				window.location.href = './index.jsp';
 			} else {
 				addToast('Could not logout');
 			}
