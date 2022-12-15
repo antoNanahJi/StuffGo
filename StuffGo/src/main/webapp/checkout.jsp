@@ -35,30 +35,31 @@
 	<c:set var="function" value="loadCheckout()" />
 </c:if>
 <body onload="${function}">
-	<nav class="navbar navbar-expand-md justify-content-between navigation">
-		<div class="container">
-			<a class="navbar-brand"
-				href="./index.jsp">StuffGo</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarNav" aria-controls="navbarNav"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse justify-content-end"
-				id="navbarNav">
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" id="nohov">${username}</a>
-					</li>
-					<li class="nav-item active"><a class="nav-link"
-						href="./index.jsp">Catalog</span></a></li>
-					<li class="nav-item"><a class="nav-link" id="loginout"
-						href="./login.jsp">Login</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="./Cart">Cart</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+  <nav class="navbar navbar-expand-md justify-content-between navigation">
+    <div class="container">
+      <a class="navbar-brand" href="./index.jsp">StuffGo</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+        <li class="nav-item">
+               	<a class="nav-link"  id="nohov">${username}</a>
+             </li>
+         	<li class="nav-item active">
+             	<a class="nav-link" href="./index.jsp">Catalog</span></a>
+             </li>
+     		<li class="nav-item">
+               	<a class="nav-link" id="loginout" href="./login.jsp">Login</a>
+             </li>
+             <li class="nav-item">
+               	<a class="nav-link" href="./Cart">Cart</a>
+             </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 	<div id="checkout-login">
 		<h4>Please Login or Register to Complete Purchase</h4>
 		<a href="login.jsp">Login</a>/<a href="register.jsp">register</a>
