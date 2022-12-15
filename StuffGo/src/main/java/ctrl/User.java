@@ -115,8 +115,9 @@ public class User extends HttpServlet {
 					resOut.flush();
 				}
 			} else if (type.equals("logout")) {
-				// Execute logout by setting username attribute of session to be null
+				// Execute logout by setting username and cartItems attributes of session to be null
 				session.setAttribute("username", null);
+				session.setAttribute("cartItems", null);
 				// Return JSON with username value being null
 				resOut.append("{\"username\": null}");
 				resOut.flush();

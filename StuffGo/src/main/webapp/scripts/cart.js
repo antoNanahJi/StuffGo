@@ -47,6 +47,27 @@ function changeItemQuantity(address, id, quantity){
 	data = '&changedItemID=' + id + "&changedItemQuantity=" + quantity;
 	console.log(address + data);
 	request.open('GET', address + data);
+	request.onreadystatechange = function () {
+		handler(request);
+	};
 	request.send(null);
 	document.getElementById("total").value = total;
+}
+
+function handler(request) {
+	if (request.readyState == 4 && request.status == 200) {
+		var CheckoutBtn = document.getElementById('Checkout');
+		console.log(request.responseText);
+
+		if (request.responseText != null && request.responseText != '') {
+			var rs = JSON.parse(request.responseText);
+			
+			if (rs.isCartEmpty == 'true') {
+				CheckoutBtn.style.display = 'none'; 
+				document.getElementById('Empty').style.display = 'block';
+			} else {
+				CheckoutBtn.style.display = 'block';
+			}
+		}
+	}
 }

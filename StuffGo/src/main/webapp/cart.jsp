@@ -82,11 +82,17 @@
 				</c:forEach>
 				<input name="cart" value="${cart}" readonly style="display: none">
 			</div>
-			<div class="login">
-				<Label for="total">Total: $</Label> <input type="number"
-					name="total" id="total" value="${total}" readonly><br />
-				<button name="checkout" value="true" type="submit">Checkout</button>
-			</div>
+			<c:if test = "${items.size() > 0}">
+         		<div class="login" id="Checkout">
+					<Label for="total">Total: $</Label> <input type="number"
+						name="total" id="total" value="${total}" readonly><br />
+					<button name="checkout" value="true" type="submit">Checkout</button>
+				</div>
+			</c:if>
+			<c:if test = "${items.size() == 0}">
+         		<p>Cart is empty. Add items!!</p>
+			</c:if>
+			<p id="Empty" style="display: none">Add items!!</p>
 		</form>
 	</div>
 	<script type="text/javascript" src="scripts/load.js">;</script>

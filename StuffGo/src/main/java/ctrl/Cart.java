@@ -1,6 +1,7 @@
 package ctrl;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -64,6 +65,7 @@ public class Cart extends HttpServlet {
 					items.add(item);
 				}
 			}
+			
 			request.getSession().setAttribute("items", items);
 //			for(String key : items.keySet()) {
 //				counter++;
@@ -82,6 +84,7 @@ public class Cart extends HttpServlet {
 		}
 		if (request.getParameter("out") != null && request.getParameter("out").equals("changeItem")) {
 			String newItemString = "";
+			Writer resOut = response.getWriter();
 			for (String i : itemStrings) {
 				String[] iSplit = i.split("=");
 				iSplit[1] = iSplit[1] + ",";
@@ -97,7 +100,17 @@ public class Cart extends HttpServlet {
 				}
 				newItemString += i;
 			}
+			
+			if (newItemString.equals("")) {
+				
+				resOut.write("{\"isCartEmpty\":\"" + true + "\"}");
+				resOut.flush();
+			} else {
+				resOut.write("{\"isCartEmpty\":\"" + false + "\"}");
+				resOut.flush();
+			}
 			request.getSession().setAttribute("cartItems", newItemString);
+			return;
 		}
 		String target = "/cart.jsp";
 //		if (request.getParameter("checkout") != null) {
