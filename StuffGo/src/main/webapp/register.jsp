@@ -41,7 +41,7 @@
       </div>
     </div>
   </nav>
-		<form action="" method="post" onsubmit="return false">
+		<form action="" method="post" onsubmit="return false" style="margin-bottom:74px">
 			<div style="max-width:600px ;" class="container filter">
 				 <div class="row login">
 				<label for="usernameInput"><b>Username</b></label>
@@ -81,6 +81,11 @@
 				<button type="submit" onclick="return register()">Register</button>
 			</div>
 		</form>
+		  <footer class="fixed-bottom" style="background-color:grey;margin-top:24px">
+  <div class="container">
+  <p style="color:white; font-weight:600;padding-top:24px;padding-bottom:24px;margin-bottom:0 !important;">2022 EECS 4413 - Group AC StuffGo Project</p>
+  </div>
+  </footer>
 		<script type="text/javascript" src="scripts/load.js">;</script>
 		<div class="toast-container position-fixed bottom-0 end-0 p-3">
 			    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">

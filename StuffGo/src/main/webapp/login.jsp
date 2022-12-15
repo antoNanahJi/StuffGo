@@ -41,7 +41,7 @@
       </div>
     </div>
   </nav>
-  <section>
+  <section style="padding-bottom:74px;">
 		<form action="" method="post" onsubmit="return false">
 			<div style="max-width:600px ;" class="container filter">
         <div class="col">
@@ -63,6 +63,11 @@
 	
   </div>
 		</section>
+		  <footer class="fixed-bottom" style="background-color:grey;margin-top:24px">
+  <div class="container">
+  <p style="color:white; font-weight:600;padding-top:24px;padding-bottom:24px;margin-bottom:0 !important;">2022 EECS 4413 - Group AC StuffGo Project</p>
+  </div>
+  </footer>
 		<div class="toast-container position-fixed bottom-0 end-0 p-3">
 			    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
 			      <div class="toast-header">

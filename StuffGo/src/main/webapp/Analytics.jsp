@@ -41,7 +41,7 @@
 			      </div>
     		</div>
   		</nav>
-		<section>
+		<section style="padding-bottom:74px;">
 		 	<div class="container">
 		    	<div class="row" id="button-container" style="display: ${AdminDisplay}">
 		            <div class="col-lg-5 productContainer">
@@ -63,6 +63,11 @@
 		        </div>
 			</div>
 		</section>
+		  <footer class="fixed-bottom" style="background-color:grey;margin-top:24px">
+  <div class="container">
+  <p style="color:white; font-weight:600;padding-top:24px;padding-bottom:24px;margin-bottom:0 !important;">2022 EECS 4413 - Group AC StuffGo Project</p>
+  </div>
+  </footer>
 		<script type="text/javascript" src="scripts/admin.js"></script>
 	</body>
 </html>

@@ -42,7 +42,7 @@
 			      </div>
 		    </div>
 		 </nav>
-		 <section>
+		 <section style="padding-bottom:74px;">
 		 	<div class="container">
 		    	<div class="row">
 		        	<div class="col-lg-7 productImage" style="background-image: url(${image});"></div>
@@ -106,6 +106,11 @@
 			    </div>
 		 	</div>
 		</section>
+		  <footer class="fixed-bottom" style="background-color:grey;margin-top:24px">
+  <div class="container">
+  <p style="color:white; font-weight:600;padding-top:24px;padding-bottom:24px;margin-bottom:0 !important;">2022 EECS 4413 - Group AC StuffGo Project</p>
+  </div>
+  </footer>
 		<script type="text/javascript" src="scripts/ItemInfo.js">;</script>
 	</body>
 </html>

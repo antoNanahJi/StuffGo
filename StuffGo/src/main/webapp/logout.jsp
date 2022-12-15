@@ -39,5 +39,10 @@
 			      <div class="toast-body" id="toast-message"></div>
 			    </div>
 		 	</div>
+		 	  <footer class="fixed-bottom" style="background-color:grey;margin-top:24px">
+  <div class="container">
+  <p style="color:white; font-weight:600;padding-top:24px;padding-bottom:24px;margin-bottom:0 !important;">2022 EECS 4413 - Group AC StuffGo Project</p>
+  </div>
+  </footer>
 	</body>
 </html>

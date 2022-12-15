@@ -63,7 +63,7 @@
 		<h4>Please Login or Register to Complete Purchase</h4>
 		<a href="login.jsp">Login</a>/<a href="register.jsp">register</a>
 	</div>
-	<div id="checkout" style="display: none; max-width:600px ;" class="container filter">
+	<div id="checkout" style="display: none; max-width:600px;margin-bottom:74px" class="container filter">
 		<span id="ccCounter" style="display: none">${applicationScope['creditCounter']}</span>
 		<Form method="get"
 			onSubmit="return validate('./Checkout?out=count')">
@@ -103,6 +103,11 @@
 
 		</Form>
 	</div>
+	  <footer class="fixed-bottom" style="background-color:grey;margin-top:24px">
+  <div class="container">
+  <p style="color:white; font-weight:600;padding-top:24px;padding-bottom:24px;margin-bottom:0 !important;">2022 EECS 4413 - Group AC StuffGo Project</p>
+  </div>
+  </footer>
 	<div class="toast-container position-fixed bottom-0 end-0 p-3">
 			    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
 			      <div class="toast-header">
