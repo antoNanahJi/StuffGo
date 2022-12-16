@@ -1,6 +1,6 @@
 curl -X GET "https://stuffgoapp.azurewebsites.net/ItemInfo?ID=001"
 
-curl -X GET "https://stuffgoapp.azurewebsites.net/ItemInfo?ID=select20%*20%from20%USERS"
+curl -X GET "https://stuffgoapp.azurewebsites.net/ItemInfo?ID=select"
 
 curl -X POST "https://stuffgoapp.azurewebsites.net/ItemInfo?ID=&out=getReviewsStars"
 
@@ -14,7 +14,7 @@ curl -X POST "https://stuffgoapp.azurewebsites.net/ItemInfo?out=addItem&ID=001&Q
 
 curl -X POST "https://stuffgoapp.azurewebsites.net/ItemInfo?out=addItem&ID=&Quantity=10"
 
-curl -X POST "https://stuffgoapp.azurewebsites.net/ItemInfo?out=addItem&ID=&Quantity=-10"
+curl -X POST "https://stuffgoapp.azurewebsites.net/ItemInfo?out=addItem&ID=001&Quantity=-10"
 
 // We need to login to add rating
 curl -X POST "https://stuffgoapp.azurewebsites.net/ItemInfo?out=addRating&ID=001&RATING=3"
