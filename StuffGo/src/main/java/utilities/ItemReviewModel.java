@@ -99,4 +99,25 @@ public class ItemReviewModel {
 		return this.id.addReview(ID, USERID, ITEMID, REVIEW, rating, REVIEWDATE, isRating);
 	}
 	
+	/**
+	 * @return The integer value of the given quantity if the quantity is a valid number
+	 * @throws NamingException
+	 */
+	public int verifyQuantity(String q, int maxValue) throws NamingException {
+		if (q == null || q.equals("")) {
+			throw new NamingException("Quantity can not be empty\n");
+		}
+		
+		int quantity = Integer.valueOf(q);
+		if (quantity <= 0) {
+			throw new NamingException("Quantity sould be number > 0\n");
+		}
+		
+		if (quantity > maxValue) {
+			throw new NamingException("Out of stock!\n");
+		}
+		
+		return quantity;
+	}
+	
 }

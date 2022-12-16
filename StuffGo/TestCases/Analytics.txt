@@ -1,0 +1,6 @@
+// We add adminCurl=true to get the Analytics page otherwise it will forward to login page
+curl -X GET "https://stuffgoapp.azurewebsites.net/Analytics?adminCurl=true"
+
+curl -X GET "https://stuffgoapp.azurewebsites.net/Analytics?adminCurl=true&out=WebsiteUsage"
+
+curl -X GET "https://stuffgoapp.azurewebsites.net/Analytics?adminCurl=true&out=MonthlyItemReport"

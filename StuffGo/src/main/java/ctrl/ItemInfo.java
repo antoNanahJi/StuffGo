@@ -55,6 +55,12 @@ public class ItemInfo extends HttpServlet {
 		ServletContext context = this.getServletContext();
 		Writer resOut = response.getWriter();
 		
+		// Get the item ID
+		if(request.getParameter("ID") != null) {
+			this.itemID = request.getParameter("ID");
+			
+		}
+		
 		// Set the clientIP value
 		if (request.getSession().getAttribute("clientIP") == null) {
 			request.getSession().setAttribute("clientIP", request.getRemoteAddr());
@@ -127,7 +133,7 @@ public class ItemInfo extends HttpServlet {
 			// Add the item into cart
 			if(request.getParameter("out") != null && request.getParameter("out").equals("addItem")) {
 				String itemID = "";
-				int quantity = 0;
+				String q = "";
 				
 				// Get the unique ID
 				if(request.getParameter("ID") != null) {
@@ -136,9 +142,12 @@ public class ItemInfo extends HttpServlet {
 				
 				// Get the Quantity
 				if(request.getParameter("Quantity") != null) {
-					quantity = Integer.valueOf(request.getParameter("Quantity"));
+					q = request.getParameter("Quantity");
 				}
-					
+				
+				ItemBean itemInfo = model.getStoreModel().retreiveItem(itemID);
+				int quantity = model.getItemReviewModel().verifyQuantity(q, itemInfo.getQuantity());
+				
 				// Update the cartItems map
 				if (request.getSession().getAttribute("cartItems") == null) {
 				   	request.getSession().setAttribute("cartItems", itemID + "=" + quantity);
@@ -241,15 +250,8 @@ public class ItemInfo extends HttpServlet {
 			
 			// Get this item info from database and send it to front end
 			if (request.getParameter("out") == null) {
-			
-				// Get the item ID
-				if(request.getParameter("ID") != null) {
-					this.itemID = request.getParameter("ID");
-					
-				}
-				
 				ItemBean itemInfo = model.getStoreModel().retreiveItem(this.itemID);
-				
+		
 				request.setAttribute("image", itemInfo.getImage());
 				request.setAttribute("name", itemInfo.getName());
 				request.setAttribute("description", itemInfo.getDescription());
@@ -257,7 +259,7 @@ public class ItemInfo extends HttpServlet {
 				request.setAttribute("quantity", itemInfo.getQuantity());
 				request.setAttribute("itemID", itemInfo.getID());
 			
-				model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.VIEW);
+				model.getWebsiteUsageModel().insertRecord(clientIP, date, this.itemID, eventTypes.VIEW);
 				
 				//Redirect to ItemView.jsp
 				String target = "/ItemView.jsp";

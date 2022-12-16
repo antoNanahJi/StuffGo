@@ -54,7 +54,8 @@ function handlerMonthlyItemSell(request){
  */
 function addMonthlyItemTable(target, jsonData) {
  	var months = ["","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-		
+	var header = ["Item ID","",  "Quantity", "", "Sold", "", "By", "", "Month", "", "", "", ""];
+	
 	if (target != null && jsonData != null) {
 			var myTable = document.createElement("TABLE");
 			myTable.setAttribute("id", "myTable");
@@ -62,13 +63,11 @@ function addMonthlyItemTable(target, jsonData) {
 			
 			
 			var r = document.createElement("TR");
-			var h1 = document.createElement("TH");
-			h1.innerHTML = "Item ID";
-			r.appendChild(h1);	
-			
-			var h2 = document.createElement("TH");
-			h2.innerHTML = "Quantity";
-			r.appendChild(h2);	
+			for(var i=0; i<header.length; i++) {		  
+				var h = document.createElement("TH");
+				h.innerHTML = header[i];			  
+				r.appendChild(h);		
+			}
 				
 			var r1 = document.createElement("TR");
 			for(var i=0; i<months.length; i++) {		  

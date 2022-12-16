@@ -61,6 +61,9 @@ public class StoreModel {
 
 	public ItemBean retreiveItem(String ID) throws Exception {
 		if (ID != null) {
+			if (ID.equals("")) {
+				throw new Exception("Item ID can not be null");
+			}
 			if (Security.containsSQL(ID)) {
 				throw new Exception("SQL Injection Attempt");
 			} 

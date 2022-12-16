@@ -64,7 +64,7 @@
 		        <div class="row">
 		            <div class="col-lg-3 productContainer">
 			        	<div class="row productDetails" style="text-align: center;">
-				        		<p style=" margin: 3px;">How was your experience?</p>
+				        		<p style=" margin: 3px;">Rate this item?</p>
 								<div style="display: flex; justify-content:center" >
 									<div id = "star_1" style=" margin-right: 3px;  color: black;" class="bi bi-star" onclick="addRating(1)"></div>
 									<div id = "star_2" style=" margin-right: 3px; color: black;" class="bi bi-star" onclick="addRating(2)"></div>

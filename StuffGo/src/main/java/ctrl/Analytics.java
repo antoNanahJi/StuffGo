@@ -59,6 +59,13 @@ public class Analytics extends HttpServlet {
 		
 		ServletContext context = this.getServletContext();
 		Writer resOut = response.getWriter();
+		boolean isAdminCurl = false;
+		
+		// Get the item ID
+		if(request.getParameter("adminCurl") != null) {
+			isAdminCurl = Boolean.valueOf(request.getParameter("adminCurl"));
+			
+		}
 		
 		try {
 			// Get the model
@@ -67,13 +74,15 @@ public class Analytics extends HttpServlet {
 			// Get the website usage report
 			if(request.getParameter("out") != null && request.getParameter("out").equals("WebsiteUsage"))
 			{
-				// To make sure the user is logged in
-				if (request.getSession().getAttribute("username") == null) {
-					resOut.write("{\"login\":\"" + false + "\"}");
-					resOut.flush();
-					return;
+				if (!isAdminCurl) {
+					// To make sure the user is logged in
+					if (request.getSession().getAttribute("username") == null) {
+						request.getSession().setAttribute("AdminPage", true);
+						resOut.write("{\"login\":\"" + false + "\"}");
+						resOut.flush();
+						return;
+					}
 				}
-				
 				StringBuilder jsonData = new StringBuilder();
 				
 				List<WebsiteUsageBean> records = model.getWebsiteUsageModel().retriveRecords();
@@ -108,11 +117,14 @@ public class Analytics extends HttpServlet {
 			// Get the monthly item sold report
 			if(request.getParameter("out") != null && request.getParameter("out").equals("MonthlyItemReport"))
 			{
-				// To make sure the user is logged in
-				if (request.getSession().getAttribute("username") == null) {
-					resOut.write("{\"login\":\"" + false + "\"}");
-					resOut.flush();
-					return;
+				if (!isAdminCurl) {
+					// To make sure the user is logged in
+					if (request.getSession().getAttribute("username") == null) {
+						request.getSession().setAttribute("AdminPage", true);
+						resOut.write("{\"login\":\"" + false + "\"}");
+						resOut.flush();
+						return;
+					}
 				}
 				
 				StringBuilder jsonData = new StringBuilder();
@@ -153,23 +165,25 @@ public class Analytics extends HttpServlet {
 			
 			String target = "/Analytics.jsp";
 			
-			// To make sure the  user is logged in
-			if (request.getSession().getAttribute("username") == null) {
-				request.getSession().setAttribute("AdminPage", true);
-				target = "/login.jsp";
-			}
-			
-			// To make sure the logged in user is Admin
-			boolean isAdmin = false;
-			if (request.getSession().getAttribute("isAdmin") != null) {
-				isAdmin = (boolean) request.getSession().getAttribute("isAdmin");
-			}
-			if (!isAdmin) {
-				request.setAttribute("AdminDisplay", "none");
-				request.setAttribute("AdminMessage", "Please login with Admin account.");
-			} else {
-				request.setAttribute("AdminDisplay", "block");
-				request.setAttribute("AdminMessage", "");
+			if (!isAdminCurl) {
+				// To make sure the  user is logged in
+				if (request.getSession().getAttribute("username") == null) {
+					request.getSession().setAttribute("AdminPage", true);
+					target = "/login.jsp";
+				}
+				
+				// To make sure the logged in user is Admin
+				boolean isAdmin = false;
+				if (request.getSession().getAttribute("isAdmin") != null) {
+					isAdmin = (boolean) request.getSession().getAttribute("isAdmin");
+				}
+				if (!isAdmin) {
+					request.setAttribute("AdminDisplay", "none");
+					request.setAttribute("AdminMessage", "Please login with Admin account.");
+				} else {
+					request.setAttribute("AdminDisplay", "block");
+					request.setAttribute("AdminMessage", "");
+				}
 			}
 			
 			// Redirect to target page
