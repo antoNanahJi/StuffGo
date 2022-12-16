@@ -25,6 +25,16 @@ public class ItemDAO {
 		}
 	}
 	
+	/**
+	 * @param brand
+	 * @param type
+	 * @param category
+	 * @param ID
+	 * @return
+	 * @throws SQLException
+	 * @throws NamingException
+	 * FORMS QUERRY STRING
+	 */
 	public Map<String, ItemBean> retrieve(String brand, String type, String category,String ID) throws SQLException, NamingException{
 		String query = "select * from ITEMS";
 		if(brand != null || type != null || category != null || ID != null) {
@@ -52,6 +62,12 @@ public class ItemDAO {
 		
 	}
 
+	/**
+	 * @param query
+	 * @return
+	 * @throws SQLException
+	 * GETS THE VALUES FROM DB
+	 */
 	public Map<String, ItemBean> getTable(String query) throws SQLException{
 		Map<String, ItemBean> rv = new HashMap<String, ItemBean>();
 		Connection con = this.ds.getConnection();
@@ -79,6 +95,13 @@ public class ItemDAO {
 		return rv;
 	}
 	
+	/**
+	 * @param ID
+	 * @return
+	 * @throws SQLException
+	 * @throws NamingException
+	 * Returns a single item from the DB
+	 */
 	public ItemBean retrieveItem(String ID) throws SQLException, NamingException{
 		String query = "select * from ITEMS ";
 
@@ -88,6 +111,12 @@ public class ItemDAO {
 		return getRow(query);
 	}
 	
+	/**
+	 * @param query
+	 * @return
+	 * @throws SQLException
+	 * Return a single record
+	 */
 	public ItemBean getRow(String query) throws SQLException{
 		ItemBean item = null;
 		Connection con = this.ds.getConnection();
@@ -115,6 +144,14 @@ public class ItemDAO {
 		return item;
 	}
 	
+	/**
+	 * @param ID
+	 * @param quantity
+	 * @return
+	 * @throws SQLException
+	 * @throws NamingException
+	 * Updates the quantity of the item
+	 */
 	public int updateQuantity(String ID, int quantity) throws SQLException, NamingException{
 		String query = "update ITEMS set quantity=? where ID=?";
 		

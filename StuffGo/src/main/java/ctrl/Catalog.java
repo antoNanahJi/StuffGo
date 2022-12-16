@@ -29,13 +29,13 @@ public class Catalog extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	// Initialize helper class called SIS and saved it on Servlet Context
+	// Initialize  class called Catalog and saved it on Servlet Context
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		try {
 
-	    	// SisModel instance save in context attribute
+	    	// StoreModel instance save in context attribute
     		MainModel model = MainModel.getInstance();
 	    	this.getServletContext().setAttribute("MainModel", model);
 
@@ -47,6 +47,7 @@ public class Catalog extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
+	 *      DO GET FORMS JSON OBJECT AND RETURNS IT
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{

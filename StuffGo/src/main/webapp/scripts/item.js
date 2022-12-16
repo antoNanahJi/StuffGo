@@ -14,7 +14,7 @@ const sqlValues = [
 	'=',
 	';',
 ];
-
+//the onload call gathering all the data from database
 window.onload = () => {
 	var request = new XMLHttpRequest();
 	request.open('GET', './home', true);
@@ -119,7 +119,7 @@ function handlerClick(request) {
 		addParagraphs(target, rs);
 	}
 }
-//FOR A TABLE IN THE FUNCTION
+//HANDLE AND DISPLAY ITEM GRID
 function addParagraphs(parent, rs) {
 	let resu = '';
 	if (rs.items.length === 0) {
@@ -145,7 +145,7 @@ function addParagraphs(parent, rs) {
 	console.log(rs);
 	console.log(resu);
 }
-
+//ADD FILTERS RADIO BUTTONS WITH SPECIFICS
 function addFilters(parent, rs) {
 	let resu = '';
 	resu += '<h5>Brands</h5>';
