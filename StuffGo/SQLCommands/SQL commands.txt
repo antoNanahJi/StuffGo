@@ -1,0 +1,107 @@
+﻿Name of the course: EECS 4413 - Building E-Commerce Systems
+Name of the team: AC
+SQL commands
+
+/* Items table
+ * ID : unique identifier of the item
+ * category : item category
+ * brand: item brand
+ * type: item type
+ * name: item name
+ * price: item price
+ * description: item description
+ * reviews: item review
+ * image: item image url 
+ */
+CREATE  TABLE ITEMS(
+  ID varchar(100) not null,
+  category varchar(70) not null,
+  brand varchar(70) not null,
+  type1 varchar(70) not null,
+  name varchar (50) not null,
+  price varchar (50) not null,
+  description varchar(1000) not null, 
+  reviews varchar(100) not null,
+  image varchar(400) not null,
+  quantity int not null);
+  
+/*
+*Items insert commands
+*/
+INSERT INTO ITEMS(category, name, ID , description , reviews , image, brand, price, type1, quantity) VALUES 
+('A' , 'Item1' , '001', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste illum ad pariatur, maxime magni laudantium, assumenda natus sequi minus exercitationem hic placeat mollitia ullam reiciendis incidunt laborum voluptatem eligendi aliquam quibusdam. Natus, reprehenderit! Exercitationem praesentium necessitatibus sapiente quibusdam, itaque laboriosam dignissimos? Fugiat architecto, magnam voluptatum rerum laborum necessitatibus assumenda natus.', 'very good', 'https://images.unsplash.com/photo-1669114656836-d5b9389a207e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80','Brand1','20','item',10), 
+('B' , 'Item2' , '002', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste illum ad pariatur, maxime magni laudantium, assumenda natus sequi minus exercitationem hic placeat mollitia ullam reiciendis incidunt laborum voluptatem eligendi aliquam quibusdam. Natus, reprehenderit! Exercitationem praesentium necessitatibus sapiente quibusdam, itaque laboriosam dignissimos? Fugiat architecto, magnam voluptatum rerum laborum necessitatibus assumenda natus.', 'very good' ,'https://images.unsplash.com/photo-1669056875150-63fdfeb392a3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80','Brand2','30','item',10), 
+('C' , 'Item3' , '003', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste illum ad pariatur, maxime magni laudantium, assumenda natus sequi minus exercitationem hic placeat mollitia ullam reiciendis incidunt laborum voluptatem eligendi aliquam quibusdam. Natus, reprehenderit! Exercitationem praesentium necessitatibus sapiente quibusdam, itaque laboriosam dignissimos? Fugiat architecto, magnam voluptatum rerum laborum necessitatibus assumenda natus.', 'so so' , 'https://images.unsplash.com/photo-1669041124233-295fb1ab1f4f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80','Brand3','40','item',10), 
+('D' , 'Item4' , '004', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste illum ad pariatur, maxime magni laudantium, assumenda natus sequi minus exercitationem hic placeat mollitia ullam reiciendis incidunt laborum voluptatem eligendi aliquam quibusdam. Natus, reprehenderit! Exercitationem praesentium necessitatibus sapiente quibusdam, itaque laboriosam dignissimos? Fugiat architecto, magnam voluptatum rerum laborum necessitatibus assumenda natus.', 'asda', 'https://images.unsplash.com/photo-1669285265050-21b6b41e1575?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80','Brand4','50','item',10);
+And more ...
+
+/* Users table
+ * USERNAME : unique identifier of the user
+ * PASSWORD : varchar
+ * BILLING_ADDRESS : varchar
+ * SHIPPING_ADDRESS : varchar
+ * isAdmin : 1 if the user is admin and 0 otherwise
+ * name : user name
+ */
+CREATE TABLE USERS(
+        USERNAME VARCHAR(255) NOT NULL,
+        PASSWORD VARCHAR(255) NOT NULL,
+        BILLING_ADDRESS VARCHAR(255) NOT NULL,
+        SHIPPING_ADDRESS VARCHAR(255) NOT NULL,
+        isAdmin INT NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        PRIMARY KEY (USERNAME)
+);
+INSERT INTO USERS VALUES ( ‘admin’, ‘admin’, ‘abc’, ‘abc’, 1, ‘admin’);
+
+/* Visit to website
+ * IPADDRESS : varchar
+ * DAY : the date of the visit
+ * ITEMID : unique identifier of the item
+ * EVENT : status of purchase
+ */
+CREATE TABLE VISITEVENT(
+        IPADDRESS VARCHAR(20) NOT NULL,
+        DAY VARCHAR(50) NOT NULL,
+        ITEMID VARCHAR(20) NOT NULL,
+        EVENT VARCHAR(20) NOT NULL,
+        FOREIGN KEY(ITEMID) REFERENCES ITEMS(ID)
+);
+
+/* When an item is reviewed
+ * ID : unique identifier ‘userID-itemID’
+ * USERID : unique identifier of the user
+ * ITEMID : unique identifier of the item
+ * REVIEW : user review on this item
+ * RATING : user rating on this item
+ * REVIEWDATE : the date of the review 
+ */
+CREATE TABLE ITEMREVIEWS(
+        ID VARCHAR(255) NOT NULL,
+        USERID VARCHAR(255) NOT NULL,
+        ITEMID VARCHAR(255) NOT NULL,
+        REVIEW VARCHAR(255),
+        RATING VARCHAR(255),
+        REVIEWDATE VARCHAR(255),
+        PRIMARY KEY (ID)
+);
+
+/* When as item is purchased
+ * ITEMID : unique identifier of the item
+ * DAY :  the date of the purchase
+ * QUANTITY :  the purchased quantity of the item
+ * USERID : unique identifier of the user
+ */
+CREATE TABLE ITEMPURCHASED(
+        ITEMID VARCHAR(255) NOT NULL,
+        DAY VARCHAR(255) NOT NULL,
+        QUANTITY VARCHAR(255) NOT NULL,
+        USERID VARCHAR(255) NOT NULL,
+        FOREIGN KEY(ITEMID) REFERENCES ITEMS(ID)
+);
+
+insert into ITEMPURCHASED values('003', '7', 6, 'test');
+insert into ITEMPURCHASED values('001', '5', 10, 'test');
+insert into ITEMPURCHASED values('002', '3', 9, 'test');
+insert into ITEMPURCHASED values('002', '8', 3, 'test');
+insert into ITEMPURCHASED values('001', '1', 12, 'test');

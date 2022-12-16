@@ -15,6 +15,10 @@
  <location>/res/my404.jsp</location>
  </error-page>
   <error-page>
+   <exception-type>Exception</exception-type>
+ <location>/res/myException.jsp</location>
+ </error-page>
+   <error-page>
  <exception-type>java.lang.Exception</exception-type>
  <location>/res/myException.jsp</location>
  </error-page>
