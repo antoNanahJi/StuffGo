@@ -50,7 +50,6 @@ public class Cart extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		MainModel model = (MainModel) this.getServletContext().getAttribute("MainModel");
 		ArrayList<ItemBean> items = new ArrayList<ItemBean>();
 		Object itemObj = request.getSession().getAttribute("cartItems");
@@ -58,6 +57,7 @@ public class Cart extends HttpServlet {
 		if (itemObj != null) {
 			itemStrings = itemObj.toString().split(",");
 		}
+		//loops through every Item added to cart and adds to list
 		try {
 			for (String i : itemStrings) {
 				if (!i.equals("")) {
@@ -65,7 +65,7 @@ public class Cart extends HttpServlet {
 					items.add(item);
 				}
 			}
-			
+			//send list to session scope
 			request.getSession().setAttribute("items", items);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -77,12 +77,14 @@ public class Cart extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//Checks for AJAX call to change item quantity
 		if (request.getParameter("out") != null && request.getParameter("out").equals("changeItem")) {
 			String newItemString = "";
 			Writer resOut = response.getWriter();
 			for (String i : itemStrings) {
 				String[] iSplit = i.split("=");
 				iSplit[1] = iSplit[1] + ",";
+				//Change the string that store item id and quantity
 				if (("00" + request.getParameter("changedItemID")).equals(iSplit[0])) {
 					if (Integer.parseInt(request.getParameter("changedItemQuantity")) <= 0) {
 						i = "";

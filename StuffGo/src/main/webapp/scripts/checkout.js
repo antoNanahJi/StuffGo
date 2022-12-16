@@ -1,4 +1,5 @@
 var counter = 0;
+//Checks that input fields contain valid content, and fails the credit cart authorization every third attempt
 function validate(address) {
 	var ok = true;
 	var ccCounter = parseInt(document.getElementById("ccCounter").innerHTML);
@@ -37,12 +38,14 @@ function validate(address) {
 
 	return ok;
 }
+//Redirects to login page
 function loadLogin() {
 	document.getElementById("checkout-login").style.display = "block";
 	document.getElementById("checkout").style.display = "none";
 	document.getElementById("confirmedMsg").style.display = "none";
 	
 }
+//Shows checkout page when succesfully logged in
 function loadCheckout() {
 	document.getElementById("checkout-login").style.display = "none";
 	document.getElementById("checkout").style.display = "block";

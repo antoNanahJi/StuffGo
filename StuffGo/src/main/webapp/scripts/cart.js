@@ -2,6 +2,7 @@ var counter = 0;
 var total;
 var swapCounter = 0;
 
+//increases quantity of item in cart by 1
 function quantityUp(index, id, price, quantity, address) {
 	var num = document.getElementById("num" + index);
 
@@ -21,6 +22,7 @@ function quantityUp(index, id, price, quantity, address) {
 	changeItemQuantity(address, id, num.value);
 }
 
+//decreases quantity of item in cart by 1
 function quantityDown(index, id, price, address) {
 	var num = document.getElementById("num" + index);
 	if (num.value <= 1) {
@@ -42,6 +44,7 @@ function quantityDown(index, id, price, address) {
 	changeItemQuantity(address, id, num.value);
 }
 
+//Tells java  controller about change in an items quantity and sets new total in jsp file
 function changeItemQuantity(address, id, quantity){
 	var request = new XMLHttpRequest();
 	data = '&changedItemID=' + id + "&changedItemQuantity=" + quantity;
