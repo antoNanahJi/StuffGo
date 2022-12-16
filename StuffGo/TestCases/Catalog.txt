@@ -1,0 +1,13 @@
+curl -X GET "https://stuffgoapp.azurewebsites.net/home"
+
+curl -X GET "https://stuffgoapp.azurewebsites.net/home?brand=brand1"
+
+curl -X GET "https://stuffgoapp.azurewebsites.net/home?brand=brand1&type=item"
+
+curl -X GET "https://stuffgoapp.azurewebsites.net/home?brand=brand1&type=item&category=A"
+
+curl -X GET "https://stuffgoapp.azurewebsites.net/home?brand=select"
+
+curl -X GET "https://stuffgoapp.azurewebsites.net/home?type=select"
+
+curl -X GET "https://stuffgoapp.azurewebsites.net/home?category=select"
