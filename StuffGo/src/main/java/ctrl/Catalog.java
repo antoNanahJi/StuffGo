@@ -83,7 +83,7 @@ public class Catalog extends HttpServlet {
 			
 		} catch (Exception e) {
 			System.out.println("error");
-			resOut.write(e.getMessage());;
+			resOut.write(e.getMessage());
 			e.printStackTrace();
 		}
 	}

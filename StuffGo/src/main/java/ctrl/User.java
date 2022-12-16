@@ -133,6 +133,8 @@ public class User extends HttpServlet {
 			
 			}
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			resOut.write(e.getMessage());
 			e.printStackTrace();
 		}
 	}

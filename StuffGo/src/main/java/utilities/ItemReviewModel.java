@@ -41,7 +41,7 @@ public class ItemReviewModel {
 		}
 		
 		if (Security.containsXSS(ITEMID) || Security.containsSQL(ITEMID)) {
-			throw new NamingException("ITEM ID is not valid\n");
+			throw new NamingException("SQL Injection/ XSS attempt\n");
 		}
 
 		
@@ -79,16 +79,16 @@ public class ItemReviewModel {
 		}
 		
 		if (Security.containsXSS(REVIEW) || Security.containsSQL(REVIEW)) {
-			throw new NamingException("REVIEW is not valid\n");
+			throw new NamingException("SQL Injection/ XSS attempt\n");
 		}
 		if (Security.containsXSS(RATING) || Security.containsSQL(RATING)) {
-			throw new NamingException("RATING is not valid\n");
+			throw new NamingException("SQL Injection/ XSS attempt\n");
 		}
 		if (Security.containsXSS(REVIEWDATE) || Security.containsSQL(REVIEWDATE)) {
-			throw new NamingException("REVIEWDATE is not valid\n");
+			throw new NamingException("SQL Injection/ XSS attempt\n");
 		}
 		if (Security.containsXSS(ITEMID) || Security.containsSQL(ITEMID)) {
-			throw new NamingException("ITEM ID is not valid\n");
+			throw new NamingException("SQL Injection/ XSS attempt\n");
 		}
 		
 		int rating = Integer.valueOf(RATING);

@@ -79,12 +79,15 @@ public class Checkout extends HttpServlet {
 		Map<String[], ItemBean> items = new HashMap<String[], ItemBean>();
 		String cartSplit[] = cartString.split("_");
 		Map<String, Integer> cartItems = new HashMap<>();
-		for (int i = 0; i < cartSplit.length - 1; i++) {
+	
+		for (int i = 0; i < cartSplit.length; i++) {
 			String itemSplit[] = cartSplit[i].split("-");
+
 			try {
 				ItemBean item = model.getStoreModel().retreiveItem(itemSplit[0]);
 				cartItems.put(itemSplit[0], Integer.valueOf(itemSplit[1]));
 				items.put(itemSplit, item);
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -126,18 +129,20 @@ public class Checkout extends HttpServlet {
 				}
 
 				if (!date.equals("") && !clientIP.equals("")) {
+					
 					for (String key : cartItems.keySet()) {
 						model.getWebsiteUsageModel().insertRecord(clientIP, date, key, eventTypes.PURCHASE);
 						model.getItemPurchasedModel().insertRecord(key, date.substring(3, 5), cartItems.get(key),
 								userID);
 						int stuff = model.getStoreModel().retreiveItem(key).getQuantity() - cartItems.get(key);
-						int test = model.getStoreModel().updateQuantity(key, stuff);
+						model.getStoreModel().updateQuantity(key, stuff);
 					}
 				}
 				
 				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				System.out.println(e.getMessage());
+				resOut.write(e.getMessage());
 				e.printStackTrace();
 			}
 			System.out.println("Order Submitted!");

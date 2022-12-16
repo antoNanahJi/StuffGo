@@ -67,11 +67,6 @@ public class Cart extends HttpServlet {
 			}
 			
 			request.getSession().setAttribute("items", items);
-//			for(String key : items.keySet()) {
-//				counter++;
-//				request.setAttribute("itemName"+ counter, items.get(key).getBrand());
-//				request.setAttribute("itemPrice"+ counter, items.get(key).getPrice());
-//			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,22 +108,6 @@ public class Cart extends HttpServlet {
 			return;
 		}
 		String target = "/cart.jsp";
-//		if (request.getParameter("checkout") != null) {
-//			target = "/checkout.jsp";
-//		}
-//		if(request.getSession().getAttribute("username") != null) {
-//			try {
-//				MainModel model = (MainModel) this.getServletContext().getAttribute("MainModel");
-//				String bAddress = model.getUserModel().returnBillingAddress(request.getSession().getAttribute("username").toString());
-//				String sAddress = model.getUserModel().returnShippingAddress(request.getSession().getAttribute("username").toString());
-//				request.setAttribute("billingAddress", bAddress);	
-//				request.setAttribute("shippingAddress", sAddress);		
-//
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
 		request.getRequestDispatcher(target).forward(request, response);
 	}
 

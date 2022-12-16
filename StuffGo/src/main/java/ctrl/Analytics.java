@@ -144,7 +144,9 @@ public class Analytics extends HttpServlet {
 				}
 			}
 		} catch(SQLException | NamingException e) {			
-			System.out.print(e.getMessage());
+			System.out.println(e.getMessage());
+			resOut.write(e.getMessage());
+			e.printStackTrace();
 		}
 		
 		if (request.getParameter("out") == null) {

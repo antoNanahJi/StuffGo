@@ -62,10 +62,10 @@ public class ItemPurchasedModel {
 		}
 		
 		if (Security.containsXSS(itemID) || Security.containsSQL(itemID)) {
-			throw new NamingException("itemID is not valid\n");
+			throw new NamingException("SQL Injection/ XSS attempt\n");
 		}
 		if (Security.containsXSS(date) || Security.containsSQL(date)) {
-			throw new NamingException("itemID is not valid\n");
+			throw new NamingException("SQL Injection/ XSS attempt\n");
 		}
 		
 

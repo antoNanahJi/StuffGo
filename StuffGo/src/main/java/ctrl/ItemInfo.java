@@ -156,7 +156,7 @@ public class ItemInfo extends HttpServlet {
 				
 				// Insert a new ADD_CART event
 				model.getWebsiteUsageModel().insertRecord(clientIP, date, itemID, eventTypes.ADD_CART);
-					
+				resOut.write("Item added to cart!!");
 			}
 			
 			// Insert a new rating
@@ -265,7 +265,8 @@ public class ItemInfo extends HttpServlet {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("error");
+			System.out.println(e.getMessage());
+			resOut.write(e.getMessage());
 			e.printStackTrace();
 		}
 	}

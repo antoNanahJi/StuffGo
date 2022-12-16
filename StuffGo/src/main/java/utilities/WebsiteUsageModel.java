@@ -63,7 +63,7 @@ public class WebsiteUsageModel {
 		}
 		
 		if (Security.containsXSS(itemID) || Security.containsSQL(itemID)) {
-			throw new NamingException("itemID is not valid\n");
+			throw new NamingException("SQL Injection/ XSS attempt\n");
 		}
 
 		return this.id.addRecord(ipAddress, date, itemID, event);
