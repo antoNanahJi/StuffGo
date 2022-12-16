@@ -9,11 +9,8 @@
 <meta charset="ISO-8859-1">
 <title>Cart</title>
 <script src="scripts/cart.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-	crossorigin="anonymous">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <!-- JavaScript Bundle with Popper -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -23,28 +20,30 @@
 	title="cse4413" media="screen, print" />
 </head>
 <body>
-	<nav class="navbar navbar-expand-md justify-content-between navigation">
-		<div class="container">
-			<a class="navbar-brand"
-				href="./index.jsp">StuffGo</a>
-			 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	 <nav class="navbar navbar-expand-md justify-content-between navigation">
+    <div class="container">
+      <a class="navbar-brand" href="./index.jsp">StuffGo</a>
+       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-			<div class="collapse navbar-collapse justify-content-end"
-				id="navbarNav">
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" id="nohov">${username}</a>
-					</li>
-					<li class="nav-item active"><a class="nav-link"
-						href="./index.jsp">Catalog</span></a></li>
-					<li class="nav-item"><a class="nav-link" id="loginout"
-						href="./login.jsp">Login</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="./Cart">Cart</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+        <li class="nav-item">
+               	<a class="nav-link"  id="nohov">${username}</a>
+             </li>
+         	<li class="nav-item active">
+             	<a class="nav-link" href="./index.jsp">Catalog</span></a>
+             </li>
+     		<li class="nav-item">
+               	<a class="nav-link" id="loginout" href="./login.jsp">Login</a>
+             </li>
+             <li class="nav-item">
+               	<a class="nav-link" href="./Cart">Cart</a>
+             </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 	<div style="max-width: 900px;margin-bottom:74px" class="container filter">
 		<form id="cartForm" method="GET" action="Checkout">
 			<div id="cart">
