@@ -1,6 +1,6 @@
 # StuffGo
 
-- Name of the course: EECS 4413 - Building E-Commerce Systems
+- Name of the course: Building E-Commerce Systems
 - Name of the team: AC
 
 - To test the analytics page:
